@@ -38,11 +38,11 @@ class LoginLogoutRegister_Controller extends Controller
         $user->password = Hash::make($req->password);
         $user->phone = $req->phone;
         $user->address = $req->address;
+        $user->remember_token = $req->_token;
 
         $user->save();
         
-        $user = $user->toArray();
-        Mail::send('page.mail',['nguoidung'=>$user], function ($message ) use($user)
+        Mail::send('page.mail',['nguoidung'=>$user], function ($message) use($user)
     {
         $message->from('manam5211@gmail.com', 'vlxdHungMinh');
         $message->to($user['email'], $user['full_name']);
@@ -57,7 +57,8 @@ class LoginLogoutRegister_Controller extends Controller
    		return view('page.dangky');
    }
    public function postLogin(Request $req){
-        if(Auth::attempt(['email'=>$req->email,'password'=>$req->password,'active'=>0])){
+        if(Auth::attempt(['email'=>$req->email,'password'=>$req->password])){
+          echo $req->email;
                 return redirect()->route('home');
         }
         else{
@@ -120,10 +121,10 @@ class LoginLogoutRegister_Controller extends Controller
 
     public function activeUser(Request $req){
         $user = User::find($req->id);
-        if($user){
+        if($req->token == $user->remember_token){
             $user->active=1;
             $user->save();
-            return redirect()->route('dangky')->with(['thanhcong','Đã kích hoạt tài khoản']);
+           // return redirect()->route('home')->with(['thanhcong','Đã kích hoạt tài khoản']);
         }
     }
 }
