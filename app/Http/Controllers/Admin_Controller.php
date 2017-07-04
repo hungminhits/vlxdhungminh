@@ -99,7 +99,7 @@ class Admin_Controller extends Controller
       $req->file('edit_image')->move('images',$filename);
       $pro=Product::Edit_Product($id,$name,$type, $desc, $unit_price, $pro_price,$filename, $unit);
       // $request->session()->flash('status', 'Tạo bài viết thành công!');
-      // return $pro; 
+      return $pro; 
    }
    public function Insert_Product(Request $req){
       $filename="";
