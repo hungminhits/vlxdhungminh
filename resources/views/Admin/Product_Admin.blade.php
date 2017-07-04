@@ -24,27 +24,23 @@
                             <br><br>
                         </div>
                         <br>
-                            {{-- @if (session('status'))
-                                <div class="alert alert-info">{{session('status')}}</div>
-                            @endif --}}
+                            
                             <input type="hidden" id="typeRequest" value="{{ $typepro }}">
                            
                             @if($typepro==0)
                              <table border="1" class="table table-striped table-nonfluid" align="center" id="product_table" >
                                 <thead>
                            {{-- <th><input type="checkbox" id="checkall" /></th> --}}
-                                    <th style="width: 100px;">id</th>
-                                        <th>name</th>
-                                        <th>type_product</th>            
-                                        <th>description</th>
-                                        <th>unit_price</th>
-                                        <th>promotion_price</th>
-                                        <th>image</th>
-                                        <th>unit</th>
-                                        <th>created_at</th>
-                                        <th>updated_at</th>
-                                        <th>Modify</th>
-                                        <th>Delete</th>
+                                        <th style="width: 10px;">id</th>
+                                        <th style="width: 100px">image</th>
+                                        <th style="width: 320px">name</th>
+                                        <th style="width: 40px">type_product</th>            
+                                        <th style="width: 300px">description</th>
+                                        <th style="width: 120px">  unit_price   </th>
+                                        <th style="width: 70px">promotion_price</th>
+                                        
+                                        <th style="width: 40px">unit</th>
+                                        <th>Edit/Delete</th>
                                 </thead>
                                 <tbody>
                                     @foreach($product as $pro )
@@ -52,20 +48,19 @@
                                             <div id="row1{{ $pro->id }}">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <td id="id{{$pro->id}}">{{$pro->id}}</td>
+                                                <td id="image{{$pro->id}}"><img src="images/{{ $pro->image }}" style="width: 90px; height: 90px"></td>
                                                 <td id="name{{$pro->id}}">{{$pro->name}}</td>
                                                 <td id="type_name{{$pro->id}}">{{$pro->type_name}}</td>
                                                 <td id="description{{$pro->id}}">{{$pro->description}}</td>
-                                                <td id="unit_price{{$pro->id}}">{{$pro->unit_price}}</td>
-                                                <td id="pro_price{{$pro->id}}">{{$pro->promotion_price}}</td>
-                                                <td id="image{{$pro->id}}">{{$pro->image}}</td>
+                                                <td id="unit_price{{$pro->id}}">{{number_format($pro->unit_price)}} vnd</td>
+                                                <td id="pro_price{{$pro->id}}">{{number_format($pro->promotion_price)}} vnd</td>
+                                                
                                                 <td id="unit{{$pro->id}}">{{$pro->unit}}</td>
-                                                <td>{{$pro->created_at}}</td>
-                                                <td id="updated_at{{$pro->id}}">{{$pro->updated_at}}</td>
+                                                {{-- <td>{{$pro->created_at}}</td> --}}
+                                                {{-- <td id="updated_at{{$pro->id}}">{{$pro->updated_at}}</td> --}}
                                                 <td>
-                                                    <button class="btn btn-info btn-lg glyphicon glyphicon-hand-right" style="border-radius: 10px;" id="edit_button{{ $pro->id  }}" onclick="editRow({{ $pro->id }})"> Edit</button>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-warning btn-lg glyphicon glyphicon-trash" style="border-radius: 10px" id="delete_button{{ $pro->id  }}" onclick="delete_row('{{ $pro->id}}');">  Delete</button>
+                                                    <button class="btn btn-info btn-lg glyphicon glyphicon-hand-right" style="border-radius: 10px;" id="edit_button{{ $pro->id  }}" onclick="editRow({{ $pro->id }})"></button>
+                                                    <button class="btn btn-warning btn-lg glyphicon glyphicon-trash" style="border-radius: 10px" id="delete_button{{ $pro->id  }}" onclick="delete_row('{{ $pro->id}}');"></button>
                                                 </td>
                                             </div>
                                         </tr>
@@ -123,41 +118,37 @@
                                     @endforeach
                                 </tbody>
                             </table>    
-                                <button type="button" class="btn btn-success" style="height:40px;width: 150px;  float:right; border-radius: 5px; margin-top: 25px;" id="viewpdf_allproduct">Xuất file pdf</button>              
+                                <button type="button" class="btn btn-success" style="height:40px;width: 150px;  float:right; border-radius: 5px; margin-top: 25px;" id="viewpdf_allproduct">Xuất file pdf</button>   
+
                             @else
                              <table border="1" class="table table-striped table-nonfluid" align="center" id="product_table" >
                                 <thead>
                            {{-- <th><input type="checkbox" id="checkall" /></th> --}}
-                                    <th style="width: 100px;">id</th>
-                                        <th>name</th>        
-                                        <th>description</th>
-                                        <th>unit_price</th>
-                                        <th>promotion_price</th>
-                                        <th>image</th>
-                                        <th>unit</th>
-                                        <th>created_at</th>
-                                        <th>updated_at</th>
-                                        <th>Modify</th>
-                                        <th>Delete</th>
+                                    <th style="width: 5%;">id</th>
+                                    <th style="width: 20%">image</th>
+                                    <th style="width: 30%">name</th>           
+                                    <th style="width: 25%">description</th>
+                                    <th style="width: 5%">  unit_price   </th>
+                                    <th style="width: 5%">promotion_price</th>
+                                    <th style="width: 5%">unit</th>
+                                    <th style="width: 5%">Edit/Delete</th>
                                 </thead>
                                 <tbody>
                                     @foreach($product as $pro )
                                         <tr id="row{{$pro->id}}">
                                             <div id="row1{{ $pro->id }}">
                                                 <td id="id{{$pro->id}}">{{$pro->id}}</td>
+                                                <td id="image{{$pro->id}}"><img src="images/{{ $pro->image }}" style="width: 90px; height: 90px"></td>
                                                 <td id="name{{$pro->id}}">{{$pro->name}}</td>
                                                 <td id="description{{$pro->id}}">{{$pro->description}}</td>
                                                 <td id="unit_price{{$pro->id}}">{{$pro->unit_price}}</td>
                                                 <td id="pro_price{{$pro->id}}">{{$pro->promotion_price}}</td>
-                                                <td id="image{{$pro->id}}">{{$pro->image}}</td>
                                                 <td id="unit{{$pro->id}}">{{$pro->unit}}</td>
-                                                <td>{{$pro->created_at}}</td>
-                                                <td id="updated_at{{$pro->id}}">{{$pro->updated_at}}</td>
+                                                {{-- <td>{{$pro->created_at}}</td> --}}
+                                                {{-- <td id="updated_at{{$pro->id}}">{{$pro->updated_at}}</td> --}}
                                                 <td>
-                                                    <button class="btn btn-info btn-lg glyphicon glyphicon-hand-right" style="border-radius: 10px;" id="edit_button{{ $pro->id  }}" onclick="editRow({{ $pro->id }})"> Edit</button>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-warning btn-lg glyphicon glyphicon-trash" style="border-radius: 10px" id="delete_button{{ $pro->id  }}" onclick="delete_row('{{ $pro->id}}');">  Delete</button>
+                                                    <button class="btn btn-info btn-lg glyphicon glyphicon-hand-right" style="border-radius: 10px;" id="edit_button{{ $pro->id  }}" onclick="editRow({{ $pro->id }})"></button>
+                                                    <button class="btn btn-warning btn-lg glyphicon glyphicon-trash" style="border-radius: 10px" id="delete_button{{ $pro->id  }}" onclick="delete_row('{{ $pro->id}}');"></button>
                                                 </td>
                                             </div>
                                         </tr>
@@ -204,7 +195,7 @@
                                 
 
                                 </tbody>    
-                                 </table>
+                            </table>
                                  <button type="button" class="btn btn-success" style="height:40px;width: 150px;  float:right; border-radius: 5px; margin-top: 25px;" id="viewpdf_all{{ $typepro }}">Xuất file pdf</button>
                             @endif
         
@@ -386,19 +377,18 @@
                     data:form_data,
                     processData: false,
                     contentType: false,
-                    success:function(data) {
-                        var updated_at = data;
+                    success:function() {
+                        // var updated_at = data;
                         document.getElementById("name"+id).innerHTML=name;
                         if (typeRequest==0) {
                             document.getElementById("type_name"+id).innerHTML=type;
                         }
-                        
                         document.getElementById("description"+id).innerHTML=description;
                         document.getElementById("unit_price"+id).innerHTML=unit_price;
                         document.getElementById("pro_price"+id).innerHTML=pro_price;
-                        document.getElementById("image"+id).innerHTML=image;
+                        document.getElementById("image"+id).innerHTML="<img src=images/"+image+ "/>";
                         document.getElementById("unit"+id).innerHTML=unit;
-                        document.getElementById("updated_at"+id).innerHTML=updated_at[0]['updated_at'];
+                        // document.getElementById("updated_at"+id).innerHTML=updated_at[0]['updated_at'];
                         document.getElementById("edit_button"+id).style.display="inline";
                         alert('Cập nhập thành công');
                         
@@ -445,9 +435,9 @@
                         var table=document.getElementById("product_table");
                         var table_len=(table.rows.length)-1;
                         if(typeRequest!=0){ 
-                            var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td><td id='name"+id+"'>"+name+"</td><td id='description"+id+"'>"+description+"</td><td id='unit_price"+id+"'>"+unit_price+"</td><td id='pro_price"+id+"'>"+pro_price+"</td><td id='image"+id+"'>"+image+"</td><td id='unit"+id+"'>"+unit+"</td><td id=''>"+created_at+"</td><td id=''>"+updated_at+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'> Edit</button></td><td><button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'>  Delete</button></td></tr>";
+                            var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td><td id='image"+id+"'><img src=images/"+image+"/></td><td id='name"+id+"'>"+name+"</td><td id='description"+id+"'>"+description+"</td><td id='unit_price"+id+"'>"+unit_price+"</td><td id='pro_price"+id+"'>"+pro_price+"</td><td id='unit"+id+"'>"+unit+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'></button><button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'></button></td></tr>";
                         }else{
-                            var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td><td id='name"+id+"'>"+name+"</td><td id='type_name"+id+"'>"+type+"</td><td id='description"+id+"'>"+description+"</td><td id='unit_price"+id+"'>"+unit_price+"</td><td id='pro_price"+id+"'>"+pro_price+"</td><td id='image"+id+"'>"+image+"</td><td id='unit"+id+"'>"+unit+"</td><td id=''>"+created_at+"</td><td id=''>"+updated_at+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'> Edit</button></td><td><button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'>  Delete</button></td></tr>";
+                            var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td><td id='image"+id+"'><img src=images/"+image+"/></td><td id='name"+id+"'>"+name+"</td><td id='type_name"+id+"'>"+type+"</td><td id='description"+id+"'>"+description+"</td><td id='unit_price"+id+"'>"+unit_price+"</td><td id='pro_price"+id+"'>"+pro_price+"</td><td id='unit"+id+"'>"+unit+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'></button><button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'></button></td></tr>";
                         }
                         
 

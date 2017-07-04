@@ -52,8 +52,8 @@ class Product extends Model
 
     public static function Edit_Product($id, $name, $type, $desc, $unit_price, $pro_price,$image,$unit){
             $pro=DB::table('products')->where('id','=',$id)->update(['name'=>$name,'id_type'=>$type, 'description'=>$desc,'unit_price'=>$unit_price,'promotion_price'=>$pro_price,'image'=>$image,'unit'=>$unit]);
-            $updated_at=DB::table('products')->where('id','=',$id)->select('updated_at')->get();
-            return $updated_at; 
+            // $updated_at=DB::table('products')->where('id','=',$id)->select('updated_at')->get();
+            return $pro; 
   }
   public static function Insert_Product($name, $type, $desc, $unit_price, $pro_price, $image, $unit){
             $id=DB::table('products')->insertGetId(['name'=>$name,'id_type'=>$type,'description'=>$desc,'unit_price'=>$unit_price,'promotion_price'=>$pro_price,'image'=>$image, 'unit'=>$unit]);
