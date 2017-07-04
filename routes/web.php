@@ -20,9 +20,9 @@ Route::get('ViewProduct_Admin',
 Route::get('ViewProductByType_Admin/{id}',
 	['as'=>'ViewProductByType_Admin',
 	'uses'=>'Admin_Controller@FindProductByType']);
-Route::get('DeleteProductById_Admin/{id}',
-	['as'=>'DeleteProductById_Admin',
-	'uses'=>'Admin_Controller@Delete_Product']);
+// Route::get('DeleteProductById_Admin/{id}',
+// 	['as'=>'DeleteProductById_Admin',
+// 	'uses'=>'Admin_Controller@Delete_Product']);
 Route::get('ChartById_Admin/{id}/{created_at_from}/{created_at_to}',
 	['as'=>'ChartById_Admin',
 	'uses'=>'Admin_Controller@ChartById_Admin']);
@@ -31,13 +31,14 @@ Route::get('ChartById_Admin/{id}/{created_at_from}/{created_at_to}',
 Route::get('viewPDF',
 	['as'=>'viewPDF',
 	'uses'=>'Admin_Controller@downloadPDF']);
-Route::get('Edit_Product/{id}/{name}/{desc}/{unit_price}/{pro_price}/{image}/{unit}',
+
+Route::post('Edit_Product',
 	['as'=>'Edit_Product',
 	 'uses'=>'Admin_Controller@Edit_Product']);
 Route::post('Insert_Product',
 	['as'=>'Insert_Product',
 	 'uses'=>'Admin_Controller@Insert_Product']);
-Route::get('Delete_Product/{id}',
+Route::get('Delete_Product',
 	['as'=>'Delete_Product',
 	 'uses'=>'Admin_Controller@Delete_Product']);
 //Loại sản phẩm admin

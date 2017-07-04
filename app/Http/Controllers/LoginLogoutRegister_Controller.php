@@ -41,13 +41,7 @@ class LoginLogoutRegister_Controller extends Controller
 
         $user->save();
         
-        $user = $user->toArray();
-        Mail::send('page.mail',['nguoidung'=>$user], function ($message ) use($user)
-    {
-        $message->from('manam5211@gmail.com', 'vlxdHungMinh');
-        $message->to($user['email'], $user['full_name']);
-        $message->subject('Submit password');
-    });
+        
 
        return redirect()->back()->with('thongbao','Đăng ký thành công, Vui lòng kiểm tra Email');
     }
