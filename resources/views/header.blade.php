@@ -20,7 +20,7 @@
             <ul class="level0 sub-menu" style="display:none;">
               <li class="level1">
                 @for($i=0;$i<count($type);$i++)
-                  <li><a href="{{route('type',$type[$i]['id'])}}">{{$type[$i]['name']}}</a></li>
+                  <li><a href="{{route('type',$type[$i]['name'])}}">{{$type[$i]['name']}}</a></li>
                 @endfor
               </li>
             </ul>

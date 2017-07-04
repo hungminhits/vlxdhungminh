@@ -18,7 +18,7 @@
 
 </title>    
 <!-- ================= Page description ================== -->
-<base href="http://localhost/vlxdHungMinh/public/">
+<base href="http://localhost/HungMinh/vlxdHungMinh/public/">
 
 <meta name="description" content="">
 
