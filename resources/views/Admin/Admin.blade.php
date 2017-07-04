@@ -38,7 +38,8 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css"/>
             <link rel="stylesheet" href="ssi-modal/styles/ssi-modal.css"/> <!-- endbuild -->
 
-
+            {{-- dialog --}}
+            <link rel="stylesheet" type="text/css" href="css/dialog.css">
 
 
            

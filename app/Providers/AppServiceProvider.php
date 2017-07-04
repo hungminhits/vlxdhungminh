@@ -34,6 +34,10 @@ class AppServiceProvider extends ServiceProvider
             $type_product=TypeProduct::Show_Type_product()->get();
             $view->with(['type_product'=>$type_product,'today'=>$dt,'firstPro'=>$firstPro]);
         });
+         view()->composer('Admin.Product_Admin',function($view){
+                $type_product=TypeProduct::Show_Type_product()->get();
+                $view->with('type_product',$type_product);
+        });
     }
 
     /**
