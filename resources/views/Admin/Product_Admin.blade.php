@@ -28,8 +28,9 @@
                                 <div class="alert alert-info">{{session('status')}}</div>
                             @endif --}}
                             <input type="hidden" id="typeRequest" value="{{ $typepro }}">
-                            <table border="1" class="table table-striped table-nonfluid" align="center" id="product_table" >
+                           
                             @if($typepro==0)
+                             <table border="1" class="table table-striped table-nonfluid" align="center" id="product_table" >
                                 <thead>
                            {{-- <th><input type="checkbox" id="checkall" /></th> --}}
                                     <th style="width: 100px;">id</th>
@@ -120,10 +121,11 @@
                                         </div>
                                     
                                     @endforeach
-                                        
-
                                 </tbody>
+                            </table>    
+                                <button type="button" class="btn btn-success" style="height:40px;width: 150px;  float:right; border-radius: 5px; margin-top: 25px;" id="viewpdf_allproduct">Xuất file pdf</button>              
                             @else
+                             <table border="1" class="table table-striped table-nonfluid" align="center" id="product_table" >
                                 <thead>
                            {{-- <th><input type="checkbox" id="checkall" /></th> --}}
                                     <th style="width: 100px;">id</th>
@@ -159,7 +161,7 @@
                                                 </td>
                                             </div>
                                         </tr>
-
+        
                                         <div id="editRowPro{{ $pro->id }}" class="form">
                                             <p class="form_title">Edit Product</p>
                                             <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
@@ -199,11 +201,13 @@
                                             </form>
                                         </div>
                                     @endforeach
-
+                                
 
                                 </tbody>    
+                                 </table>
+                                 <button type="button" class="btn btn-success" style="height:40px;width: 150px;  float:right; border-radius: 5px; margin-top: 25px;" id="viewpdf_all{{ $typepro }}">Xuất file pdf</button>
                             @endif
-
+        
                             <div id="addRowPro" class="form">
                                             <p class="form_title">Add Product</p>
                                             <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
@@ -250,8 +254,8 @@
                                             </form>
                                         </div>
                                         
-                            </table>
                             <div>{{ $product->links() }}</div>
+                        
                         </div>
                     </div>
                 </div>
@@ -263,7 +267,17 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+            $("#viewpdf_allproduct").click(function(){
 
+                 var route="{{route('viewPDF','type=0')}}";
+                  window.location.replace(route);
+            });
+             $("#viewpdf_all"+{{$typepro}}).click(function(){
+                var typepro={{$typepro}}
+                var route="{{route('viewPDF','type=typepro')}}";
+                route=route.replace('typepro',typepro);
+                window.location.replace(route);
+            });
             function editRow(id){
                 var formBox = $('#editRowPro'+id);
                 $(formBox).fadeIn("slow");
@@ -350,7 +364,6 @@
             $('.saveEdit').click(function() {
                 var id=$(this).val();
                 var typeRequest = document.getElementById("typeRequest").value;
-                // alert(typeRequest);
                 if (typeRequest==0) {
                     var type= $("#edit_type"+id).find(":selected").attr('name');
                 }
@@ -403,7 +416,10 @@
             $('#saveAdd').click(function() 
             {
                 var name=document.getElementById("new_name").value;
-                var type=$("#new_type").find(":selected").attr('name');
+                var typeRequest = document.getElementById("typeRequest").value;
+                if(typeRequest==0){
+                    var type=$("#new_type").find(":selected").attr('name');
+                }
                 var description=document.getElementById("new_description").value;
                 var unit_price=document.getElementById("new_unit_price").value;
                 var pro_price=document.getElementById("new_pro_price").value;
@@ -428,7 +444,12 @@
                         var updated_at=data[0]['updated_at'];
                         var table=document.getElementById("product_table");
                         var table_len=(table.rows.length)-1;
-                        var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td><td id='name"+id+"'>"+name+"</td><td id='type_name"+id+"'>"+type+"</td><td id='description"+id+"'>"+description+"</td><td id='unit_price"+id+"'>"+unit_price+"</td><td id='pro_price"+id+"'>"+pro_price+"</td><td id='image"+id+"'>"+image+"</td><td id='unit"+id+"'>"+unit+"</td><td id=''>"+created_at+"</td><td id=''>"+updated_at+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'> Edit</button></td><td><button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'>  Delete</button></td></tr>";
+                        if(typeRequest!=0){ 
+                            var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td><td id='name"+id+"'>"+name+"</td><td id='description"+id+"'>"+description+"</td><td id='unit_price"+id+"'>"+unit_price+"</td><td id='pro_price"+id+"'>"+pro_price+"</td><td id='image"+id+"'>"+image+"</td><td id='unit"+id+"'>"+unit+"</td><td id=''>"+created_at+"</td><td id=''>"+updated_at+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'> Edit</button></td><td><button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'>  Delete</button></td></tr>";
+                        }else{
+                            var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td><td id='name"+id+"'>"+name+"</td><td id='type_name"+id+"'>"+type+"</td><td id='description"+id+"'>"+description+"</td><td id='unit_price"+id+"'>"+unit_price+"</td><td id='pro_price"+id+"'>"+pro_price+"</td><td id='image"+id+"'>"+image+"</td><td id='unit"+id+"'>"+unit+"</td><td id=''>"+created_at+"</td><td id=''>"+updated_at+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'> Edit</button></td><td><button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'>  Delete</button></td></tr>";
+                        }
+                        
 
                         document.getElementById("new_name").value="";
                         document.getElementById("new_type").value="";

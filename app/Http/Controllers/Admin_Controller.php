@@ -110,7 +110,7 @@ class Admin_Controller extends Controller
       $pro_price = $req->input('new_pro_price');
       $unit = $req->input('new_unit');
       $filename= $req->file('image')->getClientOriginalName();
-      $req::file('image')->move('images',$filename);
+      $req->file('image')->move('images',$filename);
       $getId=Product::Insert_Product($name, $type, $desc, $unit_price, $pro_price,$filename, $unit);
       return $getId;
    } 
