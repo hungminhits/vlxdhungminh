@@ -77,7 +77,7 @@ Route::get('convert',
 Route::get('home',[
 	'as'=>'home',
 	'uses'=>'Home_Controller@getIndex']);
-Route::get('detail',[
+Route::get('detail/{id}',[
 	'as'=>'detail',
 	'uses'=>'Product_Controller@ShowDetail']);
 Route::get('Login',[
@@ -108,7 +108,7 @@ Route::get('contact',
 Route::get('allPro',
 	['as'=>'allPro',
 	 'uses'=>'Product_Controller@allProducts']);
-Route::get('type/{name_khong_dau}',
+Route::get('type/{id}',
 	['as'=>'type',
 	 'uses'=>'Type_Product_Controller@showType']);
 Route::get('detail/{id}',
