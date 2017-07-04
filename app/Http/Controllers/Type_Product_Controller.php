@@ -12,13 +12,37 @@ use App\TypeProduct;
 
 class Type_Product_Controller extends Controller
 {
-   public function showType($name_khong_dau)
+   public function showType( Request $req,$id)
    {
    		$typro = DB::table('type_products')
-   				->where('name_khong_dau',$name_khong_dau)
+   				->where('id',$id)
    				->select()
    				->get();
-   	$product = Product::limit(25)->where('id_type',"=",$typro[0]->id)->orderBy('created_at','DESC')->paginate(6);
+   	$product = DB::table('products')->select()->where('id_type',$id);
+   	
+   		switch ($req->sortBy) {
+   			case 'alpha-asc':
+   				$product=$product->orderBy('name')->paginate(6);
+   				break;
+   			case 'alpha-desc':
+   				$product=$product->orderBy('name','DESC')->paginate(6);
+   				break;
+   			case 'price-asc':
+   				$product=$product->orderBy('unit_price')->paginate(6);
+   				break;
+   			case 'price-desc':
+   				$product=$product->orderBy('unit_price','DESC')->paginate(6);
+   				break;
+   			case 'created-asc':
+   				$product=$product->orderBy('created_at')->paginate(6);
+   				break;
+   			case 'created-desc':
+   				$product=$product->orderBy('created_at','DESC')->paginate(6);
+   				break;
+   			default:
+   				$product=$product->paginate(6);
+   				break;
+   		}
    
 
     return view('page.typeproduct',compact('product','typro'));
