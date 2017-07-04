@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use App\TypeProduct;
 use App\Product;
 use Carbon\Carbon;
+use Session;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -37,6 +38,36 @@ class AppServiceProvider extends ServiceProvider
          view()->composer('Admin.Product_Admin',function($view){
                 $type_product=TypeProduct::Show_Type_product()->get();
                 $view->with('type_product',$type_product);
+        });
+
+          view()->composer('section.sanphambanchay',function($view)
+        {
+            $product = Product::findProductBestSale()->get();
+            $view->with('products',$product);
+
+            
+
+            //dd($bestproduct);
+        });
+
+            view()->composer(['header','section.sanphambanchay'],function($view)
+        {
+          if(Session::has('cart'))
+          {
+            $oldCart = Session::get('cart');
+            $cart = new Cart($oldCart);
+            $view->with(['cart'=>Session::get('cart'),'product_cart'=>$cart->items,'totalPrice'=> $cart->totalPrice,'totalQty'=>$cart->totalQty]);
+            
+
+          }
+
+
+        });
+              view()->composer('section.sanphamkhuyenmai',function($view)
+        {
+            $product = Product::findProductPromotion()->get();
+            $view->with('products',$product);
+            //dd($bestproduct);
         });
     }
 

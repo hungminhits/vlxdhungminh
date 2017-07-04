@@ -52,8 +52,8 @@ class Product extends Model
 
     public static function Edit_Product($id, $name, $type, $desc, $unit_price, $pro_price,$image,$unit){
             $pro=DB::table('products')->where('id','=',$id)->update(['name'=>$name,'id_type'=>$type, 'description'=>$desc,'unit_price'=>$unit_price,'promotion_price'=>$pro_price,'image'=>$image,'unit'=>$unit]);
-            // $updated_at=DB::table('products')->where('id','=',$id)->select('updated_at')->get();
-            return $pro; 
+            $updated_at=DB::table('products')->where('id','=',$id)->select('updated_at')->get();
+            return $updated_at; 
   }
   public static function Insert_Product($name, $type, $desc, $unit_price, $pro_price, $image, $unit){
             $id=DB::table('products')->insertGetId(['name'=>$name,'id_type'=>$type,'description'=>$desc,'unit_price'=>$unit_price,'promotion_price'=>$pro_price,'image'=>$image, 'unit'=>$unit]);
@@ -64,4 +64,30 @@ class Product extends Model
         $pro=DB::table('products')->where('id','=',$id)->delete();
         return $pro;
   }
+
+      public static function findProductBestSale() // tim san pham ban chay
+        {
+            $bestsale = DB::table('bill_detail')->join('products','bill_detail.id_product','=','products.id')
+                            ->select(DB::raw('sum(quantity) as quan'),'products.id','products.name','products.unit_price','products.promotion_price','products.image')
+                            ->groupBy('products.name','products.id','products.unit_price','products.promotion_price','products.image')
+                            ->orderBy('quantity','DESC')
+                            ->limit(2);
+
+            return $bestsale;
+        }
+    public static function findOneProduct($id)
+    {
+        $productcart = DB::table('products')
+                    ->where('products.id','=',$id)
+                    ->first();
+        return $productcart;
+
+    }
+
+    public static function findProductPromotion()
+    {
+        $products = DB::table('products')->where('promotion_price','>','0')
+                                        ->limit(4);
+        return $products;
+    }
 }
