@@ -74,27 +74,34 @@ class Admin_Controller extends Controller
             $typeproduct=TypeProduct::ALL_Type_product()->paginate(10);
             return view('Admin.TypeProduct_Admin',compact('typeproduct'));
       }
-      public function FindProductByType(Request $req){
-   		$product=Product::Find_Product_By_Type($req->id)->paginate(5);
-         $typepro=$req->id;
-   	return view('Admin.Product_Admin',compact('product','typepro'));
-      }
 
-
-
-
-      //sản phẩm
-           //Hiện tất cả sản phẩm
       public function Select_Product(){
-         $product=Product::Show_Product_All()->paginate(5);
-         $typepro=0;
-         return view('Admin.Product_Admin',compact('product','typepro'));
-      }
-       public function Edit_Product( $id, $name, $desc, $unit_price, $pro_price, $image, $unit){
-      $pro=Product::Edit_Product($id,$name, $desc, $unit_price, $pro_price, $image, $unit);
-      return $pro;
-       }
-      public function Insert_Product(Request $req){
+      $product=Product::Show_Product_All()->paginate(5);
+      $typepro=0;
+      return view('Admin.Product_Admin',compact('product','typepro'));
+   }
+   public function FindProductByType(Request $req){
+         $product=Product::Find_Product_By_Type($req->id)->paginate(5);
+         $typepro=1;
+      return view('Admin.Product_Admin',compact('product','typepro'));
+   }
+      public function Edit_Product(Request $req){
+      $filename="";
+      $id = $req->input('id');
+      $name = $req->input('edit_name');
+      $type = $req->input('edit_type');
+      $desc = $req->input('edit_des');
+      $unit_price = $req->input('edit_unit_price');
+      $pro_price = $req->input('edit_pro_price');
+      $unit = $req->input('edit_unit');
+
+      $filename= $req->file('edit_image')->getClientOriginalName();
+      $req->file('edit_image')->move('images',$filename);
+      $pro=Product::Edit_Product($id,$name,$type, $desc, $unit_price, $pro_price,$filename, $unit);
+      // $request->session()->flash('status', 'Tạo bài viết thành công!');
+      // return $pro; 
+   }
+   public function Insert_Product(Request $req){
       $filename="";
       $name = $req->input('name');
       $type = $req->input('new_type');
@@ -102,21 +109,17 @@ class Admin_Controller extends Controller
       $unit_price = $req->input('new_unit_price');
       $pro_price = $req->input('new_pro_price');
       $unit = $req->input('new_unit');
-         //    if($req->file('image')->isValid()){
-         // $filename= $req->file('image')->getClientOriginalName();
-         // $req->file('image')->move('image',$filename);
-         $getId=Product::Insert_Product($name, $type, $desc, $unit_price, $pro_price, $unit);
-      // }
-      // if(Input::hasFile('image')){
-      //    $image = Input::file('image')->getClientOriginalName();
-      
-      //  Input::file('image')->move('image', $image);
-      // }
+      $filename= $req->file('image')->getClientOriginalName();
+      $req->file('image')->move('images',$filename);
+      $getId=Product::Insert_Product($name, $type, $desc, $unit_price, $pro_price,$filename, $unit);
       return $getId;
-      } 
-      public function Delete_Product( $id){
+   } 
+   public function Delete_Product(Request $req){
+      $id = $req->id;
+      $image = $req->imageFile;
+      File::delete('images/'.$image);
       $pro=Product::Delete_Product($id);
-      }
+   }
       public function ViewProductbyDay(){
          $view=Product::ViewProductByDay();
       }
