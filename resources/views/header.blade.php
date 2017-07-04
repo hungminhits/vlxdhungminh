@@ -101,10 +101,74 @@
                               <ul>
                                 <li>
                                   <a class="cart-toggler" href="{{route('giohang')}}">
-                                    <span class="cart-no"> <span class="cart-icon"></span> 
-                                    <span class="hidden-xs" style="color:#848484;"> Giỏ hàng:</span> (<spam class="count_item_pr" id="cart-total">0</spam>) sản phẩm</span>
+                                   <span class="hidden-xs" style="color:#848484;"> Giỏ hàng:</span> 
+                                      <spam class="count_item_pr" id="cart-total">@if(Session::has('cart'))
+                                          <span id="soluong" soluong="{{$totalQty}}" value="{{$totalQty}}">(&nbsp{{$totalQty}}&nbsp)san pham</span>
+                                            @else
+
+                                          <span id="soluong">Trống</span> 
+                                            @endif 
                                   </a>
-                                  <div class="mini-cart-content shopping_cart"><div class="no-item"><p>Không có sản phẩm nào trong giỏ hàng.</p></div></div>
+                                 <div class="mini-cart-content shopping_cart 123">
+                                    @if(Session::has('cart'))
+                                      @foreach($product_cart as $product)
+
+                                      <div class="list-item-cart " id="list-item-cart{{$product['item']['id']}}">                                       
+                                        <div class="cart-img-details">
+                                            <div class="cart-img-photo" id ="cart-img-photo{{$product['item']['id']}}">
+                                                <a href="{{route('cart')}}"><img alt="" src="http://vlxdhungminh.com/vlxdhungminh_files/{{$product['item']['image']}}">
+                                                </a>
+                                            </div>
+
+                                            <div class="cart-img-contaent">
+                                                <a href="/can-ho-3pn-o-pearl-plaza">
+                                                  <h4 id="cart-name{{$product['item']['id']}}">
+                                                                                            
+                                                  {{$product['item']['name']}}
+
+                                                  </h4>
+                                                </a>
+                                                  <span class="cart-item-amount" id="id{{$product['item']['id']}}" soluong="{{$product['qty']}}" giamgia="{{$product['item']['promotion_price']}}" dongia="{{$product['item']['unit_price']}}">
+                                                        {{$product['qty']}} *
+                                                        <div id="gia{{$product['item']['id']}}">
+                                                        @if($product['item']['promotion_price']==0)
+                                                        {{$product['item']['unit_price']}}
+                                                        @else
+                                                        {{$product['item']['promotion_price']}}
+                                                        @endif 
+                                                        </div>     
+                                                   
+                                               
+                                                </span>
+                                            </div>             
+                                            <div class="pro-del"  >
+                                                <a class="cart-item-delete" value="{{$product['item']['id']}}"> <i class="fa fa-times"></i></a>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="clear"></div>                    
+                                      </div>
+                                      @endforeach
+                                    
+                                     <div>
+                                        <div class="top-subtotal">Tổng tiền: 
+                                            @if(Session::has('cart'))
+                                            <span class="price" value="{{$totalPrice}}">{{number_format($totalPrice)}}</span>
+                                            @else 0
+                                            @endif dong
+                                        </div>
+                                      </div>                            
+                                     <div>
+                                        <div class="actions" id="Thanhtoan">
+                                            <a href="/checkout" class="btn-view-cart" id="Thanhtoan">
+                                            <span>Thanh toán</span></a>
+                                        </div>
+                                    </div>                                    
+                                    @else
+                                        <div class="no-item"><p>Không có sản phẩm nào trong giỏ hàng.</p>
+                                        </div>
+                                    @endif
+                                  </div>
                                 </li>
                               </ul>
                             </div>
@@ -196,7 +260,7 @@
                                         <a href="https://mendover-theme-1.bizwebvietnam.net/nha-du-an">Nhà ở dự án</a>
                                       </li> -->
                                       @for($i=0;$i<count($type);$i++)
-                                      <li><a href="{{route('type',$type[$i]['id'])}}">{{$type[$i]['name']}}</a></li>
+                                      <li><a href="{{route('type',$type[$i]['name_khong_dau'])}}">{{$type[$i]['name']}}</a></li>
                                       @endfor
                                       
                                       

@@ -78,7 +78,7 @@ Route::get('convert',
 Route::get('home',[
 	'as'=>'home',
 	'uses'=>'Home_Controller@getIndex']);
-Route::get('detail/{id}',[
+Route::get('detail',[
 	'as'=>'detail',
 	'uses'=>'Product_Controller@ShowDetail']);
 Route::get('Login',[
@@ -109,12 +109,25 @@ Route::get('contact',
 Route::get('allPro',
 	['as'=>'allPro',
 	 'uses'=>'Product_Controller@allProducts']);
-Route::get('type/{id}',
+Route::get('type/{name_khong_dau}',
 	['as'=>'type',
 	 'uses'=>'Type_Product_Controller@showType']);
 Route::get('detail/{id}',
 	['as'=>'detail',
 	 'uses'=>'Detail_Controller@getDetail']);
+
+Route::get('buy/{id}',
+	['as'=>'buy',
+	 'uses'=>'Cart_Controller@buy']); 
+
+Route::get('cart',
+	['as'=>'cart',
+	'uses'=>'Cart_Controller@showCart']);
+
+route::get('delete_cart/{id}',
+	['as'=>'delete1cart',
+	 'uses'=>'Cart_Controller@delete_cart']);
+
 Route::get('giohang',[
 	'as'=>'giohang',
 	'uses'=>'Home_Controller@getGiohang']);

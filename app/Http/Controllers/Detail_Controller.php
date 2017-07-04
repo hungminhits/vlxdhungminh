@@ -12,9 +12,9 @@ use App\TypeProduct;
 
 class Detail_Controller extends Controller
 {
-   public function getDetail($id)
+   public function getDetail($name_khong_dau)
    {
-   	$product = Product::all()->where('id',$id);
+   	$product = Product::all()->where('name_khong_dau',$name_khong_dau);
     return view('page.chitiet',compact('product'));
     
    }
