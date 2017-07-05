@@ -44,6 +44,7 @@ class AppServiceProvider extends ServiceProvider
         {
             $product = Product::findProductBestSale()->get();
             $view->with('products',$product);
+           
 
             
 

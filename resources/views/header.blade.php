@@ -206,7 +206,7 @@
                         
                         
                         <li>
-                          <a href="{{route('allPro')}}">Sản phẩm<span data-toggle="dropdown" class="dropdown-toggle fa fa-angle-down"></span></a>
+                          <a href="{{route('allPro',['sortBy'=>'default'])}}">Sản phẩm<span data-toggle="dropdown" class="dropdown-toggle fa fa-angle-down"></span></a>
 
                           <div class="nav-child dropdown-menu mega-dropdown-menu">
                             <div class="mega-dropdown-inner">
@@ -260,7 +260,11 @@
                                         <a href="https://mendover-theme-1.bizwebvietnam.net/nha-du-an">Nhà ở dự án</a>
                                       </li> -->
                                       @for($i=0;$i<count($type);$i++)
+<<<<<<< HEAD
+                                      <li><a href="{{route('type',[$type[$i]['id'],'sortBy'=>'default'])}}">{{$type[$i]['name']}}</a></li>
+=======
                                       <li><a href="{{route('type',$type[$i]['name_khong_dau'])}}">{{$type[$i]['name']}}</a></li>
+>>>>>>> 1e8f9680e0224c3477565d6561e884e6ff81e181
                                       @endfor
                                       
                                       

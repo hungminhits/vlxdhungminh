@@ -75,7 +75,7 @@ Route::get('convert',
 
  Route::get('/','Home_Controller@getIndex');
 //trang bán hàng
-Route::get('home',[
+Route::get('',[
 	'as'=>'home',
 	'uses'=>'Home_Controller@getIndex']);
 Route::get('detail',[
@@ -134,8 +134,6 @@ Route::get('giohang',[
 Route::get('myPage',[
 	'as'=>'myPage',
 	'uses'=>'LoginLogoutRegister_Controller@getMyPage']);
-
-
 
 Route::get('login/{provider}', [
 	'as'=>'provider_login',

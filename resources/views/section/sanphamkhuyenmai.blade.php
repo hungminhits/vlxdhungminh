@@ -9,12 +9,12 @@
                         </div>
                       <div class="container">
                           <div id="featured-slider-2" class="row">
-                            <div class="slider-items slider-width-col4 owl-carousel owl-theme" style="opacity: 1; display: block;">
-                              <div class="owl-wrapper-outer autoHeight" style="height: 374px;">
-                                <div class="owl-wrapper" style="width: 5472px; left: 0px; display: block; transition: all 0ms ease; transform: translate3d(0px, 0px, 0px);">
+                            <div class="slider-items slider-width-col4 owl-carousel owl-theme" style="opacity: 1; display: block;float: left">
+                              <div class="owl-wrapper-outer autoHeight" style="height: 351px;">
+                                <div class="owl-wrapper" style="width: 5400px; left: 0px; display: block; transform: translate3d(0px, 0px, 0px); transition: all 500ms ease 0s;">
                                     <div>
                                       @foreach($products as $product )
-                                      <div class="owl-item" style="width: 304px;">
+                                      <div class="owl-item" style="width: 300px">
                                         <div class="laster-shop-item">
                                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 stl_full_width">
                                             <form action="/cart/add" method="post" class="variants" id="product-actions-1816119" enctype="multipart/form-data">
@@ -79,12 +79,15 @@
                                          
                                 </div>
                               </div>
+                                                          <div class="owl-controls clickable">
+                              <div class="owl-buttons">
+                                <div class="owl-prev"><i class="fa fa-angle-left"></i></div>
+                                <div class="owl-next"><i class="fa fa-angle-right"></i></div>
+                              </div>
                             </div>
-                          <div class="owl-controls clickable">
-                            <div class="owl-buttons">
-                              <div class="owl-prev"><i class="fa fa-angle-left"></i></div>
-                              <div class="owl-next"><i class="fa fa-angle-right"></i></div>
                             </div>
+
+
                           </div>
 
                       </div>
