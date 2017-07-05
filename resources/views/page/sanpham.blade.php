@@ -39,7 +39,7 @@
 
 							@for ($i=0;$i<count($type);$i++)
 
-								<li class="li_lv1 "> <a href="{{route('type',$type[$i]['name_khong_dau'])}}">{{$type[$i]['name']}}</a> <span class="sub_minus"></span>
+								<li class="li_lv1 "> <a href="{{route('type',[$type[$i]['id'],'sortBy'=>'default'])}}">{{$type[$i]['name']}}</a> <span class="sub_minus"></span>
 									
 									<!--level0-->
 								</li>
@@ -161,16 +161,23 @@
 											<div class="orderby-wrapper">
 											<form  id="form" action="{{route('allPro')}}"> 
 												<select name="sortBy" class="sortBy" id="sortBy" class="selectBox" style="padding: 0px 10px; height: 30px;">
-													<option selected="" value="default">Mặc định</option>
-													<option id="1" value="alpha-asc">A → Z</option>
-													<option value="alpha-desc">Z → A</option>
-													<option value="price-asc">Giá tăng dần</option>
-													<option value="price-desc">Giá giảm dần</option>
-													<option value="created-desc">Hàng mới nhất</option>
-													<option value="created-asc">Hàng cũ nhất</option>
+													<option id="default" value="default">Mặc định</option>
+													<option id="alpha-asc" value="alpha-asc">A → Z</option>
+													<option id="alpha-desc" value="alpha-desc">Z → A</option>
+													<option id="price-asc" value="price-asc">Giá tăng dần</option>
+													<option id="price-desc" value="price-desc">Giá giảm dần</option>
+													<option id="created-desc" value="created-desc">Hàng mới nhất</option>
+													<option id="created-asc" value="created-asc">Hàng cũ nhất</option>
 												</select>
 											</form>
 											</div>
+											<script type="text/javascript">
+											var a="{{isset($_GET['sortBy'])}}";
+											if(a){
+												var b="{{$_GET['sortBy']}}";
+											$("#"+b).attr("selected","selected");
+											}
+											</script>
 									</div>
 									<div class="view-mode"> 
 										<a href="javascript:;" class="active">
@@ -240,7 +247,7 @@
 
 					</div>
 					<div class="tzpagenavi-shop">
-							{{$allPro->links()}}
+							{{$allPro->appends(['sortBy'=>$_GET['sortBy']])->links()}}
 					</div>
 
 				</div>
