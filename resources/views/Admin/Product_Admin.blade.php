@@ -68,49 +68,117 @@
                                         <div id="editRowPro{{ $pro->id }}" class="form">
                                             <p class="form_title">Edit Product</p>
                                             <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
-                                            <form id="formEdit{{ $pro->id }}" enctype="multipart/form-data" method="post"   >
+                                            <form id="formEdit{{ $pro->id }}" enctype="multipart/form-data" method="post">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <div class="row">
-                                                    <label>ID</label>
-                                                     <input type="text" name="id" value="{{ $pro->id }}" readonly>
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="id">ID</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" value="{{ $pro->id }}" name="id" class="form-control" readonly >
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label>Name Product</label>
-                                                    <input type="text" name="edit_name" id="edit_name{{ $pro->id }}" value="{{ $pro->name }}" required="">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="name">Name Product</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" name="edit_name" id="edit_name{{ $pro->id }}" value="{{ $pro->name }}" required="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label>Type Product</label>
-                                                    <select class="selectpicker" name="edit_type" id="edit_type{{ $pro->id }}" >
-                                                            @foreach($type_product as $type)
-                                                                <option name="{{ $type->name }}" value="{{ $type->id }}" >{{ $type->name }}</option>
-                                                                @if($pro->type_name==$type->name )
-                                                                    <option selected="selected" name="{{ $type->name }}"" value="{{ $type->id }}" >{{ $type->name }}</option>
-                                                                @endif
-                                                            @endforeach
-                                                    </select> 
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="type">Type Product</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <select class="selectpicker form-control" name="edit_type" id="edit_type{{ $pro->id }}" >
+                                                                    @foreach($type_product as $type)
+                                                                        <option name="{{ $type->name }}" value="{{ $type->id }}" >{{ $type->name }}</option>
+                                                                        @if($pro->type_name==$type->name )
+                                                                            <option selected="selected" name="{{ $type->name }}"" value="{{ $type->id }}" >{{ $type->name }}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label> Description</label>
-                                                    <input type="text" value="{{$pro->description}}" name="edit_des" id="edit_description{{ $pro->id }}" required="">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="description">Description</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" value="{{$pro->description}}" name="edit_des" id="edit_description{{ $pro->id }}" required="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label>Unit Price</label>
-                                                    <input type="text" value="{{$pro->unit_price}}" name="edit_unit_price" id="edit_unit_price{{ $pro->id }}" required="">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="unit-price">Unit Price</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="number" value="{{$pro->unit_price}}" name="edit_unit_price" id="edit_unit_price{{ $pro->id }}" required="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label>Promotion Price</label>
-                                                    <input type="text" value="{{$pro->promotion_price}}" name="edit_pro_price" id="edit_pro_price{{ $pro->id }}" required="">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="romotion-price">Promotion Price</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="number" value="{{$pro->promotion_price}}" name="edit_pro_price" id="edit_pro_price{{ $pro->id }}" required="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label>Image</label>
-                                                    <input type="file" value="{{$pro->image}}" name="edit_image" id="edit_image{{ $pro->id }}">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="image">Image</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="file" value="{{$pro->image}}" name="edit_image" id="edit_image{{ $pro->id }}" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label>Unit</label>
-                                                    <input type="text" value="{{$pro->unit}}" name="edit_unit" id="edit_unit{{ $pro->id }}" required="">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="unit">Unit</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" value="{{$pro->unit}}" name="edit_unit" id="edit_unit{{ $pro->id }}" required="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <br>
-                                                <button  type="button" id="saveEdit" value="{{ $pro->id }}" class="button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit" style="border-radius: 10px;">  Save</button>
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-offset-5 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+                                                    <button  type="button" id="saveEdit" value="{{ $pro->id }}" class="button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit" style="border-radius: 10px;">  Save</button>
+                                                    </div>
+                                                </div>
+                                                
                                             </form>
                                         </div>
                                     
@@ -155,40 +223,110 @@
                                         <div id="editRowPro{{ $pro->id }}" class="form">
                                             <p class="form_title">Edit Product</p>
                                             <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
-                                            <form id="formEdit{{ $pro->id }}" enctype="multipart/form-data" method="post"   >
+                                            <form id="formEdit{{ $pro->id }}" enctype="multipart/form-data" method="post">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <div class="row">
-                                                    <label>ID</label>
-                                                     <input type="text" name="id" value="{{ $pro->id }}" readonly>
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="id">ID</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" value="{{ $pro->id }}" name="id" class="form-control" readonly >
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label>Name Product</label>
-                                                    <input type="text" name="edit_name" id="edit_name{{ $pro->id }}" value="{{ $pro->name }}" required="">
-                                                    <span id="name_err"></span>
+                                                <div class="row clearfix" >
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="name">Name Product</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" name="edit_name" id="edit_name{{ $pro->id }}" value="{{ $pro->name }}" required="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <input type="hidden" name="edit_type" value="{{ $pro->id_type }}">
-                                                <div class="row">
-                                                    <label> Description</label>
-                                                    <input type="text" value="{{$pro->description}}" name="edit_des" id="edit_description{{ $pro->id }}" required="">
+                                                <div class="row clearfix" id="rowType{{ $pro->id }}">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="type">Type Product</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="hidden" name="edit_type" value="{{ $pro->id_type }}" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label>Unit Price</label>
-                                                    <input type="number" value="{{$pro->unit_price}}" name="edit_unit_price" id="edit_unit_price{{ $pro->id }}" required="">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="description">Description</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" value="{{$pro->description}}" name="edit_des" id="edit_description{{ $pro->id }}" required="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label>Promotion Price</label>
-                                                    <input type="number" value="{{$pro->promotion_price}}" name="edit_pro_price" id="edit_pro_price{{ $pro->id }}">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="unit-price">Unit Price</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="number" value="{{$pro->unit_price}}" name="edit_unit_price" id="edit_unit_price{{ $pro->id }}" required="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label>Image</label>
-                                                    <input type="file" value="{{$pro->image}}" name="edit_image" id="edit_image{{ $pro->id }}">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="romotion-price">Promotion Price</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="number" value="{{$pro->promotion_price}}" name="edit_pro_price" id="edit_pro_price{{ $pro->id }}" required="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label>Unit</label>
-                                                    <input type="text" value="{{$pro->unit}}" name="edit_unit" id="edit_unit{{ $pro->id }}" required="">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="image">Image</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="file" value="{{$pro->image}}" name="edit_image" id="edit_image{{ $pro->id }}" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <br>
-                                                <button  type="button" id="saveEdit" value="{{ $pro->id }}" class="button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit" style="border-radius: 10px;">  Save</button>
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="unit">Unit</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" value="{{$pro->unit}}" name="edit_unit" id="edit_unit{{ $pro->id }}" required="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-offset-5 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+                                                    <button  type="button" id="saveEdit" value="{{ $pro->id }}" class="button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit" style="border-radius: 10px;">  Save</button>
+                                                    </div>
+                                                </div>
+                                                
                                             </form>
                                         </div>
                                     @endforeach
@@ -202,47 +340,105 @@
                             <div id="addRowPro" class="form">
                                             <p class="form_title">Add Product</p>
                                             <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
-                                            <form enctype="multipart/form-data" method="post" id="new_form" name="new_form">
+
+
+                                            <form id="new_form" enctype="multipart/form-data" method="post">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <div class="row">
-                                                    <label class="id">ID</label>
-                                                    <input type="text" disabled="">
+                                                
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="name">Name Product</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" name="new_name" id="new_name" required="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label class="id">Name Product</label>
-                                                    <input type="text" name="name" id="new_name" required="">
-                                                    <span id="name_err"></span>
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="type">Type Product</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <select class="selectpicker form-control" name="new_type" id="new_type" >
+                                                                    @foreach($type_product as $type)
+                                                                        <option name="{{ $type->name }}" class="{{ $type->id }}" value="{{ $type->id }}">{{ $type->name }}</option>
+                                                                    @endforeach
+                                                                </select> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label class="id">Type Product</label>
-                                                    <select class="selectpicker" name="new_type" id="new_type">
-                                                        @foreach($type_product as $type)
-                                                            <option name="{{ $type->name }}" class="{{ $type->id }}" value="{{ $type->id }}">{{ $type->name }}</option>
-                                                        @endforeach
-                                                    </select> 
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="description">Description</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" name="new_des" id="new_description" required="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label class="id">Description</label>
-                                                    <input type="text" name="new_des" id="new_description" required="">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="unit-price">Unit Price</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="number" name="new_unit_price" id="new_unit_price" required="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label class="id">Unit Price</label>
-                                                    <input type="number" name="new_unit_price" id="new_unit_price" required="">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="romotion-price">Promotion Price</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="number" name="new_pro_price" id="new_pro_price" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            
-                                                <div class="row">
-                                                    <label class="id">Promotion Price</label>
-                                                    <input type="number" name="new_pro_price" id="new_pro_price">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="image">Image</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="file" name="new_image" id="new_image" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label class="id">Image</label>
-                                                    <input type="file" name="image" id="new_image">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="unit">Unit</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" name="new_unit" id="new_unit" required="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label class="id">Unit</label>
-                                                    <input type="text" name="new_unit" id="new_unit" required="">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-offset-5 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+                                                    <button type="button" id="saveAdd" class="button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save" style="border-radius: 10px;">  Insert</button>
+                                                    </div>
                                                 </div>
-                                                <button type="button" id="saveAdd" class="button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save" style="border-radius: 10px;">  Insert</button>
+                                                
                                             </form>
                                         </div>
                                         
@@ -271,6 +467,10 @@
                 window.location.replace(route);
             });
             function editRow(id){
+                var typeRequest = document.getElementById("typeRequest").value;
+                if (typeRequest!=0) {
+                    $('#rowType'+id).hide();
+                }
                 var formBox = $('#editRowPro'+id);
                 $(formBox).fadeIn("slow");
 

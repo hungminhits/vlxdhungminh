@@ -103,14 +103,14 @@ class Admin_Controller extends Controller
    }
    public function Insert_Product(Request $req){
       $filename="";
-      $name = $req->input('name');
+      $name = $req->input('new_name');
       $type = $req->input('new_type');
       $desc = $req->input('new_des');
       $unit_price = $req->input('new_unit_price');
       $pro_price = $req->input('new_pro_price');
       $unit = $req->input('new_unit');
-      $filename= $req->file('image')->getClientOriginalName();
-      $req->file('image')->move('images',$filename);
+      $filename= $req->file('new_image')->getClientOriginalName();
+      $req->file('new_image')->move('images',$filename);
       $getId=Product::Insert_Product($name, $type, $desc, $unit_price, $pro_price,$filename, $unit);
       return $getId;
    } 
