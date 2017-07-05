@@ -38,12 +38,12 @@ return [
      'facebook' => [
         'client_id' => '253731135087090',
         'client_secret' => '7a687ddfc3ed8cdf3d88497310e4d074',
-        'redirect' => 'http://localhost/vlxdHungMinh/public/login/facebook/callback',
+        'redirect' => 'http://localhost/vlxdHungMinh1/public/login/facebook/callback',
     ],
     'google' => [
         'client_id' => '373850082397-fc7sp15o80el1a42clu0l3fge3mdp96j.apps.googleusercontent.com',
         'client_secret' => 'hHcqcd2Ml8198UnTQ_Kt7htk',
-        'redirect' => 'http://localhost/vlxdHungMinh/public/login/google/callback',
+        'redirect' => 'http://localhost/vlxdHungMinh1/public/login/google/callback',
     ],
 
 ];
