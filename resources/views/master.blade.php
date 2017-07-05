@@ -18,7 +18,7 @@
 
 </title>    
 <!-- ================= Page description ================== -->
-<base href="http://localhost/vlxdhungminh1/public/">
+
 
 <meta name="description" content="">
 
@@ -47,6 +47,8 @@
 <!-- end script -->
 
 <!-- Styles -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
 <link href="css/css.css" rel="stylesheet" type="text/css">
 <link href="css/css_002.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="css/font-awesome.css">
@@ -66,6 +68,14 @@
 <link href="css/settings.css" rel="stylesheet" type="text/css">
 <link href="css/main_styles.css" rel="stylesheet" type="text/css">
 <link href="css/mystyle.css" rel="stylesheet" type="text/css">
+<link href="css/font-weight_002.css" rel="stylesheet" type="text/css">
+<link href="css/challenge.css" rel="stylesheet" type="text/css">
+<link href="css/meterialize.css" rel="stylesheet" type="text/css">
+<link href="css/my_style.css" rel="stylesheet" type="text/css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="js/jquery-1.11.1.min.js"></script>
+
+
 <!-- Header hook for plugins ================================================== -->
 <script src="js/myfunction.js" type="text/javascript"></script>
 <!-- script 1-->
