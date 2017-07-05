@@ -133,15 +133,26 @@ class Admin_Controller extends Controller
   
       return view('Admin.User_Admin',compact('user'));
    }
-   public function Edit_User( $id, $group){
-      $user=User::Edit_User($id,$group);
+   public function Edit_User(Request $req){
+      $id = $req->input('id');
+      $name = $req->input('edit_name');
+      $phone = $req->input('edit_phone');
+      $address = $req->input('edit_address');
+      $group = $req->input('edit_group');
+      $user=User::Edit_User($id, $name, $phone, $address, $group);
    }
-   public function Insert_User( $name, $email, $group){
-      $getId=User::Insert_User($name,$email,$group);
-       // return view('Admin.User_Admin','getId');
+   public function Insert_User(Request $req){
+      $name = $req->input('new_name');
+      $email = $req->input('new_email');
+      $password = Hash::make($req->input('new_password'));
+      $phone = $req->input('new_phone');
+      $address = $req->input('new_address');
+      $group = $req->input('new_group');
+      $getId=User::Insert_User($name, $email, $password, $phone, $address, $group);
       return $getId;
    } 
-   public function Delete_User( $id){
+   public function Delete_User(Request $req){
+      $id = $req->id;
       $user=User::Delete_User($id);
    }
 

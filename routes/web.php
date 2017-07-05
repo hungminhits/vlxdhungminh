@@ -57,13 +57,13 @@ Route::get('ViewType_Product',
 Route::get('user_Admin',
 	['as'=>'user_Admin',
 	 'uses'=>'Admin_Controller@Select_User']);
-Route::get('Edit_User/{id}/{group}',
+Route::post('Edit_User',
 	['as'=>'Edit_User',
 	 'uses'=>'Admin_Controller@Edit_User']);
-Route::get('Insert_User/{name}/{email}/{group}',
+Route::post('Insert_User',
 	['as'=>'Insert_User',
 	 'uses'=>'Admin_Controller@Insert_User']);
-Route::get('Delete_User/{id}',
+Route::get('Delete_User',
 	['as'=>'Delete_User',
 	 'uses'=>'Admin_Controller@Delete_User']);
 
