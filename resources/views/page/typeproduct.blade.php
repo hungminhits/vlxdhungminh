@@ -5,7 +5,6 @@
 
 	<div class="banner_page_list">
 	@foreach ($typro as $typ)
-	{{$idtype = $typ->id}}
 	<h1> {{$name=$typ->name}}</h1>
 	@endforeach
 	</div>
@@ -40,7 +39,11 @@
 
 							@for ($i=0;$i<count($type);$i++)
 								@if ($type[$i]['name'] == $name)
+<<<<<<< HEAD
 								<li class="li_lv1 active"> <a href="{{route('type',[$type[$i]['id'],'sortBy'=>'default'])}}">{{$name}}</a> <span class="sub_minus"></span>
+=======
+								<li class="li_lv1 active"> <a href="{{route('type',$type[$i]['name_khong_dau'])}}">{{$name}}</a> <span class="sub_minus"></span>
+>>>>>>> 1e8f9680e0224c3477565d6561e884e6ff81e181
 									<ul class="level0_415">
 
 
@@ -64,7 +67,11 @@
 			
 								@else
 
+<<<<<<< HEAD
 								<li class="li_lv1 "> <a href="{{route('type',[$type[$i]['id'],'sortBy'=>'default'])}}">{{$type[$i]['name']}}</a> <span class="sub_minus"></span>
+=======
+								<li class="li_lv1 "> <a href="{{route('type',$type[$i]['name_khong_dau'])}}">{{$type[$i]['name']}}</a> <span class="sub_minus"></span>
+>>>>>>> 1e8f9680e0224c3477565d6561e884e6ff81e181
 								</li>
 								@endif
 							@endfor
@@ -181,8 +188,9 @@
 								<div class="box_tool">
 									<div class="result-short pull-left">
 										<p class="result-count"> Sắp xếp : </p>
-										
+										<form class="filter-xs" method="POST">
 											<div class="orderby-wrapper"> 
+<<<<<<< HEAD
 											<form  method="" id="form" action="{{route('type',$idtype)}}"> 
 												<select name="sortBy" id="sortBy" class="selectBox" style="padding: 0px 10px; height: 30px;">
 													<option id="default" value="default">Mặc định</option>
@@ -192,14 +200,29 @@
 													<option id="price-desc" value="price-desc">Giá giảm dần</option>
 													<option id="created-desc" value="created-desc">Hàng mới nhất</option>
 													<option id="created-asc" value="created-asc">Hàng cũ nhất</option>
+=======
+												<select name="sortBy" id="sortBy" class="selectBox" style="padding: 0px 10px; height: 30px;">
+													<option selected="" value="default">Mặc định</option>
+													<option value="alpha-asc">A → Z</option>
+													<option value="alpha-desc">Z → A</option>
+													<option value="price-asc">Giá tăng dần</option>
+													<option value="price-desc">Giá giảm dần</option>
+													<option value="created-desc">Hàng mới nhất</option>
+													<option value="created-asc">Hàng cũ nhất</option>
+>>>>>>> 1e8f9680e0224c3477565d6561e884e6ff81e181
 												</select>
-											</form>
+												<script>$('#sortBy').val('created-desc');</script>
+												<script src="//bizweb.dktcdn.net/100/069/071/themes/543675/assets/sortby.js?1496115817221" type="text/javascript"></script>
 											</div>
+<<<<<<< HEAD
 											<script type="text/javascript">
 												var b="{{$_GET['sortBy']}}";
 											$("#"+b).attr("selected","selected");
 											
 											</script>
+=======
+										</form>
+>>>>>>> 1e8f9680e0224c3477565d6561e884e6ff81e181
 									</div>
 									<div class="view-mode"> 
 										<a href="javascript:;" class="active">
@@ -215,6 +238,7 @@
 					</div>
 
 					<div class="row multi-columns-row">
+<<<<<<< HEAD
 					<script type="text/javascript">
 					$('#sortBy').change(function(){
 						
@@ -224,6 +248,8 @@
 					});
 
 					</script>
+=======
+>>>>>>> 1e8f9680e0224c3477565d6561e884e6ff81e181
 
 					@foreach ($product as $pro)
 						<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
@@ -237,11 +263,11 @@
 												Mua ngay
 											</a>
 
-											<a href="{{route('detail',$pro->id)}}" class="tzheart">
+											<a href="{{route('detail',$pro->name_khong_dau)}}" class="tzheart">
 												Chi tiết
 											</a>
 										</span>
-										<div class="laster-thumb row" onclick="location.href='{{route('detail',$pro->id)}}';">
+										<div class="laster-thumb row" onclick="location.href='/ban-can-ho-times-city';">
 
 											<a href="/ban-can-ho-times-city" title="Bán căn hộ Times City Park Hill">
 												<img  src="image/{{$pro->image}}" alt="">
@@ -254,7 +280,7 @@
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 stl_full_width">
 									<div class="row">
 										<div class="left_cnt_product">
-											<h3><a href="{{route('detail',$pro->id)}}" class="text2line">{{$pro->name}}</a></h3>
+											<h3><a href="/ban-can-ho-times-city" class="text2line">{{$pro->name}}</a></h3>
 											<div class="right_cnt_product">
 
 

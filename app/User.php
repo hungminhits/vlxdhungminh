@@ -43,12 +43,12 @@ class User extends Authenticatable
             $user=DB::table('users')->select();
             return $user;
     }
-    public static function Edit_User($id, $group){
-            $user=DB::table('users')->where('id','=',$id)->update(['group'=>$group]);
+    public static function Edit_User($id, $name, $phone, $address, $group){
+            $user=DB::table('users')->where('id','=',$id)->update(['full_name'=>$name, 'phone'=>$phone, 'address'=>$address,'group'=>$group]);
             return $user;
     }
-    public static function Insert_User($name,$email, $group){
-            $id=DB::table('users')->insertGetId(['full_name'=>$name,'email'=>$email,'group'=>$group]);
+    public static function Insert_User($name, $email, $password, $phone, $address, $group){
+            $id=DB::table('users')->insertGetId(['full_name'=>$name,'email'=>$email, 'password'=>$password, 'phone'=>$phone, 'address'=>$address,'group'=>$group]);
             return $id;
     }
     public static function Delete_User($id){

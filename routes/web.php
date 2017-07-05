@@ -57,13 +57,13 @@ Route::get('ViewType_Product',
 Route::get('user_Admin',
 	['as'=>'user_Admin',
 	 'uses'=>'Admin_Controller@Select_User']);
-Route::get('Edit_User/{id}/{group}',
+Route::post('Edit_User',
 	['as'=>'Edit_User',
 	 'uses'=>'Admin_Controller@Edit_User']);
-Route::get('Insert_User/{name}/{email}/{group}',
+Route::post('Insert_User',
 	['as'=>'Insert_User',
 	 'uses'=>'Admin_Controller@Insert_User']);
-Route::get('Delete_User/{id}',
+Route::get('Delete_User',
 	['as'=>'Delete_User',
 	 'uses'=>'Admin_Controller@Delete_User']);
 
@@ -75,10 +75,10 @@ Route::get('convert',
 
  Route::get('/','Home_Controller@getIndex');
 //trang bán hàng
-Route::get('home',[
+Route::get('',[
 	'as'=>'home',
 	'uses'=>'Home_Controller@getIndex']);
-Route::get('detail/{id}',[
+Route::get('detail',[
 	'as'=>'detail',
 	'uses'=>'Product_Controller@ShowDetail']);
 Route::get('Login',[
@@ -109,20 +109,31 @@ Route::get('contact',
 Route::get('allPro',
 	['as'=>'allPro',
 	 'uses'=>'Product_Controller@allProducts']);
-Route::get('type/{id}',
+Route::get('type/{name_khong_dau}',
 	['as'=>'type',
 	 'uses'=>'Type_Product_Controller@showType']);
 Route::get('detail/{id}',
 	['as'=>'detail',
 	 'uses'=>'Detail_Controller@getDetail']);
+
+Route::get('buy/{id}',
+	['as'=>'buy',
+	 'uses'=>'Cart_Controller@buy']); 
+
+Route::get('cart',
+	['as'=>'cart',
+	'uses'=>'Cart_Controller@showCart']);
+
+route::get('delete_cart/{id}',
+	['as'=>'delete1cart',
+	 'uses'=>'Cart_Controller@delete_cart']);
+
 Route::get('giohang',[
 	'as'=>'giohang',
 	'uses'=>'Home_Controller@getGiohang']);
 Route::get('myPage',[
 	'as'=>'myPage',
 	'uses'=>'LoginLogoutRegister_Controller@getMyPage']);
-
-
 
 Route::get('login/{provider}', [
 	'as'=>'provider_login',
