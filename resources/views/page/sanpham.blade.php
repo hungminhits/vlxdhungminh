@@ -39,7 +39,7 @@
 
 							@for ($i=0;$i<count($type);$i++)
 
-								<li class="li_lv1 "> <a href="{{route('type',$type[$i]['name_khong_dau'])}}">{{$type[$i]['name']}}</a> <span class="sub_minus"></span>
+								<li class="li_lv1 "> <a href="{{route('type',[$type[$i]['id'],'sortBy'=>'default'])}}">{{$type[$i]['name']}}</a> <span class="sub_minus"></span>
 									
 									<!--level0-->
 								</li>
@@ -158,6 +158,18 @@
 								<div class="box_tool">
 									<div class="result-short pull-left">
 										<p class="result-count"> Sắp xếp : </p>
+<<<<<<< HEAD
+											<div class="orderby-wrapper">
+											<form  id="form" action="{{route('allPro')}}"> 
+												<select name="sortBy" class="sortBy" id="sortBy" class="selectBox" style="padding: 0px 10px; height: 30px;">
+													<option id="default" value="default">Mặc định</option>
+													<option id="alpha-asc" value="alpha-asc">A → Z</option>
+													<option id="alpha-desc" value="alpha-desc">Z → A</option>
+													<option id="price-asc" value="price-asc">Giá tăng dần</option>
+													<option id="price-desc" value="price-desc">Giá giảm dần</option>
+													<option id="created-desc" value="created-desc">Hàng mới nhất</option>
+													<option id="created-asc" value="created-asc">Hàng cũ nhất</option>
+=======
 										<form class="filter-xs" method="POST">
 											<div class="orderby-wrapper"> 
 												<select name="sortBy" id="sortBy" class="selectBox" style="padding: 0px 10px; height: 30px;">
@@ -168,11 +180,22 @@
 													<option value="price-desc">Giá giảm dần</option>
 													<option value="created-desc">Hàng mới nhất</option>
 													<option value="created-asc">Hàng cũ nhất</option>
+>>>>>>> 1e8f9680e0224c3477565d6561e884e6ff81e181
 												</select>
 												<script>$('#sortBy').val('created-desc');</script>
 												<script src="//bizweb.dktcdn.net/100/069/071/themes/543675/assets/sortby.js?1496115817221" type="text/javascript"></script>
 											</div>
+<<<<<<< HEAD
+											<script type="text/javascript">
+											var a="{{isset($_GET['sortBy'])}}";
+											if(a){
+												var b="{{$_GET['sortBy']}}";
+											$("#"+b).attr("selected","selected");
+											}
+											</script>
+=======
 										</form>
+>>>>>>> 1e8f9680e0224c3477565d6561e884e6ff81e181
 									</div>
 									<div class="view-mode"> 
 										<a href="javascript:;" class="active">
@@ -237,7 +260,7 @@
 
 					</div>
 					<div class="tzpagenavi-shop">
-							{{$allPro->links()}}
+							{{$allPro->appends(['sortBy'=>$_GET['sortBy']])->links()}}
 					</div>
 
 				</div>
