@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('type_product',$type_product);
         });
 
-          view()->composer(['section.sanphambanchay','section.sanphamkhuyenmai'],function($view)
+          view()->composer('section.sanphambanchay',function($view)
         {
             $product = Product::findProductBestSale()->get();
             $view->with('products',$product);

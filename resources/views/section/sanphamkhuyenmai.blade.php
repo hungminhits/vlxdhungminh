@@ -1,155 +1,81 @@
-<div class="container"> 
- <div class="row"> 
-  <div class="well"> 
-   <div id="myCarousel" class="carousel slide"> 
-    <div class="carousel-inner"> 
-     <div class="item active"> 
-      <div class="row"> 
-       <div class="col-md-3"> 
-        <div class="thumbnail"> <img src="http://hocwebgiare.com/thiet_ke_web_chuan_demo/product/images/1.jpg" alt="Sản phẩm 1"> 
-         <div class="caption"> 
-          <h3>Sản phẩm 1</h3> 
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p> 
-          <p><a href="http://hocwebgiare.com/" class="btn btn-primary" role="button">200.000 đ</a> <a href="http://hocwebgiare.com/" class="btn btn-default" role="button">Đặt hàng</a>
-          </p> 
-         </div> 
-        </div> 
-       </div> 
-       <div class="col-md-3"> 
-        <div class="thumbnail"> <img src="http://hocwebgiare.com/thiet_ke_web_chuan_demo/product/images/2.jpg" alt="Sản phẩm 2"> 
-         <div class="caption"> 
-          <h3>Sản phẩm 2</h3> 
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p> 
-          <p><a href="http://hocwebgiare.com/" class="btn btn-primary" role="button">200.000 đ</a> <a href="http://hocwebgiare.com/" class="btn btn-default" role="button">Đặt hàng</a>
-          </p> 
-         </div> 
-        </div> 
-       </div> 
-       <div class="col-md-3"> 
-        <div class="thumbnail"> <img src="http://hocwebgiare.com/thiet_ke_web_chuan_demo/product/images/3.jpg" alt="Sản phẩm 3"> 
-         <div class="caption"> 
-          <h3>Sản phẩm 3</h3> 
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p> 
-          <p><a href="http://hocwebgiare.com/" class="btn btn-primary" role="button">200.000 đ</a> <a href="http://hocwebgiare.com/" class="btn btn-default" role="button">Đặt hàng</a>
-          </p> 
-         </div> 
-        </div> 
-       </div> 
-       <div class="col-md-3"> 
-        <div class="thumbnail"> <img src="http://hocwebgiare.com/thiet_ke_web_chuan_demo/product/images/4.jpg" alt="Sản phẩm 4"> 
-         <div class="caption"> 
-          <h3>Sản phẩm 4</h3> 
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p> 
-          <p><a href="http://hocwebgiare.com/" class="btn btn-primary" role="button">200.000 đ</a> <a href="http://hocwebgiare.com/" class="btn btn-default" role="button">Đặt hàng</a>
-          </p> 
-         </div> 
-        </div> 
-       </div> 
-      </div> 
-     </div> 
-     <div class="item"> 
-      <div class="row"> 
-       <div class="col-md-3"> 
-        <div class="thumbnail"> <img src="http://hocwebgiare.com/thiet_ke_web_chuan_demo/product/images/5.jpg" alt="Sản phẩm 5"> 
-         <div class="caption"> 
-          <h3>Sản phẩm 5</h3> 
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p> 
-          <p><a href="http://hocwebgiare.com/" class="btn btn-primary" role="button">200.000 đ</a> <a href="http://hocwebgiare.com/" class="btn btn-default" role="button">Đặt hàng</a>
-          </p> 
-         </div> 
-        </div> 
-       </div> 
-       <div class="col-md-3"> 
-        <div class="thumbnail"> <img src="http://hocwebgiare.com/thiet_ke_web_chuan_demo/product/images/6.jpg" alt="Sản phẩm 6"> 
-         <div class="caption"> 
-          <h3>Sản phẩm 6</h3> 
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p> 
-          <p><a href="http://hocwebgiare.com/" class="btn btn-primary" role="button">200.000 đ</a> <a href="http://hocwebgiare.com/" class="btn btn-default" role="button">Đặt hàng</a>
-          </p> 
-         </div> 
-        </div> 
-       </div> 
-       <div class="col-md-3"> 
-        <div class="thumbnail"> <img src="http://hocwebgiare.com/thiet_ke_web_chuan_demo/product/images/7.jpg" alt="Sản phẩm 7"> 
-         <div class="caption"> 
-          <h3>Sản phẩm 7</h3> 
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p> 
-          <p><a href="http://hocwebgiare.com/" class="btn btn-primary" role="button">200.000 đ</a> <a href="http://hocwebgiare.com/" class="btn btn-default" role="button">Đặt hàng</a>
-          </p> 
-         </div> 
-        </div> 
-       </div> 
-       <div class="col-md-3"> 
-        <div class="thumbnail"> <img src="http://hocwebgiare.com/thiet_ke_web_chuan_demo/product/images/8.jpg" alt="Sản phẩm 8"> 
-         <div class="caption"> 
-          <h3>Sản phẩm 8</h3> 
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p> 
-          <p><a href="http://hocwebgiare.com/" class="btn btn-primary" role="button">200.000 đ</a> <a href="http://hocwebgiare.com/" class="btn btn-default" role="button">Đặt hàng</a>
-          </p> 
-         </div> 
-        </div> 
-       </div> 
-      </div> 
-     </div> 
-     <div class="item"> 
-      <div class="row"> 
-       <div class="col-md-3"> 
-        <div class="thumbnail"> <img src="http://hocwebgiare.com/thiet_ke_web_chuan_demo/product/images/9.jpg" alt="Sản phẩm 9"> 
-         <div class="caption"> 
-          <h3>Sản phẩm 9</h3> 
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p> 
-          <p><a href="http://hocwebgiare.com/" class="btn btn-primary" role="button">200.000 đ</a> <a href="http://hocwebgiare.com/" class="btn btn-default" role="button">Đặt hàng</a>
-          </p> 
-         </div> 
-        </div> 
-       </div> 
-       <div class="col-md-3"> 
-        <div class="thumbnail"> <img src="http://hocwebgiare.com/thiet_ke_web_chuan_demo/product/images/10.jpg" alt="Sản phẩm 10"> 
-         <div class="caption"> 
-          <h3>Sản phẩm 10</h3> 
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p> 
-          <p><a href="http://hocwebgiare.com/" class="btn btn-primary" role="button">200.000 đ</a> <a href="http://hocwebgiare.com/" class="btn btn-default" role="button">Đặt hàng</a>
-          </p> 
-         </div> 
-        </div> 
-       </div> 
-       <div class="col-md-3"> 
-        <div class="thumbnail"> <img src="http://hocwebgiare.com/thiet_ke_web_chuan_demo/product/images/11.jpg" alt="Sản phẩm 11"> 
-         <div class="caption"> 
-          <h3>Sản phẩm 11</h3> 
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p> 
-          <p><a href="http://hocwebgiare.com/" class="btn btn-primary" role="button">200.000 đ</a> <a href="http://hocwebgiare.com/" class="btn btn-default" role="button">Đặt hàng</a>
-          </p> 
-         </div> 
-        </div> 
-       </div> 
-       <div class="col-md-3"> 
-        <div class="thumbnail"> <img src="http://hocwebgiare.com/thiet_ke_web_chuan_demo/product/images/12.jpg" alt="Sản phẩm 12"> 
-         <div class="caption"> 
-          <h3>Sản phẩm 12</h3> 
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p> 
-          <p><a href="http://hocwebgiare.com/" class="btn btn-primary" role="button">200.000 đ</a> <a href="http://hocwebgiare.com/" class="btn btn-default" role="button">Đặt hàng</a>
-          </p> 
-         </div> 
-        </div> 
-       </div> 
-      </div> 
-     </div> 
-    </div> 
-      <a class="left carousel-control" href="http://hocwebgiare.com/#myCarousel" data-slide="prev"><i class="fa fa-chevron-left fa-2x"></i></a> 
-      <a class="right carousel-control" href="http://hocwebgiare.com/cpadmin/#myCarousel" data-slide="next"><i class="fa fa-chevron-right fa-2x"></i></a> 
-    <ol class="carousel-indicators"> 
-     <li data-target="#myCarousel" data-slide-to="0" class="active"></li> 
-     <li data-target="#myCarousel" data-slide-to="1"></li> 
-     <li data-target="#myCarousel" data-slide-to="2"></li> 
-    </ol> 
-   </div> 
-  </div> 
- </div>
-</div>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.3.6/slick.css"/>
+    <style>
+        .menu {
+            text-align: center;
+        }
+        
+        .slick-prev:before, .slick-next:before  {
+            color: gray ! important;
+        }
+    </style>
+    
+<section class="awe-section-7"> 
+  <section class="list_style_product ">
+      <div class="new_title_color center" style="margin-bottom: 120px;">
+          <h2>
+            <span>
+              
+            </span>
+            <a href="san-pham-khuyen-mai" title="Sản phẩm khuyến mãi">Sản phẩm khuyến mãi</a
+            ><span>
+              
+            </span>
+          </h2>
+      </div>
+      <div class="container">
+        <div id="featured-slider-2" class="row">
+          <div class="slider-items slider-width-col4 owl-carousel owl-theme" style="opacity: 1; display: block;">
+              
+             
+                  <div class="slideshow">
+                    @foreach($products  as $product)
+                      <div class="owl-item" style="width: 200px"><img src="image/{{$product->image}}" style="padding-right: 20px">{{$product->name}}</div>
+                         
 
-<script>   
-$('#myCarousel').carousel({ 
-    interval:   2000
+                    @endforeach
+                  </div>
+              
+              <div class="owl-controls clickable">
+                  <div class="owl-buttons">
+                      <div class="owl-prev">
+                          <i class="fa fa-angle-left"></i>
+                      </div>
+                      <div class="owl-next">
+                          <i class="fa fa-angle-right"></i>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+  </section>
+</section>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.3.6/slick.min.js"/></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".slideshow").slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1
+    });
+    $(".menu a").click(function(e){
+        e.preventDefault();
+        slideIndex = $(this).index();
+        $( '.slideshow' ).slickGoTo( parseInt(slideIndex) );
+    });
+    $('.fa fa-angle-left').click(function()
+    {
+        $( '.slideshow' ).css('right',1000)
+        
+    });
+     $('.fa fa-angle-right').click(function()
+    {
+        $( '.slideshow' ).css('right',1000)
+        
+    });
+    
 });
 </script>

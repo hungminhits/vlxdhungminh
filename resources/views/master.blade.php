@@ -72,8 +72,7 @@
 <link href="css/challenge.css" rel="stylesheet" type="text/css">
 <link href="css/meterialize.css" rel="stylesheet" type="text/css">
 <link href="css/my_style.css" rel="stylesheet" type="text/css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="js/jquery-1.11.1.min.js"></script>
+
 
 
 <!-- Header hook for plugins ================================================== -->
