@@ -11,6 +11,20 @@
 |
 */
 //gọi các trang trong admin
+Route::get('Login_Admin',
+	['as'=>'Login_Admin',
+	'uses'=>'Admin_Controller@Login_Admin']);
+Route::post('PostLogin_Admin',
+	['as'=>'PostLogin_Admin',
+	'uses'=>'Admin_Controller@PostLogin_Admin']);
+Route::get('ForgetPassword',[
+	'as'=>'ForgetPassword',
+	'uses'=>'Admin_Controller@ForgetPassword']);
+
+Route::post('ForgetPassword_Admin',
+	['as'=>'ForgetPassword_Admin',
+	'uses'=>'Admin_Controller@PostForgetPassword']);
+
 Route::get('ViewContent_Admin',
 	['as'=>'ViewContentAdmin',
 	'uses'=>'Admin_Controller@ViewContent_Admin']);
@@ -20,6 +34,7 @@ Route::get('ViewProduct_Admin',
 Route::get('ViewProductByType_Admin/{id}',
 	['as'=>'ViewProductByType_Admin',
 	'uses'=>'Admin_Controller@FindProductByType']);
+
 // Route::get('DeleteProductById_Admin/{id}',
 // 	['as'=>'DeleteProductById_Admin',
 // 	'uses'=>'Admin_Controller@Delete_Product']);

@@ -47,8 +47,8 @@ class User extends Authenticatable
             $user=DB::table('users')->where('id','=',$id)->update(['full_name'=>$name, 'phone'=>$phone, 'address'=>$address,'group'=>$group]);
             return $user;
     }
-    public static function Insert_User($name, $email, $password, $phone, $address, $group){
-            $id=DB::table('users')->insertGetId(['full_name'=>$name,'email'=>$email, 'password'=>$password, 'phone'=>$phone, 'address'=>$address,'group'=>$group]);
+    public static function Insert_User($name, $email, $password, $phone, $address, $group,$remember_token){
+            $id=DB::table('users')->insertGetId(['full_name'=>$name,'email'=>$email, 'password'=>$password, 'phone'=>$phone, 'address'=>$address,'remember_token'=>$remember_token,'group'=>$group]);
             return $id;
     }
     public static function Delete_User($id){

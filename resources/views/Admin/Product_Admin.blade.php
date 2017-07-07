@@ -63,8 +63,9 @@
                                                 </td>
                                             </div>
                                         </tr>
-
-        
+                                        
+                                        
+                                        {{-- Edit Product --}}
                                         <div id="editRowPro{{ $pro->id }}" class="form">
                                             <p class="form_title">Edit Product</p>
                                             <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
@@ -181,7 +182,7 @@
                                                 
                                             </form>
                                         </div>
-                                    
+                                        {{-- End Edit --}}
                                     @endforeach
                                 </tbody>
                             </table>    
@@ -219,7 +220,7 @@
                                                 </td>
                                             </div>
                                         </tr>
-        
+                                        {{-- Edit Product --}}
                                         <div id="editRowPro{{ $pro->id }}" class="form">
                                             <p class="form_title">Edit Product</p>
                                             <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
@@ -326,9 +327,9 @@
                                                     <button  type="button" id="saveEdit" value="{{ $pro->id }}" class="button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit" style="border-radius: 10px;">  Save</button>
                                                     </div>
                                                 </div>
-                                                
                                             </form>
                                         </div>
+                                        {{-- End Edit --}}
                                     @endforeach
                                 
 
@@ -336,7 +337,8 @@
                             </table>
                                  <button type="button" class="btn btn-success" style="height:40px;width: 150px;  float:right; border-radius: 5px; margin-top: 25px;" id="viewpdf_all{{ $typepro }}">Xuất file pdf</button>
                             @endif
-        
+                            
+                            {{-- Add Product --}}
                             <div id="addRowPro" class="form">
                                             <p class="form_title">Add Product</p>
                                             <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
@@ -441,7 +443,7 @@
                                                 
                                             </form>
                                         </div>
-                                        
+                                        {{-- End Add --}}
                             <div>{{ $product->links() }}</div>
                         
                         </div>

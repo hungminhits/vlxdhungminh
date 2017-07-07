@@ -7,6 +7,7 @@ use App\Http\Requests\ProductEditRequest;
 use DB;
 use File;
 use Illuminate\Support\Facades\Input;
+use Auth;   
 use App\Product;
 use App\TypeProduct;
 use App\Bill_Detail;
@@ -14,6 +15,7 @@ use Carbon\Carbon;
 use App\User;
 use App\News;
 use PDF;    
+use Hash;
 class Admin_Controller extends Controller
 {
    public function ViewContent_Admin()
@@ -24,9 +26,41 @@ class Admin_Controller extends Controller
       $FindSumQuantity=Bill_Detail::FindSum_Quantity();
    	return view('Admin.Content_Admin',compact('MostViewProduct','Total_view','FindSumQuantity'));
    }
+   public function Login_Admin()
+   {
+      return view('Admin.Login_Admin');
+   }
 //Loại sản phẫm 
+   public function PostLogin_Admin(Request $req){
+        if(Auth::attempt(['email'=>$req->email,'password'=>$req->password,'active'=>1])){
+            if(Auth::User()->group>=1)
+               return redirect()->route('ViewContentAdmin');
+             else
+               return redirect()->back()->with('thatbai','Bạn không có quyền truy cập vào trang này');
+        }
+        else{
+            return redirect()->back()->with('thatbai','Sai thông tin đăng nhập');
+        }
+    }
+    public function PostForgetPassword(Request $req){
+      $user=User::User_All()->where('email',$req->email)->get();
+      if(isset($user[0])){
+            $characters ='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i <5 ; $i++) {
+                 $randomString .= $characters[rand(0, $charactersLength - 1)];
+             }
 
-
+             DB::table('users')->where('email','=',$req->email)->update(['password'=>Hash::make($randomString)]);
+             return redirect()->back()->with('thatbai',$randomString);  
+      }
+      else
+            return redirect()->back()->with('thatbai','Nhập Không Đúng Email hoặc Email Bạn Không Tồn Tại');
+    }
+   public function ForgetPassword() {
+   return view('Admin.ForgetPassWord');
+   }
    public function downloadPDF(Request $req){
       if($req->type!=null){
           $title="Tất cả các sản phẩm";
@@ -148,7 +182,8 @@ class Admin_Controller extends Controller
       $phone = $req->input('new_phone');
       $address = $req->input('new_address');
       $group = $req->input('new_group');
-      $getId=User::Insert_User($name, $email, $password, $phone, $address, $group);
+      $token=$req->input('_token');
+      $getId=User::Insert_User($name, $email, $password, $phone, $address, $group, $token);
       return $getId;
    } 
    public function Delete_User(Request $req){

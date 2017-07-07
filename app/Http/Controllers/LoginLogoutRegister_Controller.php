@@ -51,7 +51,7 @@ class LoginLogoutRegister_Controller extends Controller
    		return view('page.dangky');
    }
    public function postLogin(Request $req){
-        if(Auth::attempt(['email'=>$req->email,'password'=>$req->password,'active'=>0])){
+        if(Auth::attempt(['email'=>$req->email,'password'=>$req->password,'active'=>1])){
                 return redirect()->route('home');
         }
         else{
