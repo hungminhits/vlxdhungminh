@@ -8,16 +8,19 @@
 <script type="text/javascript" async="" src="js/bizweb_stats.js"></script>
 <script src="js/jquery-1.js" integrity="" crossorigin="anonymous"></script>
 <script src="js/bootstrap.js" type="text/javascript"></script>
-<script src="js/jquery-2.js" type="text/javascript"></script>
+<script src="js/jquery-2.2.3.min.js" type="text/javascript"></script>
 <script src="js/jquery-parallax-min.js" type="text/javascript"></script>
 <script src="js/owl.js" type="text/javascript"></script>
 <script src="js/resize.js" type="text/javascript"></script>
-<script src ="js/markup.js" type="text/javascript"></script>
+
 <script src="js/jquery_002.js" type="text/javascript"></script>
 <script src="js/jquery.js" type="text/javascript"></script>
 <script src="js/modernizr-2.js" type="text/javascript"></script>
-<script src="js/reflow.js" type="text/javascript"></script>
+<script src="js/owl.carousel.min.js" type="text/javascript"></script>
+<script src="js/owl.carousel.js" type="text/javascript"></script>
 
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
 
