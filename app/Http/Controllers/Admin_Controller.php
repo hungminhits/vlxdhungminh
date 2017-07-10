@@ -95,6 +95,10 @@ class Admin_Controller extends Controller
         return $pdf->stream();
    }
 
+<<<<<<< HEAD
+   public function Delete_TypeProduct(Request $req){
+      $type=TypeProduct::Delete_Type_product($req->id);
+=======
 
 
 
@@ -103,6 +107,7 @@ class Admin_Controller extends Controller
 
    public function Delete_TypeProduct($id){
       $type=TypeProduct::Delete_Type_product($id);
+>>>>>>> dfbe8b9a05cae391067a03c9a940258771574c5f
    }
    public function ChartById_Admin($id,$created_at_from,$created_at_to){
          $chart=Bill_Detail::FindSum_QuantityById($id,$created_at_from,$created_at_to);

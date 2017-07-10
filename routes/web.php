@@ -59,7 +59,7 @@ Route::get('Delete_Product',
 //Loại sản phẩm admin
 
 
-Route::get('Delete_TypeProduct/{id}',
+Route::get('Delete_TypeProduct',
 	['as'=>'Delete_TypeProduct',
 	 'uses'=>'Admin_Controller@Delete_TypeProduct']);
 Route::get('ViewType_Product',
@@ -162,5 +162,7 @@ Route::get('active-user',[
 	'as'=>'active-user',
 	'uses'=>'LoginLogoutRegister_Controller@activeUser']
 );
-
+Route::get('show-news',
+	['as'=>'show-news',
+	'uses'=>'News_Controller@shownews']);
 
