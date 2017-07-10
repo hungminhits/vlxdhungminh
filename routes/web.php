@@ -60,10 +60,15 @@ Route::get('Delete_Product',
 	 'uses'=>'Admin_Controller@Delete_Product']);
 //Loại sản phẩm admin
 
-
-Route::get('Delete_TypeProduct',
-	['as'=>'Delete_TypeProduct',
-	 'uses'=>'Admin_Controller@Delete_TypeProduct']);
+Route::post('Edit_Category',
+	['as'=>'Edit_Category',
+	 'uses'=>'Admin_Controller@Edit_Category']);
+Route::post('Insert_Category',
+	['as'=>'Insert_Category',
+	 'uses'=>'Admin_Controller@Insert_Category']);
+Route::get('Delete_Category',
+	['as'=>'Delete_Category',
+	 'uses'=>'Admin_Controller@Delete_Category']);
 Route::get('ViewType_Product',
 	['as'=>'ViewType_Product', 
 	'uses'=>'Admin_Controller@View_TypeProduct']);

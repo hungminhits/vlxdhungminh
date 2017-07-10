@@ -342,8 +342,6 @@
                             <div id="addRowPro" class="form">
                                             <p class="form_title">Add Product</p>
                                             <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
-
-
                                             <form id="new_form" enctype="multipart/form-data" method="post">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 
@@ -505,7 +503,7 @@
 
                         $row = $(this);
 
-                        var id = $row.find("td:nth-child(2)").text();
+                        var id = $row.find("td:nth-child(3)").text();
 
                         if (id.indexOf(value) !== 0) {
                             $row.hide();
@@ -532,7 +530,8 @@
                 },function (result) {
                     if(result)
                     {
-                        var image = $('#row'+id).find('td:nth-child(7)').text();
+                        var image = $('#row'+id).find('td:nth-child(2)').text();
+                        alert(image);
                         var route="{{ route('Delete_Product') }}";
 
                         $.ajax({
@@ -624,15 +623,6 @@
                 image=image.substr(12);
                 var unit=document.getElementById("new_unit").value;
 
-                var flag = true;
-                // if (name=='') {
-                //     $('#name_err').text('Tên sản phẩm không được để trống');
-                //     flag= false;
-                // }
-                // if (unit_price=='' || unit_price) {
-                //     $('#name_err').text('Tên sản phẩm không được để trống');
-                //     flag= false;
-                // }
                 var route="{{ route('Insert_Product') }}";
                 var form = $('form#new_form')[0];
                 var form_data = new FormData(form);
@@ -645,11 +635,9 @@
                     data:form_data,
                     success:function(data) {
                         // console.log(data);
-                        var id=data[0]['id'];
-                        var created_at=data[0]['created_at'];
-                        var updated_at=data[0]['updated_at'];
+                        var id=data;
                         var table=document.getElementById("product_table");
-                        var table_len=(table.rows.length)-1;
+                        var table_len=(table.rows.length);
                         if(typeRequest!=0){ 
                             var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td><td id='image"+id+"'><img src='images/"+image+"' style='width: 90px; height: 90px'/></td><td id='name"+id+"'>"+name+"</td><td id='description"+id+"'>"+description+"</td><td id='unit_price"+id+"'>"+unit_price+"</td><td id='pro_price"+id+"'>"+pro_price+"</td><td id='unit"+id+"'>"+unit+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'></button> <button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'></button></td></tr>";
                         }else{

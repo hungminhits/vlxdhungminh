@@ -14,7 +14,16 @@ class TypeProduct extends Model
 		$Type_product=DB::table('category')->select('id','name');
 		return $Type_product;
 	}	
-	public static function Delete_Type_product($id){
+
+	public static function Edit_Category($id, $name, $desc, $image){
+        $pro=DB::table('category')->where('id','=',$id)->update(['name'=>$name, 'description'=>$desc,'image'=>$image]);
+        return $pro; 
+  	}
+  	public static function Insert_Category($name, $desc, $image){
+            $id=DB::table('category')->insertGetId(['name'=>$name,'description'=>$desc,'image'=>$image]);
+            return $id;
+  	}
+	public static function Delete_Category($id){
 		$pro=DB::table('products')->where('id_type',$id)->delete();
 		$type_pro=DB::table('category')->where('id',$id)->delete();
 	}
