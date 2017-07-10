@@ -16,7 +16,6 @@ use App\User;
 use App\News;
 use PDF;    
 use Hash;
-use Mail;
 class Admin_Controller extends Controller
 {
    public function ViewContent_Admin()
@@ -44,7 +43,6 @@ class Admin_Controller extends Controller
         }
     }
     public function PostForgetPassword(Request $req){
-      $mail=$req->email;
       $user=User::User_All()->where('email',$req->email)->get();
       if(isset($user[0])){
             $characters ='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -53,12 +51,7 @@ class Admin_Controller extends Controller
             for ($i = 0; $i <5 ; $i++) {
                  $randomString .= $characters[rand(0, $charactersLength - 1)];
              }
-             Mail::send('page.mailForgetPassword', ['password'=>$randomString], function ($message)
-            {
-               // $message->from('thanhung23495@gmail.com', 'vlxdHungminh');
-               $message->to('heodat234@gmail.com','chào bạn');
-               $message->subject('Xác nhận mật khẩu');
-            });
+
              DB::table('users')->where('email','=',$req->email)->update(['password'=>Hash::make($randomString)]);
              return redirect()->back()->with('thatbai',$randomString);  
       }
@@ -68,15 +61,6 @@ class Admin_Controller extends Controller
    public function ForgetPassword() {
    return view('Admin.ForgetPassWord');
    }
-
-
-
-
-
-
-
-
-
    public function downloadPDF(Request $req){
       if($req->type!=null){
           $title="Tất cả các sản phẩm";
@@ -95,19 +79,8 @@ class Admin_Controller extends Controller
         return $pdf->stream();
    }
 
-<<<<<<< HEAD
    public function Delete_TypeProduct(Request $req){
       $type=TypeProduct::Delete_Type_product($req->id);
-=======
-
-
-
-
-
-
-   public function Delete_TypeProduct($id){
-      $type=TypeProduct::Delete_Type_product($id);
->>>>>>> dfbe8b9a05cae391067a03c9a940258771574c5f
    }
    public function ChartById_Admin($id,$created_at_from,$created_at_to){
          $chart=Bill_Detail::FindSum_QuantityById($id,$created_at_from,$created_at_to);

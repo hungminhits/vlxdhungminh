@@ -42,7 +42,9 @@ Route::get('ChartById_Admin/{id}/{created_at_from}/{created_at_to}',
 	['as'=>'ChartById_Admin',
 	'uses'=>'Admin_Controller@ChartById_Admin']);
 //sản phẩm
-
+Route::get('ViewNews',
+	['as'=>'ViewNews',
+	'uses'=>'Admin_Controller@ViewAllNews']);
 Route::get('viewPDF',
 	['as'=>'viewPDF',
 	'uses'=>'Admin_Controller@downloadPDF']);
@@ -85,6 +87,16 @@ Route::get('Delete_User',
 Route::get('convert',
 	['as'=>'convert',
 	'uses'=>'Admin_Controller@convert_vi_to_en']);
+
+
+
+
+
+
+
+
+
+
 
 
 
