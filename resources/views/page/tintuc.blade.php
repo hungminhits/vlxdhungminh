@@ -92,12 +92,12 @@
 								</div>
 								<h2><a href="/noi-that-can-ho-voi-nhung-mau-sac-tuong-phan">{{$new->title}}</a></h2>
 								<span class="tzblog-meta">
-									<em><i class="fa fa-user"></i>Nguyễn Tùng</em>
+									<em><i class="fa fa-user"></i>{{$new->id_user}}</em>
 									<em><i class="fa fa-clock-o"></i>{{date("d/m/Y",strtotime($new->created_at))}}</em>
 								</span>
 								<div class="action-button-hiden" style="    text-align: left;">
 									
-									<p style="text-align: justify;">{{strstr($new->description, ".", true)}}...</p>
+									<p style="text-align: justify;">{{($new->description)}}</p>
 									
 									<div class="quickviewbtn">
 										<a style="margin:0px;padding: 13px 40px;" class="color-tooltip" data-toggle="tooltip" href="/noi-that-can-ho-voi-nhung-mau-sac-tuong-phan" title="Đọc tiếp">Đọc tiếp</a>

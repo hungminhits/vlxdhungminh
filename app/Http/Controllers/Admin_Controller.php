@@ -88,22 +88,10 @@ class Admin_Controller extends Controller
          return view('Admin.ChartById_Admin',compact('chart','pro'));
    }
 
-   // public function Pro_convert_vi_to_en(){
-   //       $str=Product::all();
-   //       foreach ($str as $str1) {
-   //          $str=TypeProduct::vi_to_en($str1->name);
-   //          $product=DB::table('products')->where('name','=',$str1->name)->update(['name_khong_dau'=>$str]);
-   //       }
-   // }
-   //    public function TypePro_convert_vi_to_en(){
-   //       $str=TypeProduct::all();
-   //       foreach ($str as $str1) {
-   //          $str=TypeProduct::vi_to_en($str1->name);
-   //          $product=DB::table('products')->where('name','=',$str1->name)->update(['name_khong_dau'=>$str]);
-   //       }
-   // }
-
-
+      public function ViewAllNews(){
+         $news=News::Load_ALL_News()->get();
+         return view('Admin.News_Admin',compact($news));
+      }
       public function View_TypeProduct(){
             $typeproduct=TypeProduct::ALL_Type_product()->paginate(10);
             return view('Admin.TypeProduct_Admin',compact('typeproduct'));
