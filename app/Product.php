@@ -24,8 +24,8 @@ class Product extends Model
     //hiện tất cả các sản phẩm
     public static function Show_Product_All(){
             $product=DB::table('products')
-                        ->join('type_products','products.id_type','=','type_products.id')
-                        ->select('type_products.name as type_name','products.id','products.name','products.unit_price', 
+                        ->join('category','products.id_type','=','category.id')
+                        ->select('category.name as type_name','products.id','products.name','products.unit_price', 
                                  'products.promotion_price','products.image','products.unit','products.created_at',
                                  'products.updated_at','products.description');
         return $product;
