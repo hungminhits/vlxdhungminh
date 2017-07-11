@@ -211,7 +211,7 @@
 												Mua ngay
 											</a>
 
-											<a href="{{route('detail',$pro->name_khong_dau)}}" class="tzheart">
+											<a href="{{route('detail',$pro->id)}}" class="tzheart">
 												Chi tiết
 											</a>
 										</span>

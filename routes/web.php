@@ -134,8 +134,11 @@ Route::get('Info',
 	 'uses'=>'Home_Controller@info']);
 Route::get('news',
 	['as'=>'news',
-	 'uses'=>'Home_Controller@news']);
-Route::get('news-detail',[
+	 'uses'=>'Home_Controller@news_All']);
+Route::get('TypeNews/{id}',[
+	'as'=>'TypeNews',
+	'uses'=>'Home_Controller@NewsById']);
+Route::get('news-detail/{id}',[
 	'as'=>'news-detail',
 	'uses'=>'Home_Controller@newsdetail']);
 

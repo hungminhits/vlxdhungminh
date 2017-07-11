@@ -261,9 +261,6 @@
                                       </li> -->
                                       @for($i=0;$i<count($type);$i++)
                                       <li><a href="{{route('type',[$type[$i]['id'],'sortBy'=>'default'])}}">{{$type[$i]['name']}}</a></li>
-
-                                      <li><a href="{{route('type',$type[$i]['name_khong_dau'])}}">{{$type[$i]['name']}}</a></li>
-
                                       @endfor
                                       
                                       

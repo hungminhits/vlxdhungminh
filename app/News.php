@@ -11,4 +11,10 @@ class News extends Model
     	$news=DB::table('news')->select();
     	return $news;
     }
+    public static function NewById($id){
+    	$news=DB::table('news')
+                ->where('news.id',$id)
+    			->join('users','news.id_user','=','users.id')->select();
+    	return $news;
+    }
 }

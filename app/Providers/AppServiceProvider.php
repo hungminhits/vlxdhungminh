@@ -7,7 +7,8 @@ use App\TypeProduct;
 use App\Product;
 use Carbon\Carbon;
 use Session;
-
+use DB;
+use App\News;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -18,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer(['header','page.typeproduct','page.sanpham','section.sanphamnoibat','Admin.Product_Admin'],function($view){
-            $type =  TypeProduct::all();
+            $type =  TypeProduct::all()->where('type',1);
             $view->with('type',$type);
         });
         view()->composer('section.sanphamnoibat',function($view)
@@ -26,7 +27,11 @@ class AppServiceProvider extends ServiceProvider
             $hotPro = Product::hotProduct()->get();
             $view->with('hotPro',$hotPro);
         });
-
+        view()->composer(['page.tintuc','page.ChitietTintuc'],function($view){
+            $typenews=TypeProduct::all()->where('type',2);
+             $newNoiBat=News::Load_ALL_News()->orderBy('created_at','DESC')->limit(5)->get();
+            $view->with(['typenews'=>$typenews,'newNoiBat'=>$newNoiBat]);
+        });
          view()->composer('Admin.Admin',function($view){
             $dt = Carbon::now();
             $dt=$dt->toDateString();

@@ -1,5 +1,23 @@
 @extends('master')
 @section('content')
+<div class="fvc" style="float:left;width:100%;">
+	
+	<div class="banner_page_list">
+		
+		<h1>Tin tức</h1>
+		
+	</div>
+	<div class="breadcrumbs">
+		<div class="container">
+			<ul>
+				<li class="home"> <a href="/" title="Trang chủ">Trang chủ &nbsp;</a></li>
+				<!-- blog -->
+				
+				<li class="active"><strong>Tin tức</strong></li>
+			</ul>
+		</div>
+	</div>
+
 <section class="tzblog-wrap">
 	<div class="container">
 		<div class="row flx">
@@ -15,9 +33,12 @@
 						<div class="show_nav_bar hidden-lg hidden-md"></div>
 					</div>
 					<div class="list_item_collection show1">
-						<ul>
-							
-						</ul>
+							<ul>
+								@foreach ($typenews as $type)
+								<li class="li_lv1"> <a href="{{route('TypeNews',[$type->id,'sortBy'=>'default'])}}">{{$type->name}}</a> <span class="sub_minus"></span>
+								</li>
+								@endforeach
+							</ul>
 					</div>
 				</div>
 				
@@ -29,80 +50,35 @@
 						</h2>
 					</div>
 					<ul>
-						
-						<li style="margin: 15px 0px;padding-bottom: 15px;">
-							<div class="as_bestsellers_thumb">
-								<a href="/noi-that-can-ho-voi-nhung-mau-sac-tuong-phan" title="Nội thất căn hộ với những màu sắc tương phản">
-									
-									<img alt="Nội thất căn hộ với những màu sắc tương phản" src="//bizweb.dktcdn.net/thumb/small/100/069/071/articles/a1.jpg?v=1458789205460">
-									
-								</a>
-							</div>
-							<div class="as_bestsellers_content">
-								<h3><a title="Nội thất căn hộ với những màu sắc tương phản" href="/noi-that-can-ho-voi-nhung-mau-sac-tuong-phan">Nội thất căn hộ với những màu sắc tương phản</a></h3>
-								<div class="post-date">24/03/2016</div>
-							</div>
-						</li>
-						
-						<li style="margin: 15px 0px;padding-bottom: 15px;">
-							<div class="as_bestsellers_thumb">
-								<a href="/can-ho-chung-cu-dep-voi-phong-cach-scandinavian" title="Căn hộ chung cư đẹp với phong cách Scandinavian">
-									
-									<img alt="Căn hộ chung cư đẹp với phong cách Scandinavian" src="//bizweb.dktcdn.net/thumb/small/100/069/071/articles/a2.jpg?v=1458789110663">
-									
-								</a>
-							</div>
-							<div class="as_bestsellers_content">
-								<h3><a title="Căn hộ chung cư đẹp với phong cách Scandinavian" href="/can-ho-chung-cu-dep-voi-phong-cach-scandinavian">Căn hộ chung cư đẹp với phong cách Scandinavian</a></h3>
-								<div class="post-date">24/03/2016</div>
-							</div>
-						</li>
-						
-						<li style="margin: 15px 0px;padding-bottom: 15px;">
-							<div class="as_bestsellers_thumb">
-								<a href="/me-man-voi-can-ho-chung-cu-co-thiet-ke-noi-that-hoan-hao" title="Mê mẩn với căn hộ chung cư có thiết kế nội thất hoàn hảo">
-									
-									<img alt="Mê mẩn với căn hộ chung cư có thiết kế nội thất hoàn hảo" src="//bizweb.dktcdn.net/thumb/small/100/069/071/articles/a5.jpg?v=1458789000307">
-									
-								</a>
-							</div>
-							<div class="as_bestsellers_content">
-								<h3><a title="Mê mẩn với căn hộ chung cư có thiết kế nội thất hoàn hảo" href="/me-man-voi-can-ho-chung-cu-co-thiet-ke-noi-that-hoan-hao">Mê mẩn với căn hộ chung cư có thiết kế nội thất hoàn hảo</a></h3>
-								<div class="post-date">24/03/2016</div>
-							</div>
-						</li>
-						
-						<li style="margin: 15px 0px;padding-bottom: 15px;">
-							<div class="as_bestsellers_thumb">
-								<a href="/mau-can-ho-cao-cap-voi-noi-that-go-am-cung" title="Mẫu căn hộ cao cấp với nội thất gỗ ấm cúng">
-									
-									<img alt="Mẫu căn hộ cao cấp với nội thất gỗ ấm cúng" src="//bizweb.dktcdn.net/thumb/small/100/069/071/articles/a3.jpg?v=1458788850693">
-									
-								</a>
-							</div>
-							<div class="as_bestsellers_content">
-								<h3><a title="Mẫu căn hộ cao cấp với nội thất gỗ ấm cúng" href="/mau-can-ho-cao-cap-voi-noi-that-go-am-cung">Mẫu căn hộ cao cấp với nội thất gỗ ấm cúng</a></h3>
-								<div class="post-date">24/03/2016</div>
-							</div>
-						</li>
-						
-					</ul>
+							@foreach($newNoiBat as $tintuc)
+							<li style="margin: 15px 0px;padding-bottom: 15px;">
+								<div class="as_bestsellers_thumb">
+									<a href="{{route('news-detail',$tintuc->id)}}" title="{{$tintuc->title}}">
+										
+										<img alt="{{$tintuc->title}}" src="images/{{$tintuc->image}}">
+										
+									</a>
+								</div>
+								<div class="as_bestsellers_content">
+									<h3><a title="{{$tintuc->title}}" href="{{route('news-detail',$tintuc->id)}}">{{$tintuc->title}}</a></h3>
+									<div class="post-date">{{date("d/m/Y",strtotime($tintuc->created_at))}}</div>
+								</div>
+							</li>
+							@endforeach
+						</ul>
 				</aside>
-				
 			</div>
 			<div id="content_atc" class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 				<div class="tzpost-content">
-					<h2>Nội thất căn hộ với những màu sắc tương phản</h2>
+					<h2>{{$newDetail[0]->title}}</h2>
 					<div class="infor_article post-date">
-						<p style="color: #bda87f;"><i class="fa fa-user" ></i>Nguyễn Tùng - <i class="fa fa-clock-o" ></i>24/03/2016</p>
+						<p style="color: #bda87f;"><i class="fa fa-user" ></i>{{$newDetail[0]->full_name}} <i class="fa fa-clock-o" ></i>{{$newDetail[0]->created_at}}</p>
 					</div>
-					<p style="text-align: center;"><img src="//bizweb.dktcdn.net/100/069/071/files/a4.jpg?v=1458789202415" /></p>
+					<p style="text-align: center;"><img src="images/{{$newDetail[0]->image}}" /></p>
 
-<p style="text-align: justify;">Căn hộ chung cư này có diện tích khá nhỏ, nên các kiến trúc sư đã lựa chọn kết hợp màu đen với màu vàng của gỗ để tạo nên một sự tương phản nổi bật làm cho căn hộ ấn tượng cũng như ấm áp hơn.&nbsp;Các không gian trong nhà được bao trùm trong tông màu đen kết hợp với sàn gỗ vừa mang lại một nét cá tính hiện đại cũng như không kém phần ấm áp cho căn hộ.</p>
-
-<p style="text-align: justify;">Không gian nhà bếp có thiết kế hình chữ L gọn gàng và được đặt tại một góc của ngôi nhà để không chiếm quá nhiều diện tích.&nbsp;Không gian phòng ngủ ấm cúng được bao bọc bởi trần, sàn và tường gỗ kết hợp với hệ thống ánh sáng âm sàn mang lại một cảm giác thư giãn tuyệt vời cho không gian.</p>
+					<p style="text-align: justify;">{{$newDetail[0]->content}}</p>
 				</div>
-				<div class="tag_article">
+{{-- 				<div class="tag_article">
 					
 				</div>
 				<div class="social-media media-icon">
@@ -227,7 +203,7 @@ Bài viết thật tuyệt vời</p>
 <input name='FormType' type='hidden' value='article_comments' />
 <input name='utf8' type='hidden' value='true' />
 						
-
+ --}}
 						
 						<div class="row">
 							<div style="margin-bottom:15px;" class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="to_comment">
@@ -250,4 +226,5 @@ Bài viết thật tuyệt vời</p>
 		</div>
 	</div>
 </section><!--end class tzblog-wrap-->
+</div>
 @endsection
