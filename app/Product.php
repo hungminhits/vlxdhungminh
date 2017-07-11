@@ -87,7 +87,7 @@ class Product extends Model
     public static function findProductPromotion()
     {
         $products = DB::table('products')->where('promotion_price','>','0')
-                                        ->limit(10);
+                                        ->limit(8);
         return $products;
     }
 }

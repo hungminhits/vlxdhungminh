@@ -12,10 +12,10 @@ use App\TypeProduct;
 
 class Type_Product_Controller extends Controller
 {
-   public function showType($name_khong_dau)
+   public function showType($id)
    {
    		$typro = DB::table('type_products')
-   				->where('name_khong_dau',$name_khong_dau)
+   				->where('id',$id)
    				->select()
    				->get();
    	$product = Product::limit(25)->where('id_type',"=",$typro[0]->id)->orderBy('created_at','DESC')->paginate(6);

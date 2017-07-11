@@ -15,7 +15,6 @@
   Vật Liệu Xây Dựng Hùng Minh
 
 
-
 </title>    
 <!-- ================= Page description ================== -->
 
@@ -616,9 +615,11 @@
         </div>
       </div>
       <button class="btn btn-block btn-outline-red" data-dismiss="modal">Tiếp tục mua hàng</button>
-    <a href="/checkout" class="btn btn-block btn-radius">Tiến hành thanh toán »</a>
+      <a href="/checkout" class="btn btn-block btn-radius">Tiến hành thanh toán »</a>
+    </div>
   </div>
-</div></div></div>
+</div>
+</div>
 
 
 

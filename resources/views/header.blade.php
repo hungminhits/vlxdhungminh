@@ -106,17 +106,16 @@
                                           <span id="soluong" soluong="{{$totalQty}}" value="{{$totalQty}}">(&nbsp{{$totalQty}}&nbsp)san pham</span>
                                             @else
 
-                                          <span id="soluong">Trống</span> 
+                                          <span id="soluong" soluong="0">Trống</span> 
                                             @endif 
                                   </a>
                                  <div class="mini-cart-content shopping_cart 123">
                                     @if(Session::has('cart'))
                                       @foreach($product_cart as $product)
-
-                                      <div class="list-item-cart " id="list-item-cart{{$product['item']['id']}}">                                       
+                                      <div class="list-item-cart{{$product['item']['id']}}" >                                       
                                         <div class="cart-img-details">
                                             <div class="cart-img-photo" id ="cart-img-photo{{$product['item']['id']}}">
-                                                <a href="{{route('cart')}}"><img alt="" src="http://vlxdhungminh.com/vlxdhungminh_files/{{$product['item']['image']}}">
+                                                <a id="route_cart" href="{{route('cart')}}"><img alt="" src="image/{{$product['item']['image']}}">
                                                 </a>
                                             </div>
 
@@ -128,7 +127,12 @@
 
                                                   </h4>
                                                 </a>
-                                                  <span class="cart-item-amount" id="id{{$product['item']['id']}}" soluong="{{$product['qty']}}" giamgia="{{$product['item']['promotion_price']}}" dongia="{{$product['item']['unit_price']}}">
+                                                  <span class="cart-item-amount" id="id{{$product['item']['id']}}" 
+                                                     
+                                                      soluonghang="{{$product['qty']}}"
+
+                                                  giamgia="{{$product['item']['promotion_price']}}" dongia="{{$product['item']['unit_price']}}">
+
                                                         {{$product['qty']}} *
                                                         <div id="gia{{$product['item']['id']}}">
                                                         @if($product['item']['promotion_price']==0)
@@ -138,11 +142,12 @@
                                                         @endif 
                                                         </div>     
                                                    
-                                               
                                                 </span>
                                             </div>             
                                             <div class="pro-del"  >
-                                                <a class="cart-item-delete" value="{{$product['item']['id']}}"> <i class="fa fa-times"></i></a>
+                                                <a class="cart-item-delete" value="{{$product['item']['id']}}"> 
+                                                    <i class="fa fa-times"></i>
+                                                </a>
                                             </div>
                                         </div>
                                         
@@ -152,10 +157,9 @@
                                     
                                      <div>
                                         <div class="top-subtotal">Tổng tiền: 
-                                            @if(Session::has('cart'))
-                                            <span class="price" value="{{$totalPrice}}">{{number_format($totalPrice)}}</span>
-                                            @else 0
-                                            @endif dong
+                                            
+                                            <span class="price" tong_tam="0" value="{{$totalPrice}}">{{number_format($totalPrice)}} </span>
+                                                                        
                                         </div>
                                       </div>                            
                                      <div>
@@ -164,10 +168,10 @@
                                             <span>Thanh toán</span></a>
                                         </div>
                                     </div>                                    
-                                    @else
-                                        <div class="no-item"><p>Không có sản phẩm nào trong giỏ hàng.</p>
-                                        </div>
-                                    @endif
+                                      @else
+                                          <div class="no-item"><p>Không có sản phẩm nào trong giỏ hàng</p>
+                                          </div>
+                                      @endif
                                   </div>
                                 </li>
                               </ul>
@@ -260,11 +264,7 @@
                                         <a href="https://mendover-theme-1.bizwebvietnam.net/nha-du-an">Nhà ở dự án</a>
                                       </li> -->
                                       @for($i=0;$i<count($type);$i++)
-<<<<<<< HEAD
                                       <li><a href="{{route('type',[$type[$i]['id'],'sortBy'=>'default'])}}">{{$type[$i]['name']}}</a></li>
-=======
-                                      <li><a href="{{route('type',$type[$i]['name_khong_dau'])}}">{{$type[$i]['name']}}</a></li>
->>>>>>> 1e8f9680e0224c3477565d6561e884e6ff81e181
                                       @endfor
                                       
                                       
@@ -295,3 +295,56 @@
                     </nav>
                   </div><!--end class container-->
                 </header><!--end class tz-header-->
+<script type="text/javascript">
+//cart ajax
+    $('.cart-item-delete').click(function(){
+      var id=$(this).attr('value');
+      var route="{{route('delete1cart','id_sp')}}";
+      route=route.replace("id_sp",id);
+
+      var tongsoluong=$('#soluong').attr('soluong');
+      tongsoluong=tongsoluong-$('#id'+id).attr('soluonghang');
+
+
+      var tongtien=$('.price').attr('value');
+      var gia=$('#id'+id).attr('giamgia');
+       if(gia==0)
+        gia=$('#id'+id).attr('dongia');
+      tongtien=tongtien-($('#id'+id).attr('soluonghang')*gia);
+      
+      
+      $.ajax({
+        url: route,
+        type:'get',
+        data: {id:id},
+        success:function(){
+          alert(tongsoluong);
+          $('.list-item-cart'+id).hide();
+          $('#soluong').attr('soluong',tongsoluong);
+          $('#soluong').attr('value',tongsoluong);
+          $('#id'+id).attr('soluonghang',0)
+
+           // $('#id'+id).attr('soluonghang',soluonghang);
+           // $('#id'+id).attr('value',soluonghang);
+           
+          if(tongsoluong>0)
+            $('#soluong').html((tongsoluong)+" "+"sản phẩm");   
+          else
+          {
+            
+            $('p.no-item').show();
+            $('#soluong').html((tongsoluong)+" "+"sản phẩm");
+            $('.top-subtotal').hide();
+            $('#Thanhtoan').hide();
+                       
+          }
+
+          $('.price').attr('value',tongtien);
+          $('.price').html((tongtien));
+        }
+      
+      });
+    });
+
+
+  </script>

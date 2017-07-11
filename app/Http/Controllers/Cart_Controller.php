@@ -14,12 +14,12 @@ class Cart_Controller extends Controller
     //
     public function buy(Request $req, $id) // add gio hang
     {
-           $product = Product::find($id);
+            $product = Product::find($id);
             $oldCart = Session('cart') ? Session('cart') : null;
             $cart = new Cart($oldCart);
             $cart->add($product, $product->id);
             $req->session()->put('cart', $cart);
-           
+            
         
     }
 

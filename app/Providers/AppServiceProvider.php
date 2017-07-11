@@ -5,9 +5,13 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\TypeProduct;
 use App\Product;
+use App\Partner;
 use Carbon\Carbon;
+use App\Cart;
 use Session;
-
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Support\Collection;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -58,6 +62,7 @@ class AppServiceProvider extends ServiceProvider
             $oldCart = Session::get('cart');
             $cart = new Cart($oldCart);
             $view->with(['cart'=>Session::get('cart'),'product_cart'=>$cart->items,'totalPrice'=> $cart->totalPrice,'totalQty'=>$cart->totalQty]);
+
             
 
           }
@@ -66,10 +71,37 @@ class AppServiceProvider extends ServiceProvider
         });
               view()->composer('section.sanphamkhuyenmai',function($view)
         {
-            $product = Product::findProductPromotion()->get();
+            $product = Product::findProductPromotion() ->get();
             $view->with('products',$product);
+          
             //dd($bestproduct);
         });
+
+              view()->composer('section.thuonghieu',function($view)
+        {
+           $partners = Partner::limit(8)->get()->toArray();
+
+           $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+          //Create a new Laravel collection from the array data
+          $collection = new Collection($partners);
+          $perPage = 8;
+
+        //Slice the collection to get the items to display in current page
+          $currentPageSearchResults = $collection->slice(($currentPage-1) * $perPage, $perPage)->all();
+
+          //Create our paginator and pass it to the view
+          $new_partners= new LengthAwarePaginator($currentPageSearchResults, count($collection), $perPage);
+           $new_partners->setPath(route('home'));
+
+           $view->with('new_partners',$new_partners);
+    
+          
+            //dd($bestproduct);
+        });
+
+
+
     }
 
     /**

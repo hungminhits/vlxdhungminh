@@ -14,9 +14,11 @@
 <script src="js/resize.js" type="text/javascript"></script>
 <script src ="js/markup.js" type="text/javascript"></script>
 <script src="js/jquery_002.js" type="text/javascript"></script>
-<script src="js/jquery.js" type="text/javascript"></script>
+ <script src="js/jquery.js" type="text/javascript"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" type="text/javascript"></script> -->
 <script src="js/modernizr-2.js" type="text/javascript"></script>
 <script src="js/reflow.js" type="text/javascript"></script>
+<script src="js/jssor.slider-25.0.7.min.js" type="text/javascript"></script>
 
 
 

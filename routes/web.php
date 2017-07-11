@@ -109,18 +109,14 @@ Route::get('contact',
 Route::get('allPro',
 	['as'=>'allPro',
 	 'uses'=>'Product_Controller@allProducts']);
-Route::get('type/{name_khong_dau}',
+Route::get('type/{id}',
 	['as'=>'type',
 	 'uses'=>'Type_Product_Controller@showType']);
 Route::get('detail/{id}',
 	['as'=>'detail',
 	 'uses'=>'Detail_Controller@getDetail']);
 
-Route::get('buy/{id}',
-	['as'=>'buy',
-	 'uses'=>'Cart_Controller@buy']); 
-
-Route::get('cart',
+Route::get('cart_product',
 	['as'=>'cart',
 	'uses'=>'Cart_Controller@showCart']);
 
@@ -147,5 +143,9 @@ Route::get('active-user',[
 	'as'=>'active-user',
 	'uses'=>'LoginLogoutRegister_Controller@activeUser']
 );
+
+Route::get('buy/{id}',
+	['as'=>'buy',
+	 'uses'=>'Cart_Controller@buy']); 
 
 
