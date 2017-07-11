@@ -9,7 +9,7 @@
                     <div class="card">
                         <div class="header">
                             <h2 id="header">
-                                    USER
+                                    CATEGORY
                                     {{-- <small>You can edit any columns except header/footer</small> --}}
                             </h2>
                         </div>
@@ -27,11 +27,10 @@
                                 <thead>
                            {{-- <th><input type="checkbox" id="checkall" /></th> --}}
                                         <th style="width: 5%">ID</th>
-                                        {{-- <th style="width: 8%; background-color: #ff7f00;" >IMAGE</th> --}}
-                                        <th style="width: 20%;">NAME</th>
-                                        <th style="width: 20%;">Description</th>
-                                        <th style="width: 25%;">Image</th>            
-                                        {{-- <th style="width: 22%; background-color: #ff7f00;">PASSWORD</th> --}}
+                                        <th style="width: 10%;">Image</th> 
+                                        <th style="width: 30%;">NAME</th>
+                                        <th style="width: 35%;">Description</th>
+                                        {{-- <th style="width: 8%;">Type</th>              --}}
                                         <th>EDIT/DELETE</th>
                                 </thead>
                                 <tbody>
@@ -40,10 +39,10 @@
                                             <div id="row1{{$tp->id }}">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <td id="id{{$tp->id }}">{{$tp->id }}</td>
-                                                 <td id="name{{ $tp->id }}">{{ $tp->name }}</td>
-                                                {{-- <td id="image{{$users->id}}"><img src="images/{{ $users->image }}" style="width: 90px; height: 90px"></td> --}}
-                                                <td id="Description{{ $tp->id }}">{{ $tp->description }}</td>
-                                                <td id="Image{{$tp->id}}">{{$tp->image}}</td>
+                                                <td id="image{{$tp->id}}"><img src="images/{{$tp->image}}" style="width: 100px; height: 100px"></td>
+                                                <td id="name{{ $tp->id }}">{{ $tp->name }}</td>
+                                                <td id="description{{ $tp->id }}">{{ $tp->description }}</td>
+                                               {{--  <td id="type{{$tp->id}}">{{$tp->type}}</td> --}}
                                                 <td>
                                                     <button class="btn btn-info btn-lg glyphicon glyphicon-hand-right" style="border-radius: 10px;" id="edit_button{{ $tp->id  }}" onclick="editRow({{ $tp->id }})"></button>
                                                     <button class="btn btn-warning btn-lg glyphicon glyphicon-trash" style="border-radius: 10px" id="delete_button{{ $tp->id  }}" onclick="delete_row('{{ $tp->id  }}');"></button>
@@ -54,7 +53,7 @@
                                         <div id="editRowPro{{ $tp->id  }}" class="form">
                                             <p class="form_title">Edit Type</p>
                                             <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
-                                            <form id="formEdit{{ $tp->id  }} enctype="multipart/form-data" method="post" class="horizontal">
+                                            <form id="formEdit{{ $tp->id  }}" enctype="multipart/form-data" method="post" class="horizontal">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="row clearfix">
                                                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
@@ -87,7 +86,7 @@
                                                     <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                                         <div class="form-group">
                                                             <div class="form-line">
-                                                                <input type="file" value="{{$tp->image}}" name="edit_image" id="edit_image{{$tp->id}}" class="form-control">
+                                                                <input type="file" value="{{$tp->image}}" name="edit_image" id="edit_image{{$tp->id}}" class="form-control" >
                                                             </div>
                                                         </div>
                                                     </div>
@@ -119,7 +118,7 @@
                             <div id="addRowPro" class="form">
                                 <p class="form_title">Add Type</p>
                                 <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
-                                <form enctype="multipart/form-data" method="post" id="new_form" name="new_form" class="horizontal">
+                                <form id="new_form" enctype="multipart/form-data" method="post">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="row clearfix">
                                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
@@ -128,7 +127,7 @@
                                         <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" id="new_name" name="new_name" class="form-control" placeholder="Enter your name">
+                                                    <input type="text" id="new_name" name="new_name" class="form-control" placeholder="Enter name">
                                                 </div>
                                             </div>
                                         </div>
@@ -240,15 +239,16 @@
                 },function (result) {
                     if(result)
                     {
-                        // var image = $('#row'+id).find('td:nth-child(7)').text();
-                        var route="{{ route('Delete_TypeProduct') }}";
+                        var image = $('#row'+id).find('td:nth-child(2)').val();
+                        alert(image);
+                        var route="{{ route('Delete_Category') }}";
 
                         $.ajax({
                         url:route,
                         type:'get',
                         data:{
                             id:id,
-                            // imageFile:image,
+                            imageFile:image,
                         },
                         success:function() {  
                              $('#row'+id).hide();
@@ -267,10 +267,9 @@
                 var id=$(this).val();
                 var name=document.getElementById("edit_name"+id).value;
                 var description=document.getElementById("edit_description"+id).value;
-                // var password=document.getElementById("edit_password"+id).value;
                 var image=document.getElementById("edit_image"+id).value.toString();
                 image=image.substr(12);
-                var route=" {{ route('Edit_Product') }} ";
+                var route=" {{ route('Edit_Category') }} ";
                 var form = $('form#formEdit'+id)[0];
                 var form_data = new FormData(form);
                 
@@ -282,12 +281,9 @@
                     processData: false,
                     contentType: false,
                     success:function() {
-                        // var updated_at = data;
                         document.getElementById("description"+id).innerHTML=description;
                         document.getElementById("name"+id).innerHTML=name;
-                        // document.getElementById("password"+id).innerHTML=password;
-                        document.getElementById("image"+id).innerHTML="<img src='images/"+image+"' style='width: 90px; height: 90px' />";
-                        // document.getElementById("edit_button"+id).style.display="inline";
+                        document.getElementById("image"+id).innerHTML="<img src='images/"+image+"' style='width: 100px; height: 100px' />";
                         alert('Cập nhập thành công');
                         
                     },
@@ -301,16 +297,18 @@
                         });
             
             });
+
+
+
+
             $('#saveAdd').click(function() 
             {
                 var name=document.getElementById("new_name").value;
-                var description=document.getElementById("new_description").value;
-                // var password=document.getElementById("new_password").value;
-               
+                var description=document.getElementById("new_description").value;               
                 var image=document.getElementById("new_image").value.toString();
                 image=image.substr(12);
 
-                var route="{{ route('Insert_Product') }}";
+                var route="{{ route('Insert_Category') }}";
                 var form = $('form#new_form')[0];
                 var form_data = new FormData(form);
                 $.ajax
@@ -321,27 +319,26 @@
                     contentType: false,
                     data:form_data,
                     success:function(data) {
-                        // console.log(data);
-               
+                        console.log(data);
                         var id=data;
                         var table=document.getElementById("product_table");
                         var table_len=(table.rows.length);
-                            var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td></td><td id='image"+id+"'><img src='images/"+image+"' style='width: 90px; height: 90px'/></td><td id='name"+id+"'>"+name+"</td><td id='description"+id+"'>"+description+"</td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'></button> <button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'></button></td></tr>                                 <div id='editRowPro"+id+"' class='form'>                                                                   <p class='form_title'>Edit Type</p>                                                                        <a href='#' class='close'><img src='close.png' class='img-close' title='Close Window' alt='Close' /></a>   <form id='formEdit"+id+"' enctype='multipart/form-data' method='post'>                                     <input type='hidden' name='_token' value='{{ csrf_token() }}'>                                             <div class='row'><label>ID</label><input type='text' name='id' value='"+id+"' readonly></div>              <div class='row'><label>Name</label><input type='text' name='edit_name' id='edit_name"+id+"' value='"+name+"' required=''></div>                                                                                      <div class='row'><label> description</label><input type='email' value='"+description+"' name='edit_des' id='edit_email"+id+"' disabled=''></div>                                                                                  <div class='row'><label>Image</label><input type='file' value='"+image+"' name='edit_image' id='edit_image"+id+"' required=''></div>                                                           <br><button  type='button' id='saveEdit' value='"+id+"' class='button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit' style='border-radius: 10px;''>  Save</button></form></div>";                        
+                            var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td></td><td id='image"+id+"'><img src='images/"+image+"' style='width: 90px; height: 90px'/></td><td id='name"+id+"'>"+name+"</td><td id='description"+id+"'>"+description+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'></button> <button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'></button>                                    </td></tr>                                                                                                                      <div id='editRowPro"+id+"' class='form'>                                                                                        <p class='form_title'>Edit Type</p>                                                                                             <a href='#' class='close'><img src='close.png' class='img-close' title='Close Window' alt='Close' /></a>                        <form id='formEdit"+id+"' enctype='multipart/form-data' method='post'>                                                          <input type='hidden' name='_token' value='{{ csrf_token() }}'>                                                                  <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='id'>ID</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='{{ $tp->id  }}' name='id' class='form-control' readonly ></div></div></div></div>                                                   <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='name'>Name</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' name='edit_name' id='edit_name{{ $tp->id  }}' value='{{ $tp->name }}' required=''  class='form-control'></div></div></div></div><div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='image'>Image</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='file' value='{{$tp->image}}' name='edit_image' id='edit_image{{$tp->id}}' class='form-control' ></div></div></div></div><div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='description'>Description</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='{{$tp->description}}' name='edit_des' id='edit_description{{ $tp->id }}' required='' class='form-control'></div></div></div></div>                                                                                   <div class='row clearfix'><div class='col-lg-offset-5 col-md-offset-2 col-sm-offset-4 col-xs-offset-5'><button  type='button' id='saveEdit' value='{{ $tp->id }}' class='button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit' style='border-radius: 10px;'>  Save</button></div></div> </form></div>";                        
 
                         document.getElementById("new_name").value="";
                         document.getElementById("new_description").value="";
                         document.getElementById("new_image").value="";
-                        alert('Thêm user thành công');
-                        var formBox = $('#addRowPro');
+                        alert('Thêm category thành công');
+                        
+                    },
+                    error:function() {
+                        alert('Thêm category thất bại');
+                    },
+                });
+                var formBox = $('#addRowPro');
                         $(formBox).fadeOut('400', function() {
                             $('#over').remove(); 
                         });
-                    },
-                    error:function() {
-                        alert('Thêm user thất bại');
-                    },
-
-                });
                 
             });
 

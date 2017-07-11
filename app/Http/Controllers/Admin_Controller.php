@@ -79,9 +79,32 @@ class Admin_Controller extends Controller
         return $pdf->stream();
    }
 
-   public function Delete_TypeProduct(Request $req){
-      $type=TypeProduct::Delete_Type_product($req->id);
+    public function Edit_Category(Request $req){
+      $filename="";
+      $id = $req->input('id');
+      $name = $req->input('edit_name');
+      $desc = $req->input('edit_des');
+      $filename= $req->file('edit_image')->getClientOriginalName();
+      $req->file('edit_image')->move('images',$filename);
+      $pro=TypeProduct::Edit_Category($id, $name, $desc, $filename);
    }
+   public function Insert_Category(Request $req){
+      $filename="";
+      $name = $req->input('new_name');
+      $desc = $req->input('new_des');
+      $filename= $req->file('new_image')->getClientOriginalName();
+      $req->file('new_image')->move('images',$filename);
+      $getId=TypeProduct::Insert_Category($name, $desc, $filename);
+      return $getId;
+   }
+   public function Delete_Category(Request $req){
+      $image = $req->imageFile;
+      File::delete('images/'.$image);
+      $type=TypeProduct::Delete_Category($req->id);
+   }
+
+
+
    public function ChartById_Admin($id,$created_at_from,$created_at_to){
          $chart=Bill_Detail::FindSum_QuantityById($id,$created_at_from,$created_at_to);
          $pro=Product::Show_Product_All()->get();
