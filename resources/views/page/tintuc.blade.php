@@ -46,7 +46,8 @@
 						</div>
 						<div class="list_item_collection show1">
 							<ul>
-								
+								<li> abcde</li>
+								<li> abcde</li>
 							</ul>
 						</div>
 					</div>
@@ -62,14 +63,14 @@
 							@foreach($new as $tintuc)
 							<li style="margin: 15px 0px;padding-bottom: 15px;">
 								<div class="as_bestsellers_thumb">
-									<a href="/noi-that-can-ho-voi-nhung-mau-sac-tuong-phan" title="{{$tintuc->title}}">
+									<a href="{{route('news-detail')}}" title="{{$tintuc->title}}">
 										
 										<img alt="{{$tintuc->title}}" src="images/{{$tintuc->image}}">
 										
 									</a>
 								</div>
 								<div class="as_bestsellers_content">
-									<h3><a title="{{$tintuc->title}}" href="/noi-that-can-ho-voi-nhung-mau-sac-tuong-phan">{{$tintuc->title}}</a></h3>
+									<h3><a title="{{$tintuc->title}}" href="{{route('news-detail')}}">{{$tintuc->title}}</a></h3>
 									<div class="post-date">{{date("d/m/Y",strtotime($tintuc->created_at))}}</div>
 								</div>
 							</li>
@@ -86,11 +87,11 @@
 							<article class="blog-gird-item blog-item blog-gird-item3">
 								<div class="pageblog-thumb">
 									
-									<a href="/noi-that-can-ho-voi-nhung-mau-sac-tuong-phan" title="{{$new->title}}"><img alt="{{$new->title}}" src="images/{{$new->image}}"></a>
+									<a href="{{route('news-detail')}}" title="{{$new->title}}"><img alt="{{$new->title}}" src="images/{{$new->image}}"></a>
 									
-									<a title="{{$new->title}}" href="/noi-that-can-ho-voi-nhung-mau-sac-tuong-phan" class="tzblog-view"><i class="fa fa-search"></i></a>
+									<a title="{{$new->title}}" href="{{route('news-detail')}}" class="tzblog-view"><i class="fa fa-search"></i></a>
 								</div>
-								<h2><a href="/noi-that-can-ho-voi-nhung-mau-sac-tuong-phan">{{$new->title}}</a></h2>
+								<h2><a href="{{route('news-detail')}}">{{$new->title}}</a></h2>
 								<span class="tzblog-meta">
 									<em><i class="fa fa-user"></i>{{$new->id_user}}</em>
 									<em><i class="fa fa-clock-o"></i>{{date("d/m/Y",strtotime($new->created_at))}}</em>

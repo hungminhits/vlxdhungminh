@@ -130,6 +130,14 @@ Route::get('Info',
 Route::get('news',
 	['as'=>'news',
 	 'uses'=>'Home_Controller@news']);
+Route::get('news-detail',[
+	'as'=>'news-detail',
+	'uses'=>'Home_Controller@newsdetail']);
+
+
+
+
+
 Route::get('contact',
 	['as'=>'contact',
 	 'uses'=>'Home_Controller@contact']);
@@ -174,7 +182,5 @@ Route::get('active-user',[
 	'as'=>'active-user',
 	'uses'=>'LoginLogoutRegister_Controller@activeUser']
 );
-Route::get('show-news',
-	['as'=>'show-news',
-	'uses'=>'News_Controller@shownews']);
+
 

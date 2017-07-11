@@ -23,6 +23,9 @@ class Home_Controller extends Controller
       $new=News::Load_ALL_News()->orderBy('created_at','DESC')->limit(5)->get();
       return view('page.tintuc',compact('news','new'));
    }
+   public function newsdetail(){
+      return view('page.ChitietTintuc');
+   }
      public function contact(){
    	return view('page.lienhe');
    }
