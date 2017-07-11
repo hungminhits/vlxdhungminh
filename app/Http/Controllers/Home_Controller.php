@@ -18,10 +18,19 @@ class Home_Controller extends Controller
    public function info(){
    	return view('page.gioithieu');
    }
-   public function news(){
+   public function news_All(){
       $news=News::Load_ALL_News()->orderBy('created_at','DESC')->paginate(5);
-      $new=News::Load_ALL_News()->orderBy('created_at','DESC')->limit(5)->get();
-      return view('page.tintuc',compact('news','new'));
+      $typeidtintuc=0;
+      return view('page.tintuc',compact('news','newNoiBat','typeidtintuc'));
+   }
+   public function NewsById($id){
+      $NewsById=News::Load_ALL_News()->where('Category_ID_News',$id)->orderBy('id','DESC')->paginate(5);
+      $typeidtintuc=$id;
+      return view('page.tintuc',compact('NewsById','typeidtintuc'));
+   }
+   public function newsdetail($id){
+      $newDetail=News::NewById($id)->get();
+      return view('page.ChitietTintuc',compact('newDetail'));
    }
      public function contact(){
    	return view('page.lienhe');
