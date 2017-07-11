@@ -24,18 +24,18 @@
                             <br><br>
                         </div>
                         <br>
-                             <table border="1" class="table table-striped table-nonfluid" align="center" id="product_table" >
+                             <table border="1" class="table table-admin table-striped table-nonfluid" align="center" id="product_table" >
                                 <thead>
                            {{-- <th><input type="checkbox" id="checkall" /></th> --}}
-                                        <th style="width: 5%; background-color: #ff7f00;">ID</th>
+                                        <th style="width: 5%">ID</th>
                                         {{-- <th style="width: 8%; background-color: #ff7f00;" >IMAGE</th> --}}
-                                        <th style="width: 20%; background-color: #ff7f00;">NAME</th>
-                                        <th style="width: 25%; background-color: #ff7f00;">EMAIL</th>            
+                                        <th style="width: 20%;">NAME</th>
+                                        <th style="width: 25%;">EMAIL</th>            
                                         {{-- <th style="width: 22%; background-color: #ff7f00;">PASSWORD</th> --}}
-                                        <th style="width: 15%; background-color: #ff7f00;"> PHONE   </th>
-                                        <th style="width: 30%; background-color: #ff7f00;">ADDRESS</th>
-                                        <th style="width: 5%;background-color: #ff7f00;">GROUP</th>
-                                        <th style="background-color: #ff7f00;">EDIT/DELETE</th>
+                                        <th style="width: 15%;"> PHONE   </th>
+                                        <th style="width: 30%;">ADDRESS</th>
+                                        <th style="width: 5%">GROUP</th>
+                                        <th>EDIT/DELETE</th>
                                 </thead>
                                 <tbody>
                                     @foreach($user as $users )
@@ -57,44 +57,93 @@
                                             </div>
                                         </tr>
 
-        
                                         <div id="editRowPro{{ $users->id }}" class="form">
                                             <p class="form_title">Edit User</p>
                                             <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
-                                            <form id="formEdit{{ $users->id }}" enctype="multipart/form-data" method="post"   >
+                                            <form id="formEdit{{ $users->id }}" enctype="multipart/form-data" method="post" class="horizontal">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <div class="row">
-                                                    <label>ID</label>
-                                                     <input type="text" name="id" value="{{ $users->id }}" readonly>
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="id">ID</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" value="{{ $users->id }}" name="id" class="form-control" readonly >
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label>Name</label>
-                                                    <input type="text" name="edit_name" id="edit_name{{ $users->id }}" value="{{ $users->full_name }}" required="">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="name">Name</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" name="edit_name" id="edit_name{{ $users->id }}" value="{{ $users->full_name }}" required=""  class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label> Email</label>
-                                                    <input type="email" value="{{$users->email}}" name="edit_des" id="edit_email{{ $users->id }}" disabled="">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="email">Email</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="email" value="{{$users->email}}" name="edit_des" id="edit_email{{ $users->id }}" disabled="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                {{-- <div class="row">
-                                                    <label>Password</label>
-                                                    <input type="password" value="{{$users->password}}" name="edit_password" id="edit_password{{ $users->id }}" disabled="">
-                                                </div> --}}
-                                                <div class="row">
-                                                    <label>Phone</label>
-                                                    <input type="number" value="{{$users->phone}}" name="edit_phone" id="edit_phone{{ $users->id }}" required="">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="phone">Phone</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="number" value="{{$users->phone}}" name="edit_phone" id="edit_phone{{ $users->id }}" required="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label>Address</label>
-                                                    <input type="text" value="{{$users->address}}" name="edit_address" id="edit_address{{ $users->id }}">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="address">Address</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" value="{{$users->address}}" name="edit_address" id="edit_address{{ $users->id }}" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="row">
-                                                    <label>Group</label>
-                                                    <input type="text" value="{{$users->group}}" name="edit_group" id="edit_group{{ $users->id }}" required="">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="group">Group</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" value="{{ $users->group }}" name="edit_group" id="edit_group{{ $users->id }}" required="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <br>
-                                                <button  type="button" id="saveEdit" value="{{ $users->id }}" class="button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit" style="border-radius: 10px;">  Save</button>
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-offset-5 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+                                                    <button  type="button" id="saveEdit" value="{{ $users->id }}" class="button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit" style="border-radius: 10px;">  Save</button>
+                                                    </div>
+                                                </div>
+                                                
                                             </form>
                                         </div>
+        
+                                        
                                     
                                     @endforeach
                                 </tbody>
@@ -102,43 +151,90 @@
                                 {{-- <button type="button" class="btn btn-success" style="height:40px;width: 150px;  float:right; border-radius: 5px; margin-top: 25px;" id="viewpdf_allproduct">Xuất file pdf</button>  --}}  
 
                             <div id="addRowPro" class="form">
-                                            <p class="form_title">Add User</p>
-                                            <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
-                                            <form enctype="multipart/form-data" method="post" id="new_form" name="new_form">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <div class="row">
-                                                    <label class="id">ID</label>
-                                                    <input type="text" disabled="">
-                                                </div>
-                                                <div class="row">
-                                                    <label class="id">Name</label>
-                                                    <input type="text" name="new_name" id="new_name" required="">
-                                                    <span id="name_err"></span>
-                                                </div>
-                                                <div class="row">
-                                                    <label class="id">Email</label>
-                                                    <input type="text" name="new_email" id="new_email" required="">
-                                                </div>
-                                                <div class="row">
-                                                    <label class="id">Password</label>
-                                                    <input type="password" name="new_password" id="new_password" required="">
-                                                </div>
-                                            
-                                                <div class="row">
-                                                    <label class="id">Phone</label>
-                                                    <input type="number" name="new_phone" id="new_phone">
-                                                </div>
-                                                <div class="row">
-                                                    <label class="id">Address</label>
-                                                    <input type="text" name="new_address" id="new_address">
-                                                </div>
-                                                <div class="row">
-                                                    <label class="id">Group</label>
-                                                    <input type="text" name="new_group" id="new_group" required="">
-                                                </div>
-                                                <button type="button" id="saveAdd" class="button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save" style="border-radius: 10px;">  Insert</button>
-                                            </form>
+                                <p class="form_title">Add User</p>
+                                <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
+                                <form enctype="multipart/form-data" method="post" id="new_form" name="new_form" class="horizontal">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                            <label class="name">Name</label>
                                         </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input type="text" id="new_name" name="new_name" class="form-control" placeholder="Enter your name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                            <label class="email">Email</label>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input type="text" id="new_email" name="new_email" class="form-control" placeholder="Enter your email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                            <label class="password">Password</label>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input type="text" id="new_password" name="new_password" class="form-control" placeholder="Enter your password">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                            <label class="phone">Phone</label>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input type="number" id="new_phone" name="new_phone" class="form-control" placeholder="Enter your phone">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                            <label class="address">Address</label>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input type="text" id="new_address" name="new_address" class="form-control" placeholder="Enter your address">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                            <label class="group">Group</label>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input type="text" id="new_group" name="new_group" class="form-control" placeholder="Enter your group">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+                                        <div class="col-lg-offset-5 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+                                            <button type="button" id="saveAdd" class="button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save" style="border-radius: 10px;">  Save</button>
+                                        </div>
+                                    </div>
+                                    
+                                </form>
+                            </div>
                                         
                             <div>{{ $user->links() }}</div>
                         
@@ -312,7 +408,7 @@
                         var id=data;
                         var table=document.getElementById("product_table");
                         var table_len=(table.rows.length);
-                            var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td><td id='name"+id+"'>"+name+"</td><td id='email"+id+"'>"+email+"</td><td id='phone"+id+"'>"+phone+"</td><td id='address"+id+"'>"+address+"</td><td id='group"+id+"'>"+group+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'></button> <button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'></button></td></tr>                                 <div id='editRowPro"+id+"' class='form'>                                                                   <p class='form_title'>Edit User</p>                                                                        <a href='#' class='close'><img src='close.png' class='img-close' title='Close Window' alt='Close' /></a>   <form id='formEdit"+id+"' enctype='multipart/form-data' method='post'>                                     <input type='hidden' name='_token' value='{{ csrf_token() }}'>                                             <div class='row'><label>ID</label><input type='text' name='id' value='"+id+"' readonly></div>              <div class='row'><label>Name</label><input type='text' name='edit_name' id='edit_name"+id+"' value='"+name+"' required=''></div>                                                                                      <div class='row'><label> Email</label><input type='email' value='"+email+"' name='edit_des' id='edit_email"+id+"' disabled=''></div>                                                                                  <div class='row'><label>Phone</label><input type='number' value='"+phone+"' name='edit_phone' id='edit_phone"+id+"' required=''></div>                                                                   <div class='row'><label>Address</label><input type='text' value='"+address+"' name='edit_address' id='edit_address"+id+"'></div>                                                                             <div class='row'><label>Group</label><input type='text' value='"+group+"' name='edit_group' id='edit_group"+id+"' required=''></div><br><button  type='button' id='saveEdit' value='"+id+"' class='button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit' style='border-radius: 10px;''>  Save</button></form></div>";                        
+                            var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td><td id='name"+id+"'>"+name+"</td><td id='email"+id+"'>"+email+"</td><td id='phone"+id+"'>"+phone+"</td><td id='address"+id+"'>"+address+"</td><td id='group"+id+"'>"+group+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'></button> <button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'></button></td></tr>                                                                                                                             <div id='editRowPro"+id+"' class='form'>                                                                                        <p class='form_title'>Edit User</p>                                                                                             <a href='#' class='close'><img src='close.png' class='img-close' title='Close Window' alt='Close' /></a>                        <form id='formEdit"+id+"' enctype='multipart/form-data' method='post'>                                                          <input type='hidden' name='_token' value='{{ csrf_token() }}'>                                                                  <div class='row'><label>ID</label><input type='text' name='id' value='"+id+"' readonly></div>                                   <div class='row'><label>Name</label><input type='text' name='edit_name' id='edit_name"+id+"' value='"+name+"' required=''></div>                                                                                                                            <div class='row'><label> Email</label><input type='email' value='"+email+"' name='edit_des' id='edit_email"+id+"' disabled=''></div>                                                                                                                            <div class='row'><label>Phone</label><input type='number' value='"+phone+"' name='edit_phone' id='edit_phone"+id+"' required=''></div>                                                                                                              <div class='row'><label>Address</label><input type='text' value='"+address+"' name='edit_address' id='edit_address"+id+"'></div>                                                                                                                            <div class='row'><label>Group</label><input type='text' value='"+group+"' name='edit_group' id='edit_group"+id+"' required=''></div><br>                                                                                                                        <button  type='button' id='saveEdit' value='"+id+"' class='button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit' style='border-radius: 10px;''>  Save</button></form></div>";                        
 
                         document.getElementById("new_name").value="";
                         document.getElementById("new_email").value="";
@@ -321,22 +417,20 @@
                         document.getElementById("new_address").value="";
                         document.getElementById("new_group").value="";
                         alert('Thêm user thành công');
-                        var formBox = $('#addRowPro');
+                        
+                    },
+                    error:function() {
+                        alert('Thêm user thất bại');
+                    },
+                });
+                var formBox = $('#addRowPro');
                         $(formBox).fadeOut('400', function() {
                             $('#over').remove(); 
                         });
-                    },
-                    error:function() {
-                        alert('thất bại');
-                    },
-
-                });
-                
             });
 
     </script>
     @endsection
-
 
 
                             

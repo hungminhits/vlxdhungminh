@@ -7,6 +7,7 @@ use App\Http\Requests\ProductEditRequest;
 use DB;
 use File;
 use Illuminate\Support\Facades\Input;
+use Auth;   
 use App\Product;
 use App\TypeProduct;
 use App\Bill_Detail;
@@ -14,6 +15,7 @@ use Carbon\Carbon;
 use App\User;
 use App\News;
 use PDF;    
+use Hash;
 class Admin_Controller extends Controller
 {
    public function ViewContent_Admin()
@@ -24,9 +26,41 @@ class Admin_Controller extends Controller
       $FindSumQuantity=Bill_Detail::FindSum_Quantity();
    	return view('Admin.Content_Admin',compact('MostViewProduct','Total_view','FindSumQuantity'));
    }
+   public function Login_Admin()
+   {
+      return view('Admin.Login_Admin');
+   }
 //Loại sản phẫm 
+   public function PostLogin_Admin(Request $req){
+        if(Auth::attempt(['email'=>$req->email,'password'=>$req->password,'active'=>1])){
+            if(Auth::User()->group>=1)
+               return redirect()->route('ViewContentAdmin');
+             else
+               return redirect()->back()->with('thatbai','Bạn không có quyền truy cập vào trang này');
+        }
+        else{
+            return redirect()->back()->with('thatbai','Sai thông tin đăng nhập');
+        }
+    }
+    public function PostForgetPassword(Request $req){
+      $user=User::User_All()->where('email',$req->email)->get();
+      if(isset($user[0])){
+            $characters ='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i <5 ; $i++) {
+                 $randomString .= $characters[rand(0, $charactersLength - 1)];
+             }
 
-
+             DB::table('users')->where('email','=',$req->email)->update(['password'=>Hash::make($randomString)]);
+             return redirect()->back()->with('thatbai',$randomString);  
+      }
+      else
+            return redirect()->back()->with('thatbai','Nhập Không Đúng Email hoặc Email Bạn Không Tồn Tại');
+    }
+   public function ForgetPassword() {
+   return view('Admin.ForgetPassWord');
+   }
    public function downloadPDF(Request $req){
       if($req->type!=null){
           $title="Tất cả các sản phẩm";
@@ -45,31 +79,44 @@ class Admin_Controller extends Controller
         return $pdf->stream();
    }
 
-   public function Delete_TypeProduct($id){
-      $type=TypeProduct::Delete_Type_product($id);
+    public function Edit_Category(Request $req){
+      $filename="";
+      $id = $req->input('id');
+      $name = $req->input('edit_name');
+      $desc = $req->input('edit_des');
+      $type = $req->input('edit_type');
+      $filename= $req->file('edit_image')->getClientOriginalName();
+      $req->file('edit_image')->move('images',$filename);
+      $pro=TypeProduct::Edit_Category($id, $name, $desc, $filename, $type);
    }
+   public function Insert_Category(Request $req){
+      $filename="";
+      $name = $req->input('new_name');
+      $desc = $req->input('new_des');
+      $type = $req->input('new_type');
+      $filename= $req->file('new_image')->getClientOriginalName();
+      $req->file('new_image')->move('images',$filename);
+      $getId=TypeProduct::Insert_Category($name, $desc, $filename, $type);
+      return $getId;
+   }
+   public function Delete_Category(Request $req){
+      $image = $req->imageFile;
+      File::delete('images/'.$image);
+      $type=TypeProduct::Delete_Category($req->id);
+   }
+
+
+
    public function ChartById_Admin($id,$created_at_from,$created_at_to){
          $chart=Bill_Detail::FindSum_QuantityById($id,$created_at_from,$created_at_to);
          $pro=Product::Show_Product_All()->get();
          return view('Admin.ChartById_Admin',compact('chart','pro'));
    }
 
-   // public function Pro_convert_vi_to_en(){
-   //       $str=Product::all();
-   //       foreach ($str as $str1) {
-   //          $str=TypeProduct::vi_to_en($str1->name);
-   //          $product=DB::table('products')->where('name','=',$str1->name)->update(['name_khong_dau'=>$str]);
-   //       }
-   // }
-   //    public function TypePro_convert_vi_to_en(){
-   //       $str=TypeProduct::all();
-   //       foreach ($str as $str1) {
-   //          $str=TypeProduct::vi_to_en($str1->name);
-   //          $product=DB::table('products')->where('name','=',$str1->name)->update(['name_khong_dau'=>$str]);
-   //       }
-   // }
-
-
+      public function ViewAllNews(){
+         $news=News::Load_ALL_News()->get();
+         return view('Admin.News_Admin',compact($news));
+      }
       public function View_TypeProduct(){
             $typeproduct=TypeProduct::ALL_Type_product()->paginate(10);
             return view('Admin.TypeProduct_Admin',compact('typeproduct'));
@@ -96,21 +143,21 @@ class Admin_Controller extends Controller
       $unit = $req->input('edit_unit');
 
       $filename= $req->file('edit_image')->getClientOriginalName();
-      $req->file('edit_image')->move('images',$filename);
+      // $req->file('edit_image')->move('images',$filename);
       $pro=Product::Edit_Product($id,$name,$type, $desc, $unit_price, $pro_price,$filename, $unit);
       // $request->session()->flash('status', 'Tạo bài viết thành công!');
       return $pro; 
    }
    public function Insert_Product(Request $req){
       $filename="";
-      $name = $req->input('name');
+      $name = $req->input('new_name');
       $type = $req->input('new_type');
       $desc = $req->input('new_des');
       $unit_price = $req->input('new_unit_price');
       $pro_price = $req->input('new_pro_price');
       $unit = $req->input('new_unit');
-      $filename= $req->file('image')->getClientOriginalName();
-      $req->file('image')->move('images',$filename);
+      $filename= $req->file('new_image')->getClientOriginalName();
+      $req->file('new_image')->move('images',$filename);
       $getId=Product::Insert_Product($name, $type, $desc, $unit_price, $pro_price,$filename, $unit);
       return $getId;
    } 
@@ -148,7 +195,8 @@ class Admin_Controller extends Controller
       $phone = $req->input('new_phone');
       $address = $req->input('new_address');
       $group = $req->input('new_group');
-      $getId=User::Insert_User($name, $email, $password, $phone, $address, $group);
+      $token=$req->input('_token');
+      $getId=User::Insert_User($name, $email, $password, $phone, $address, $group, $token);
       return $getId;
    } 
    public function Delete_User(Request $req){

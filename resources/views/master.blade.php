@@ -17,7 +17,7 @@
 
 </title>    
 <!-- ================= Page description ================== -->
-
+<base href="http://localhost/vlxdHungMinh/public/">
 
 <meta name="description" content="">
 
@@ -46,8 +46,7 @@
 <!-- end script -->
 
 <!-- Styles -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+
 <link href="css/css.css" rel="stylesheet" type="text/css">
 <link href="css/css_002.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="css/font-awesome.css">
@@ -67,15 +66,9 @@
 <link href="css/settings.css" rel="stylesheet" type="text/css">
 <link href="css/main_styles.css" rel="stylesheet" type="text/css">
 <link href="css/mystyle.css" rel="stylesheet" type="text/css">
-<link href="css/font-weight_002.css" rel="stylesheet" type="text/css">
-<link href="css/challenge.css" rel="stylesheet" type="text/css">
-<link href="css/meterialize.css" rel="stylesheet" type="text/css">
-<link href="css/my_style.css" rel="stylesheet" type="text/css">
-
-
 
 <!-- Header hook for plugins ================================================== -->
-<script src="js/myfunction.js" type="text/javascript"></script>
+
 <!-- script 1-->
 <script>
   var Bizweb = Bizweb || {};
@@ -592,12 +585,14 @@
     <a title="Close" class="quickview-close close-window" href="javascript:;" onclick="$('#popup-cart').modal('hide');"><i class="fa  fa-times-circle"></i></a>
   </div>
 </div>
-<div id="myModal" class="modal fade" role="dialog" style="display: none;">
+<!-- <div id="myModal" class="modal fade" role="dialog" style=""> -->
   <div class="modal-dialog">
-    <div class="modal-content">
+   <!--  <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: relative; z-index: 9;"><span aria-hidden="true">×</span>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: relative; z-index: 9;">
+          <span aria-hidden="true">×</span>
         </button>
+<<<<<<< HEAD
         <h4 class="modal-title">
           <span><i class="fa fa-check" aria-hidden="true"></i></span>Thêm vào giỏ hàng thành công
         </h4>
@@ -620,6 +615,21 @@
   </div>
 </div>
 </div>
+=======
+          <h4 class="modal-title">
+            <span><i class="fa fa-check" aria-hidden="true"></i></span>Thêm vào giỏ hàng thành công
+          </h4></div>
+          <div class="modal-body">
+            <div class="media">
+              <div class="media-left">
+                <div class="thumb-1x1">
+                  <img width="70px" src="./Mendover Theme_files/4-1c8f99f7-8863-45bd-8b47-fa7c0e642e0e(2).jpg" alt="Bán căn hộ Pent House tầng 10">
+                </div>
+              </div>
+              <div class="media-body">
+                <div class="product-title">Bán căn hộ Pent House tầng 10</div>
+                  <div class="product-new-price"><span>2.700.000.000 đ</span></div></div></div><button class="btn btn-block btn-outline-red" data-dismiss="modal">Tiếp tục mua hàng</button><a href="https://mendover-theme-1.bizwebvietnam.net/checkout" class="btn btn-block btn-radius">Tiến hành thanh toán »</a></div></div> --></div></div>
+>>>>>>> 249546664894c6b84985cf6d31801c2d3339faed
 
 
 
@@ -720,8 +730,6 @@ window.onclick = function(event) {
 }
 </script>
 
-
-
 <div id="hello" style="width: 100px; height: 200px; display: none;">
 <div class="modal-content"></div>
 
@@ -729,18 +737,20 @@ Hello</div>
 
 <script type="text/javascript">
   $('.add-button').click(function(){
-    document.getElementById('hello').style.display="bloc
+    document.getElementById('hello').style.display="block";
+  });
+</script> 
 
 <!-- script 12 -->
-  <script srk";
-  });
-</script> c="js/cs.js" type="text/javascript"></script>
+  <script src="js/cs.js" type="text/javascript"></script>
   <script src="js/main.js" type="text/javascript"></script>
   <script src="js/custom.js" type="text/javascript"></script>
   <script src="js/main_custome.js" type="text/javascript"></script>
 <!-- Product detail JS,CSS -->
 
 
-<div><div style="display:none"><img src="image/Logging.htm"></div></div></body>
+<div><div style="display:none"><img src="image/Logging.htm"></div></div>
+
+</body>
 </html>
 </html>

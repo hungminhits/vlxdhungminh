@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     @if(Auth::check())
-        @if(Auth::User()->group==1)
+        @if(Auth::User()->group>=1)
         <head>
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -119,16 +119,17 @@
         </body>
         @else
              <script type="text/javascript">
-            window.location.href = "{{route('home')}}";
+            window.location.href = "{{route('Login_Admin')}}";
             </script>
         @endif
 
     @else
              {{--  @if(Auth::User()->group=1) --}}
         <script type="text/javascript">
-            window.location.href = "{{route('home')}}";
+            window.location.href = "{{route('Login_Admin')}}";
         </script>
     {{--     @endif --}}
     @endif
+        
 </html>
    

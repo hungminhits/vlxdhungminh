@@ -11,6 +11,20 @@
 |
 */
 //gọi các trang trong admin
+Route::get('Login_Admin',
+	['as'=>'Login_Admin',
+	'uses'=>'Admin_Controller@Login_Admin']);
+Route::post('PostLogin_Admin',
+	['as'=>'PostLogin_Admin',
+	'uses'=>'Admin_Controller@PostLogin_Admin']);
+Route::get('ForgetPassword',[
+	'as'=>'ForgetPassword',
+	'uses'=>'Admin_Controller@ForgetPassword']);
+
+Route::post('ForgetPassword_Admin',
+	['as'=>'ForgetPassword_Admin',
+	'uses'=>'Admin_Controller@PostForgetPassword']);
+
 Route::get('ViewContent_Admin',
 	['as'=>'ViewContentAdmin',
 	'uses'=>'Admin_Controller@ViewContent_Admin']);
@@ -20,6 +34,7 @@ Route::get('ViewProduct_Admin',
 Route::get('ViewProductByType_Admin/{id}',
 	['as'=>'ViewProductByType_Admin',
 	'uses'=>'Admin_Controller@FindProductByType']);
+
 // Route::get('DeleteProductById_Admin/{id}',
 // 	['as'=>'DeleteProductById_Admin',
 // 	'uses'=>'Admin_Controller@Delete_Product']);
@@ -27,7 +42,9 @@ Route::get('ChartById_Admin/{id}/{created_at_from}/{created_at_to}',
 	['as'=>'ChartById_Admin',
 	'uses'=>'Admin_Controller@ChartById_Admin']);
 //sản phẩm
-
+Route::get('ViewNews',
+	['as'=>'ViewNews',
+	'uses'=>'Admin_Controller@ViewAllNews']);
 Route::get('viewPDF',
 	['as'=>'viewPDF',
 	'uses'=>'Admin_Controller@downloadPDF']);
@@ -43,10 +60,15 @@ Route::get('Delete_Product',
 	 'uses'=>'Admin_Controller@Delete_Product']);
 //Loại sản phẩm admin
 
-
-Route::get('Delete_TypeProduct/{id}',
-	['as'=>'Delete_TypeProduct',
-	 'uses'=>'Admin_Controller@Delete_TypeProduct']);
+Route::post('Edit_Category',
+	['as'=>'Edit_Category',
+	 'uses'=>'Admin_Controller@Edit_Category']);
+Route::post('Insert_Category',
+	['as'=>'Insert_Category',
+	 'uses'=>'Admin_Controller@Insert_Category']);
+Route::get('Delete_Category',
+	['as'=>'Delete_Category',
+	 'uses'=>'Admin_Controller@Delete_Category']);
 Route::get('ViewType_Product',
 	['as'=>'ViewType_Product', 
 	'uses'=>'Admin_Controller@View_TypeProduct']);
@@ -70,6 +92,16 @@ Route::get('Delete_User',
 Route::get('convert',
 	['as'=>'convert',
 	'uses'=>'Admin_Controller@convert_vi_to_en']);
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -102,7 +134,18 @@ Route::get('Info',
 	 'uses'=>'Home_Controller@info']);
 Route::get('news',
 	['as'=>'news',
-	 'uses'=>'Home_Controller@news']);
+	 'uses'=>'Home_Controller@news_All']);
+Route::get('TypeNews/{id}',[
+	'as'=>'TypeNews',
+	'uses'=>'Home_Controller@NewsById']);
+Route::get('news-detail/{id}',[
+	'as'=>'news-detail',
+	'uses'=>'Home_Controller@newsdetail']);
+
+
+
+
+
 Route::get('contact',
 	['as'=>'contact',
 	 'uses'=>'Home_Controller@contact']);

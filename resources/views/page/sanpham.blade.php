@@ -158,7 +158,6 @@
 								<div class="box_tool">
 									<div class="result-short pull-left">
 										<p class="result-count"> Sắp xếp : </p>
-<<<<<<< HEAD
 											<div class="orderby-wrapper">
 											<form  id="form" action="{{route('allPro')}}"> 
 												<select name="sortBy" class="sortBy" id="sortBy" class="selectBox" style="padding: 0px 10px; height: 30px;">
@@ -169,23 +168,11 @@
 													<option id="price-desc" value="price-desc">Giá giảm dần</option>
 													<option id="created-desc" value="created-desc">Hàng mới nhất</option>
 													<option id="created-asc" value="created-asc">Hàng cũ nhất</option>
-=======
-										<form class="filter-xs" method="POST">
-											<div class="orderby-wrapper"> 
-												<select name="sortBy" id="sortBy" class="selectBox" style="padding: 0px 10px; height: 30px;">
-													<option selected="" value="default">Mặc định</option>
-													<option value="alpha-asc">A → Z</option>
-													<option value="alpha-desc">Z → A</option>
-													<option value="price-asc">Giá tăng dần</option>
-													<option value="price-desc">Giá giảm dần</option>
-													<option value="created-desc">Hàng mới nhất</option>
-													<option value="created-asc">Hàng cũ nhất</option>
->>>>>>> 1e8f9680e0224c3477565d6561e884e6ff81e181
 												</select>
 												<script>$('#sortBy').val('created-desc');</script>
 												<script src="//bizweb.dktcdn.net/100/069/071/themes/543675/assets/sortby.js?1496115817221" type="text/javascript"></script>
-											</div>
-<<<<<<< HEAD
+											
+
 											<script type="text/javascript">
 											var a="{{isset($_GET['sortBy'])}}";
 											if(a){
@@ -193,9 +180,9 @@
 											$("#"+b).attr("selected","selected");
 											}
 											</script>
-=======
+
 										</form>
->>>>>>> 1e8f9680e0224c3477565d6561e884e6ff81e181
+									</div>
 									</div>
 									<div class="view-mode"> 
 										<a href="javascript:;" class="active">
@@ -224,7 +211,7 @@
 												Mua ngay
 											</a>
 
-											<a href="{{route('detail',$pro->name_khong_dau)}}" class="tzheart">
+											<a href="{{route('detail',$pro->id)}}" class="tzheart">
 												Chi tiết
 											</a>
 										</span>

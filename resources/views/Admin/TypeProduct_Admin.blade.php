@@ -8,77 +8,264 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2>
-                                    USER
+                            <h2 id="header">
+                                    CATEGORY
                                     {{-- <small>You can edit any columns except header/footer</small> --}}
                             </h2>
                         </div>
-                        <div class="body"> 
+                        <div class="body">     
+
                         <div>
-                            <button id="addRow" class="btn btn-primary glyphicon glyphicon-plus-sign" style="height: 60px; width: 60px; border-radius: 10px"> </button>
+                            <button id="addRow" onclick="addRow()"  class="btn btn-primary glyphicon glyphicon-plus-sign" style="height: 60px; width: 60px; border-radius: 10px"></button>
                         </div> 
+                        <div style="float: right;">
+                            <input type="text" id="search" placeholder="Search" style="width: 200px; height: 50px"></input>
+                            <br><br>
+                        </div>
                         <br>
-                            <table  class="table table-striped table-nonfluid" align="center" id="user_table">
+                             <table border="1" class="table table-admin table-striped table-nonfluid" align="center" id="product_table" >
                                 <thead>
                            {{-- <th><input type="checkbox" id="checkall" /></th> --}}
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Image</th>
-                                    <th>created_at</th>
-                                    <th>updated_at</th>
+                                        <th style="width: 5%">ID</th>
+                                        <th style="width: 10%;">Image</th> 
+                                        <th style="width: 30%;">NAME</th>
+                                        <th style="width: 35%;">Description</th>
+                                        <th style="width: 8%;">Type</th>             
+                                        <th>EDIT/DELETE</th>
                                 </thead>
                                 <tbody>
                                     @foreach($typeproduct as $tp)
                                         <tr id="row{{$tp->id }}">
-                                                {{-- <td><input type="checkbox" class="checkthis" /></td> --}}
-                                            <td id="id{{ $tp->id }}">{{ $tp->id }}</td>
-                                            <td id="name{{ $tp->id }}">{{ $tp->name }}</td>
-                                            <td id="Description{{ $tp->id }}">{{ $tp->description }}</td>
-                                            <td id="Image{{$tp->id}}">{{$tp->image}}</td>
-                                            <td id="created_at{{ $tp->id }}">{{ $tp->created_at }}</td>
-                                            <td id="updated_at{{ $tp->id }}">{{ $tp->updated_at }}</td>
-                                            <td>
-                                                <button class="btn btn-info btn-lg glyphicon glyphicon-hand-right" style="border-radius: 10px;" id="edit_button{{ $tp->id  }}" onclick="edit_row('{{ $tp->id  }}');"> Edit</button>
-                                                <button class=" save_button btn btn-success btn-lg glyphicon glyphicon-save" style="border-radius: 10px;" id="save_button{{ $tp->id  }}" onclick="save_row('{{ $tp->id  }}');"> Save</button>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-warning btn-lg glyphicon glyphicon-trash" style="border-radius: 10px" id="delete_button{{ $tp->id  }}" onclick="delete_row('{{ $tp->id}}');"> Delete</button>
-                                            </td>
+                                            <div id="row1{{$tp->id }}">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <td id="id{{$tp->id }}">{{$tp->id }}</td>
+                                                <td id="image{{$tp->id}}"><img id="img{{$tp->id}}" src="images/{{$tp->image}}" style="width: 100px; height: 100px"></td>
+                                                <td id="name{{ $tp->id }}">{{ $tp->name }}</td>
+                                                <td id="description{{ $tp->id }}">{{ $tp->description }}</td>
+                                                @if($tp->type==1)
+                                                    <td id="type{{$tp->id}}">Sản phẩm</td>
+                                                @else
+                                                    <td id="type{{$tp->id}}">Tin tức</td>
+                                                @endif
+                                                <td>
+                                                    <button class="btn btn-info btn-lg glyphicon glyphicon-hand-right" style="border-radius: 10px;" id="edit_button{{ $tp->id  }}" onclick="editRow({{ $tp->id }})"></button>
+                                                    <button class="btn btn-warning btn-lg glyphicon glyphicon-trash" style="border-radius: 10px" id="delete_button{{ $tp->id  }}" onclick="delete_row('{{ $tp->id  }}');"></button>
+                                                </td>
+                                            </div>
                                         </tr>
+
+                                        <div id="editRowPro{{ $tp->id  }}" class="form">
+                                            <p class="form_title">Edit Type</p>
+                                            <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
+                                            <form id="formEdit{{ $tp->id  }}" enctype="multipart/form-data" method="post" class="horizontal">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="id">ID</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" value="{{ $tp->id  }}" name="id" class="form-control" readonly >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="name">Name</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" name="edit_name" id="edit_name{{ $tp->id  }}" value="{{ $tp->name }}" required=""  class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row clearfix">
+                                                   <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="image">Image</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="file" value="{{$tp->image}}" name="edit_image" id="edit_image{{$tp->id}}" class="form-control" >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row clearfix">
+                                                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="description">Description</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" value="{{$tp->description}}" name="edit_des" id="edit_description{{ $tp->id }}" required="" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row clearfix">
+                                                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="type">Type</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <select class="selectpicker form-control" name="edit_type" id="edit_type{{ $tp->id }}">
+                                                                    @if($tp->type==1)
+                                                                        <option selected="selected" name="Sản phẩm" value="1">Sản phẩm</option>
+                                                                        <option name="Tin tức" value="2">Tin tức</option>
+                                                                    @else
+                                                                        <option selected="selected"  name="Tin tức" value="2" >Tin tức</option>
+                                                                        <option name="Sản phẩm" value="1">Sản phẩm</option>
+                                                                    @endif
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-offset-5 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+                                                    <button  type="button" onclick="saveEdit({{ $tp->id }});" class="button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit" style="border-radius: 10px;">  Save</button>
+                                                    </div>
+                                                </div>  
+                                            </form>
+                                        </div>
                                     @endforeach
-                                        <tr id="new_row">
-                                        <form>
-                                            <td><input type="text" disabled="" ></td>
-                                            <td><input type="text" id="new_name" required=""></td>
-                                            <td><input type="text" id="new_email" required=""></td>
-                                            <td><input type="text" ></td>
-                                            <td><input type="text" ></td>
-                                            <td><input type="text" ></td>
-                                            <td><input type="text" ></td>
-                                            <td><input type="text" ></td>
-                                            <td><input type="text" id="new_group" required=""></td>
-                                            <td><button class="btn btn-info btn-lg glyphicon glyphicon-floppy-save" style="border-radius: 10px;" onclick="insert_row();"> Insert</button></td> 
-                                        </form>
-                                            
-                                            
-                                        </tr>
                                 </tbody>
-                            </table>
-                            <div>{{ $typeproduct->links() }}</div>
-                            <input style="position: absolute; display: none;">
+                            </table>    
+                                {{-- <button type="button" class="btn btn-success" style="height:40px;width: 150px;  float:right; border-radius: 5px; margin-top: 25px;" id="viewpdf_allproduct">Xuất file pdf</button>  --}}  
+
+                            <div id="addRowPro" class="form">
+                                <p class="form_title">Add Type</p>
+                                <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
+                                <form id="new_form" enctype="multipart/form-data" method="post">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <div class="row clearfix">
+                                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                            <label class="name">Name</label>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input type="text" id="new_name" name="new_name" class="form-control" placeholder="Enter name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                <label class="description">Description</label>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <input type="text" name="new_des" id="new_description" required="" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="row clearfix">
+                                                 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                    <label class="type">Type</label>
+                                                </div>
+                                                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <select class="selectpicker form-control" name="new_type" id="new_type">
+                                                                    <option selected="selected" name="Sản phẩm" value="1">Sản phẩm</option>
+                                                                    <option name="Tin tức" value="2">Tin tức</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                   
+                                    <div class="row clearfix">
+                                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                        <label class="image">Image</label>
+                                                    </div>
+                                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="file" name="new_image" id="new_image" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                    <div class="row clearfix">
+                                        <div class="col-lg-offset-5 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+                                            <button type="button" id="saveAdd" class="button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save" style="border-radius: 10px;">  Save</button>
+                                        </div>
+                                    </div>
+                                    
+                                </form>
+                            </div>       
+                            <div>{{  $typeproduct->links() }}</div>
+                        
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     <script type="text/javascript">
-            $('#new_row').hide();
-            $('.save_button').hide();
-            $('#addRow').click(function() {
-                $('#new_row').show();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
             });
-            function delete_row(idUser)
+            
+            function editRow(id){
+                var formBox = $('#editRowPro'+id);
+                $(formBox).fadeIn("slow");
+
+                // thêm phần tử id="over" vào cuối thẻ body
+                $('body').append('<div id="over"></div>');
+                $('#over').fadeIn(300);
+        
+            }
+            function addRow(){
+                var formBox = $('#addRowPro');
+                $(formBox).fadeIn("slow");
+
+                // thêm phần tử id="over" vào cuối thẻ body
+                $('body').append('<div id="over"></div>');
+                $('#over').fadeIn(300);
+        
+            }
+             $(document).on('click', "a.close, #over", function() { 
+                $('#over, .form').fadeOut(300 , function() {
+                    $('#over').remove();  
+                }); 
+                return false;
+            });
+
+            $("#search").on("keyup", function() {
+                var value = $(this).val();
+
+                $("table tr").each(function(index) {
+                    if (index !== 0) {
+
+                        $row = $(this);
+
+                        var id = $row.find("td:nth-child(2)").text();
+
+                        if (id.indexOf(value) !== 0) {
+                            $row.hide();
+                            
+                        }
+                        else {
+                            $row.show();
+                            $('#new_row').hide();
+                        }
+                    }
+                });
+            });
+
+            function delete_row(id)
             {
                 ssi_modal.confirm({
                 content: 'Are you sure you want to exit?',
@@ -91,19 +278,23 @@
                 },function (result) {
                     if(result)
                     {
-                        var route="{{route('Delete_TypeProduct','id')}}";
-                        route=route.replace('id',idUser);
+                        var image = $('#img'+id).attr("src");
+                        image=image.substr(7);
+                        // alert(image);
+                        var route="{{ route('Delete_Category') }}";
+
                         $.ajax({
                         url:route,
                         type:'get',
-                        data:null,
+                        data:{
+                            id:id,
+                            imageFile:image,
+                        },
                         success:function() {  
-                             $('#row'+idUser).hide();
+                             $('#row'+id).hide();
                             alert('Xóa thành công');
-                            
                         }
                         });
-                        
                         
                     }
                     else
@@ -111,77 +302,108 @@
                 }
             );
             }
-            function edit_row(id)
+            function saveEdit(id)
             {
- // var name=document.getElementById("name"+id).innerHTML;
- // var eamil=document.getElementById("email"+id).innerHTML;
- // var phone=document.getElementById("phone"+id).innerHTML;
- // var add=document.getElementById("add"+id).innerHTML;
-                var group=document.getElementById("group"+id).innerHTML;
-
-                document.getElementById("group"+id).innerHTML="<input type='text' id='group_text"+id+"' value='"+group+"'>";
-                // document.getElementById("email"+id).innerHTML="<input type='text' id='age_text"+id+"' value='"+age+"'>";
-    
-                document.getElementById("edit_button"+id).style.display="none";
-                document.getElementById("save_button"+id).style.display="block";
-                $('#delete_button'+id).hide();
-            }
-
-            function save_row(id)
-            {
-                var group=document.getElementById("group_text"+id).value;
-                // var age=document.getElementById("age_text"+id).value;
-                var route="{{route('Edit_User',['id','group'])}}";
-                route=route.replace('id',id);
-                route=route.replace('group',group);
+                // var id=$(this).val();
+                var name=document.getElementById("edit_name"+id).value;
+                var description=document.getElementById("edit_description"+id).value;
+                var type= $("#edit_type"+id).find(":selected").attr('name');
+                var image=document.getElementById("edit_image"+id).value.toString();
+                image=image.substr(12);
+                var route=" {{ route('Edit_Category') }} ";
+                var form = $('form#formEdit'+id)[0];
+                // console.log(form);
+                var form_data = new FormData(form);
+                
                 $.ajax
                 ({
-                    type:'get',
+                    type:'post',
                     url:route,
-                    data:null,
+                    data:form_data,
+                    processData: false,
+                    contentType: false,
                     success:function() {
-                        document.getElementById("group"+id).innerHTML=group;
-                        document.getElementById("edit_button"+id).style.display="inline";
-                        document.getElementById("save_button"+id).style.display="none";
-
-                    }
+                        document.getElementById("description"+id).innerHTML=description;
+                        document.getElementById("name"+id).innerHTML=name;
+                        document.getElementById("type"+id).innerHTML=type;
+                        document.getElementById("image"+id).innerHTML="<img src='images/"+image+"' style='width: 100px; height: 100px' />";
+                        alert('Cập nhập thành công');
+                        
+                    },
+                    error:function() {
+                       alert('lỗi khi cập nhập');
+                    },
                 });
-                $('#delete_button'+id).show();
+                var formBox = $('#editRowPro'+id);
+                        $(formBox).fadeOut('400', function() {
+                            $('#over').remove(); 
+                        });
+            
             }
-            function insert_row()
+
+
+
+
+            $('#saveAdd').click(function() 
             {
                 var name=document.getElementById("new_name").value;
-                var email=document.getElementById("new_email").value;
-                var group=document.getElementById("new_group").value;
-
-                var route="{{route('Insert_User',['name','email','group'])}}";
-                route=route.replace('name',name);
-                route=route.replace('email',email);
-                route=route.replace('group',group);
+                var description=document.getElementById("new_description").value;               
+                var image=document.getElementById("new_image").value.toString();
+                image=image.substr(12);
+                var type= $("#new_type").find(":selected").attr('name');
+                var typeValue= $("#new_type").val();
+                // alert(typeValue);
+                var typeValue1="";
+                if(type=="Sản phẩm"){
+                    var type1="Tin tức";
+                    typeValue1=2;
+                }
+                else{
+                    var type1="Sản phẩm";
+                    typeValue1=1;
+                }
+                // alert(typeValue1);
+                var route="{{ route('Insert_Category') }}";
+                var form = $('form#new_form')[0];
+                var form_data = new FormData(form);
                 $.ajax
                 ({
-                    type:'get',
+                    type:'post',
                     url:route,
-                    data:null,
+                    processData: false,
+                    contentType: false,
+                    data:form_data,
                     success:function(data) {
                         // console.log(data);
                         var id=data;
-                        var table=document.getElementById("user_table");
-                        var table_len=(table.rows.length)-1;
-                        var row = table.insertRow(table_len).outerHTML=
-                        "<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td><td id='name"+id+"'>"+name+"</td><td id='email"+id+"'>"+email+"</td><td id='pass"+id+"'></td><td id='phone"+id+"'></td><td id='add"+id+"'></td><td id='created_at"+id+"'></td><td id='active"+id+"'></td><td id='group"+id+"'>"+group+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px' id='edit_button"+id+"' onclick='edit_row("+id+");'> Edit</button><button class='save_button btn btn-success btn-lg glyphicon glyphicon-save' style='border-radius: 10px' id='save_button"+id+"' onclick='save_row("+id+");'> Save</button></td><td><button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'> Delete</button></td></tr>";
-
+                        var table=document.getElementById("product_table");
+                        var table_len=(table.rows.length);
+                            var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td></td><td id='image"+id+"'><img id='img"+id+"' src='images/"+image+"' style='width: 90px; height: 90px'/></td><td id='name"+id+"'>"+name+"</td><td id='description"+id+"'>"+description+"</td><td id='type"+id+"'>"+type+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'></button> <button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'></button></td></tr>";                        
+                            $('tbody').append("<div id='editRowPro"+id+"' class='form'>                                                                                                                   <p class='form_title'>Edit Type</p>                                                                                             <a href='#' class='close'><img src='close.png' class='img-close' title='Close Window' alt='Close' /></a>                        <form id='formEdit"+id+"' enctype='multipart/form-data' method='post'> <input type='hidden' name='_token' value='{{ csrf_token() }}'>                                                                                                                           <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='id'>ID</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+id+"' name='id' class='form-control' readonly ></div></div></div></div>                                                   <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='name'>Name</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' name='edit_name' id='edit_name"+id+"' value='"+name+"' required=''  class='form-control'></div></div></div></div>               <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='image'>Image</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='file' value='"+image+"' name='edit_image' id='edit_image"+id+"' class='form-control' ></div></div></div></div>  <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='description'>Description</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+description+"' name='edit_des' id='edit_description"+id+"' required='' class='form-control'></div></div></div></div>                                                                                                                            <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='type'>Type</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><select class='selectpicker form-control' name='edit_type' id='edit_type"+id+"'><option selected='selected' name='"+type+"' value='"+typeValue+"'>"+type+"</option><option name='"+type1+"' value='"+typeValue1+"'>"+type1+"</option></select></div></div></div></div>                                                                                                                            <div class='row clearfix'><div class='col-lg-offset-5 col-md-offset-2 col-sm-offset-4 col-xs-offset-5'><button  type='button' class='button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit' style='border-radius: 10px;' onclick='saveEdit("+id+");'>  Save</button></div></div> </form></div>");
                         document.getElementById("new_name").value="";
-                        document.getElementById("new_email").value="";
-                        document.getElementById("new_group").value="";
-                        $('#new_row').hide();
-                        $('#save_button'+id).hide();
-                    }
+                        document.getElementById("new_description").value="";
+                        document.getElementById("new_image").value="";
+                        document.getElementById("new_type").value="";
+                        alert('Thêm category thành công');
+                        
+                    },
+                    error:function() {
+                        alert('Thêm category thất bại');
+                    },
                 });
-            }
+                var formBox = $('#addRowPro');
+                        $(formBox).fadeOut('400', function() {
+                            $('#over').remove(); 
+                        });
+                
+            });
+
     </script>
     @endsection
 
+
+
+                            
 
 
                             

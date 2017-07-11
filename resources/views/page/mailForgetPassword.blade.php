@@ -1,0 +1,2 @@
+Chào bạn, chúng tôi gửi cho bạn một password mới để đăng nhập tài khoản. sau khi đăng nhập thành công xin vui lòng đổi lại password mới.
+<a href="http://localhost/vlxdHungminh/public/index.php/Login_Admin">Nhấn vào đây để Login</a>

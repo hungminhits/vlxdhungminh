@@ -8,7 +8,7 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="index.html">ADMINBSB - HÙNG MINH</a>
+                <a class="navbar-brand" href="javascript:void(0);">ADMINBSB - HÙNG MINH</a>
             </div>
             </div>
         </div>
