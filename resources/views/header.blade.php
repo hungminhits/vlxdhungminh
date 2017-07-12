@@ -134,13 +134,13 @@
                                                   giamgia="{{$product['item']['promotion_price']}}" dongia="{{$product['item']['unit_price']}}">
 
                                                         {{$product['qty']}} *
-                                                        <div id="gia{{$product['item']['id']}}">
+                                                        
                                                         @if($product['item']['promotion_price']==0)
                                                         {{$product['item']['unit_price']}}
                                                         @else
                                                         {{$product['item']['promotion_price']}}
                                                         @endif 
-                                                        </div>     
+                                                             
                                                    
                                                 </span>
                                             </div>             
@@ -155,19 +155,17 @@
                                       </div>
                                       @endforeach
                                     
-                                     <div>
-                                        <div class="top-subtotal">Tổng tiền: 
+                                      <div class="top-subtotal">Tổng tiền: 
                                             
                                             <span class="price" tong_tam="0" value="{{$totalPrice}}">{{number_format($totalPrice)}} </span>
                                                                         
-                                        </div>
-                                      </div>                            
-                                     <div>
-                                        <div class="actions" id="Thanhtoan">
-                                            <a href="/checkout" class="btn-view-cart" id="Thanhtoan">
+                                      </div>                         
+                                   
+                                      <div class="actions">
+                                            <a href="/checkout" class="btn-view-cart">
                                             <span>Thanh toán</span></a>
-                                        </div>
-                                    </div>                                    
+                                      </div>
+                                                                      
                                       @else
                                           <div class="no-item"><p>Không có sản phẩm nào trong giỏ hàng</p>
                                           </div>
@@ -319,23 +317,24 @@
         data: {id:id},
         success:function(){
           alert(tongsoluong);
-          $('.list-item-cart'+id).hide();
           $('#soluong').attr('soluong',tongsoluong);
           $('#soluong').attr('value',tongsoluong);
           $('#id'+id).attr('soluonghang',0)
-
+          $('.list-item-cart'+id).hide();
            // $('#id'+id).attr('soluonghang',soluonghang);
            // $('#id'+id).attr('value',soluonghang);
+
            
           if(tongsoluong>0)
             $('#soluong').html((tongsoluong)+" "+"sản phẩm");   
           else
           {
-            
+           
             $('p.no-item').show();
             $('#soluong').html((tongsoluong)+" "+"sản phẩm");
+            $('.123').html("Không có sản phẩm nào trong giỏ hàng");
             $('.top-subtotal').hide();
-            $('#Thanhtoan').hide();
+            $('.actions').hide();
                        
           }
 

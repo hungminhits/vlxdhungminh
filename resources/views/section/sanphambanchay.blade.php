@@ -94,33 +94,33 @@
 
         var route="{{route('buy','id_sp')}}";
         route=route.replace("id_sp",id);
+
         
         var image = $('img#image'+id).attr('src');
+
         var name =  $('a#name_sanpham'+id).attr('value');
 
         var route_cart = "{{route('cart')}}";
 
-        var promotion_price=$('#id'+id).attr('giamgia');
-        var unit_price = $('#id'+id).attr('dongia')
-
+        var promotion_price = $('#gia'+id).attr('giamgia');
+        var unit_price = $('#gia'+id).attr('dongia');
         
-        var price;
+        var price = $('#gia'+id).attr('giamgia');
       
         
-        if(promotion_price==0)
+        if(price==0)
         {
 
-          price = unit_price;
+          price = $('#gia'+id).attr('dongia');
           
         }
-        else
-        {
-          price = promotion_price;
-        }
+      
+        alert(price);
+        
+        
           // soluong hang
-
-          
           var soluonghang = $('#id'+id).attr('soluonghang');
+
           if(isNaN(soluonghang)){
           soluonghang=parseInt(0);
           }
@@ -130,69 +130,74 @@
           }
           soluonghang = soluonghang +1;
           
-        
-              $('#id'+id).attr('soluonghang',soluonghang);
-              $('#id'+id).attr('value',soluonghang);
-             
-              
-          
-          
 
          var tongsoluong = $('#soluong').attr('soluong');
          tongsoluong= parseInt(tongsoluong)+parseInt(1);
-         
-
-         
-         
-        var tong_tam = $('#gia'+id).attr('tong_tam');
-
 
         var tongtien=parseInt($('.price').attr('value'));
 
         if(isNaN(tongtien))
         {
          tongtien = parseInt(0);
+         tongtien = tongtien + parseInt($('#gia'+id).attr('soluong_tam'))*parseInt(price);
         }
         else
+        {
         tongtien=parseInt(tongtien)+parseInt($('#gia'+id).attr('soluong_tam'))*parseInt(price);
+        }
 
         
-                  
-          $('.no-item').hide();
         $.ajax({
-          url:route,
-          type:'get',
-          data: {id,id},
-          success:function()
+        url: route,
+        type:'get',
+        data: {id:id},
+        success:function()
           {
-            
-               
-              
-              if(tongsoluong>0)
-            {
-             $('span.price').html(tongtien);
+                    
 
-            $('.list-item-cart'+id).show();
-              $('#soluong').html((tongsoluong)+" "+"sản phẩm");
-              $('#soluong').attr('soluong',tongsoluong);
-              $('#soluong').attr('value',tongsoluong);
-              $('span.price').attr('value',tongtien)
-               $('#id'+id).html((soluonghang) + "*" +(price));
-              
-               $('.top-subtotal').html("Tổng tiền:  <span class='price' tong_tam='0' value='"+tongtien+"'>"+tongtien+" </span>")
-               $('#Thanhtoan').html("<a href='/checkout' class='btn-view-cart' id='Thanhtoan'><span>Thanh toán</span></a>");
-              
-              $('#Thanhtoan').show();
-              $('.top-subtotal').show();
+                        if ($('.list-item-cart'+id).length){
+                          $('.list-item-cart'+id).html(" <div class='cart-img-details'>        <div class='cart-img-photo' id ='cart-img-photo"+id+"'> <a id='route_cart'                href='"+route_cart+"'> <img alt='' src='"+image+"' > </a> </div>                            <div class='cart-img-contaent'><a href='/can-ho-3pn-o-pearl-plaza'><h4 id='cart-name"+id+"'>"+name+"</h4></a><span class='cart-item-amount' id='id"+id+"' soluonghang='"+soluonghang+"' giamgia='"+promotion_price+"' dongia='"+unit_price+"'> "+soluonghang+" *"+price+"</span></div> <div class='pro-del'><a class='cart-item-delete' value='"+id+"'><i class='fa fa-times'></i></a></div></div>");
+                          }
+                          else
+                          {
 
-              // $('#id'+id).attr
-              
-              document.getElementById('cart-img-photo'+id).innerHTML = "<img src=" + image + "/>";
+                              if($('.top-subtotal').length)
+                              {
+                                $('.top-subtotal').html("Tổng tiền:  <span class='price' tong_tam='0' value='"+tongtien+"'>"+tongtien+" </span>")
+                                
+                              }
+                              else
+                              {
+
+                                $('.123').append("<div class='top-subtotal'> Tổng tiền:  <span class='price' tong_tam='0' value='"+tongtien+"'>  </div ");
+                              }
+
+                              $('.123').append("<div class='list-item-cart"+id+"' >   <div class='cart-img-details'>        <div class='cart-img-photo' id ='cart-img-photo"+id+"'> <a id='route_cart'                href='"+route_cart+"'> <img alt='' src='"+image+"' > </a> </div>                            <div class='cart-img-contaent'><a href='/can-ho-3pn-o-pearl-plaza'><h4 id='cart-name"+id+"'>"+name+"</h4></a><span class='cart-item-amount' id='id"+id+"' soluonghang='"+soluonghang+"' giamgia='"+promotion_price+"' dongia='"+unit_price+"'> "+soluonghang+" *"+price+"</span></div> <div class='pro-del'><a class='cart-item-delete' value='"+id+"'><i class='fa fa-times'></i></a></div></div> <div class='clear'></div> </div>  ");
 
 
 
-                
-            }
+                        
+                          }
+                          $('.list-item-cart'+id).show();
+
+                        
+                  if(tongsoluong>0)
+                    {   
+                        $('.no-item').hide();
+                        $('#id'+id).attr('soluonghang',soluonghang);
+                        $('#soluong').attr('soluong',tongsoluong);
+                        $('#soluong').attr('value',tongsoluong);
+                        $('#soluong').html((tongsoluong)+" "+"sản phẩm");
+                        $('span.price').attr('value',tongtien);
+                        $('#id'+id).html((soluonghang) + "*" +(price));
+
+                        $('.top-subtotal').html("Tổng tiền:  <span class='price' tong_tam='0' value='"+tongtien+"'>"+tongtien+" </span>")
+                        $('.actions').html("<a href='/checkout' class='btn-view-cart' ><span>Thanh toán</span></a>");
+
+
+                     
+                    }
+
           }
 
 

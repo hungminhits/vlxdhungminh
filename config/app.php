@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost/vlxdhungminh/public'),
+    'url' => env('APP_URL', 'http://localhost/vlxdhungminh/public/index.php/'),
 
     /*/
     |--------------------------------------------------------------------------

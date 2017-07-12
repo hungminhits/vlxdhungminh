@@ -9,14 +9,11 @@ use App\Partner;
 use Carbon\Carbon;
 use App\Cart;
 use Session;
-<<<<<<< HEAD
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Support\Collection;
-=======
 use DB;
 use App\News;
->>>>>>> 249546664894c6b84985cf6d31801c2d3339faed
 class AppServiceProvider extends ServiceProvider
 {
     /**

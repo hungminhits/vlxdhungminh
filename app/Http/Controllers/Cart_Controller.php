@@ -25,7 +25,7 @@ class Cart_Controller extends Controller
 
     public function delete_cart(Request $req)
     {
-         $oldCart=Session('cart')?Session::get('cart'):null;
+            $oldCart=Session('cart')?Session::get('cart'):null;
             $cart=new Cart($oldCart);
             $cart->removeItem($req->id);
             if(count($cart->items)<=0)
