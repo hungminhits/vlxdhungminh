@@ -14,18 +14,18 @@ class Cart_Controller extends Controller
     //
     public function buy(Request $req, $id) // add gio hang
     {
-           $product = Product::find($id);
+            $product = Product::find($id);
             $oldCart = Session('cart') ? Session('cart') : null;
             $cart = new Cart($oldCart);
             $cart->add($product, $product->id);
             $req->session()->put('cart', $cart);
-           
+            
         
     }
 
     public function delete_cart(Request $req)
     {
-         $oldCart=Session('cart')?Session::get('cart'):null;
+            $oldCart=Session('cart')?Session::get('cart'):null;
             $cart=new Cart($oldCart);
             $cart->removeItem($req->id);
             if(count($cart->items)<=0)

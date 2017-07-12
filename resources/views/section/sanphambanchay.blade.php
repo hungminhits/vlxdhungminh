@@ -20,7 +20,7 @@
                                     <span class="tz-shop-meta">
 
                                       <input name="variantId" value="2782584" type="hidden">
-                                      <a  id="mua_hang" value="{{$product->id}}" class="tzshopping add_to_cart add-cart" title="Mua ngay">
+                                      <a  id="mua_hang" value="{{$product->id}}"  class="tzshopping add_to_cart add-cart" title="Mua ngay">
 
                                        <div > Mua ngay </div>
                                       </a>
@@ -43,7 +43,7 @@
                                   <div class="row">
                                     <div class="left_cnt_product">
                                       <h3><a id="name_sanpham{{$product->id}}" value="{{$product->name}}" href="https://mendover-theme-1.bizwebvietnam.net/can-ho-2pn-tai-pearl-plaza" class="text2line">{{ $product->name }}</a></h3>
-                                      <div class="right_cnt_product" id="gia{{$product->id}}" giamgia="{{$product->promotion_price}}" dongia ="{{$product->unit_price}}" >
+                                      <div class="right_cnt_product" id="gia{{$product->id}}" giamgia="{{$product->promotion_price}}" dongia ="{{$product->unit_price}}" soluong_tam="1" tong_tam="0">
 
                                       @if($product->promotion_price != 0)
                                        <small>
@@ -81,7 +81,135 @@
                   </section>
                 </section>
 
-   
-<div id="myModal" class="modal fade " role="dialog" style="display: none;"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: relative; z-index: 9;"><span aria-hidden="true">×</span></button><h4 class="modal-title"><span><i class="fa fa-check" aria-hidden="true"></i></span>Thêm vào giỏ hàng thành công</h4></div><div class="modal-body"><div class="media"><div class="media-left"><div class="thumb-1x1"><img width="70px" src="//bizweb.dktcdn.net/thumb/small/100/069/071/products/3.jpg" alt="Căn hộ 3PN  ở Pearl Plaza"></div></div><div class="media-body"><div class="product-title">Căn hộ 3PN  ở Pearl Plaza</div><div class="product-new-price"><span>3.000.000.000 đ</span></div></div></div><button class="btn btn-block btn-outline-red" data-dismiss="modal">Tiếp tục mua hàng</button><a href="/checkout" class="btn btn-block btn-radius">Tiến hành thanh toán »</a></div></div></div></div>
+  
+
+<script type="text/javascript">
+    
+    $(".add-cart").click(function()
+    {
+        var i =0;
+        var id=$(this).attr('value');
+
+
+
+        var route="{{route('buy','id_sp')}}";
+        route=route.replace("id_sp",id);
+
+        
+        var image = $('img#image'+id).attr('src');
+
+        var name =  $('a#name_sanpham'+id).attr('value');
+
+        var route_cart = "{{route('cart')}}";
+
+        var promotion_price = $('#gia'+id).attr('giamgia');
+        var unit_price = $('#gia'+id).attr('dongia');
+        
+        var price = $('#gia'+id).attr('giamgia');
+      
+        
+        if(price==0)
+        {
+
+          price = $('#gia'+id).attr('dongia');
+          
+        }
+      
+        alert(price);
+        
+        
+          // soluong hang
+          var soluonghang = $('#id'+id).attr('soluonghang');
+
+          if(isNaN(soluonghang)){
+          soluonghang=parseInt(0);
+          }
+          else
+          {
+          soluonghang=parseInt($('#id'+id).attr('soluonghang'));
+          }
+          soluonghang = soluonghang +1;
+          
+
+         var tongsoluong = $('#soluong').attr('soluong');
+         tongsoluong= parseInt(tongsoluong)+parseInt(1);
+
+        var tongtien=parseInt($('.price').attr('value'));
+
+        if(isNaN(tongtien))
+        {
+         tongtien = parseInt(0);
+         tongtien = tongtien + parseInt($('#gia'+id).attr('soluong_tam'))*parseInt(price);
+        }
+        else
+        {
+        tongtien=parseInt(tongtien)+parseInt($('#gia'+id).attr('soluong_tam'))*parseInt(price);
+        }
+
+        
+        $.ajax({
+        url: route,
+        type:'get',
+        data: {id:id},
+        success:function()
+          {
+                    
+
+                        if ($('.list-item-cart'+id).length){
+                          $('.list-item-cart'+id).html(" <div class='cart-img-details'>        <div class='cart-img-photo' id ='cart-img-photo"+id+"'> <a id='route_cart'                href='"+route_cart+"'> <img alt='' src='"+image+"' > </a> </div>                            <div class='cart-img-contaent'><a href='/can-ho-3pn-o-pearl-plaza'><h4 id='cart-name"+id+"'>"+name+"</h4></a><span class='cart-item-amount' id='id"+id+"' soluonghang='"+soluonghang+"' giamgia='"+promotion_price+"' dongia='"+unit_price+"'> "+soluonghang+" *"+price+"</span></div> <div class='pro-del'><a class='cart-item-delete' value='"+id+"'><i class='fa fa-times'></i></a></div></div>");
+                          }
+                          else
+                          {
+
+                              if($('.top-subtotal').length)
+                              {
+                                $('.top-subtotal').html("Tổng tiền:  <span class='price' tong_tam='0' value='"+tongtien+"'>"+tongtien+" </span>")
+                                
+                              }
+                              else
+                              {
+
+                                $('.123').append("<div class='top-subtotal'> Tổng tiền:  <span class='price' tong_tam='0' value='"+tongtien+"'>  </div ");
+                              }
+
+                              $('.123').append("<div class='list-item-cart"+id+"' >   <div class='cart-img-details'>        <div class='cart-img-photo' id ='cart-img-photo"+id+"'> <a id='route_cart'                href='"+route_cart+"'> <img alt='' src='"+image+"' > </a> </div>                            <div class='cart-img-contaent'><a href='/can-ho-3pn-o-pearl-plaza'><h4 id='cart-name"+id+"'>"+name+"</h4></a><span class='cart-item-amount' id='id"+id+"' soluonghang='"+soluonghang+"' giamgia='"+promotion_price+"' dongia='"+unit_price+"'> "+soluonghang+" *"+price+"</span></div> <div class='pro-del'><a class='cart-item-delete' value='"+id+"'><i class='fa fa-times'></i></a></div></div> <div class='clear'></div> </div>  ");
+
+
+
+                        
+                          }
+                          $('.list-item-cart'+id).show();
+
+                        
+                  if(tongsoluong>0)
+                    {   
+                        $('.no-item').hide();
+                        $('#id'+id).attr('soluonghang',soluonghang);
+                        $('#soluong').attr('soluong',tongsoluong);
+                        $('#soluong').attr('value',tongsoluong);
+                        $('#soluong').html((tongsoluong)+" "+"sản phẩm");
+                        $('span.price').attr('value',tongtien);
+                        $('#id'+id).html((soluonghang) + "*" +(price));
+
+                        $('.top-subtotal').html("Tổng tiền:  <span class='price' tong_tam='0' value='"+tongtien+"'>"+tongtien+" </span>")
+                        $('.actions').html("<a href='/checkout' class='btn-view-cart' ><span>Thanh toán</span></a>");
+
+
+                     
+                    }
+
+          }
+
+
+        });
+
+
+
+        
+
+
+    });
+</script>
+
 
 

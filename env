@@ -2,7 +2,7 @@ APP_ENV=local
 APP_KEY=base64:K4a6Ad1JEEzTRlokJ3tqYic8kJGiOfWB9fpEfYN60wk=
 APP_DEBUG=true
 APP_LOG_LEVEL=debug
-APP_URL=http://localhost:8080
+APP_URL=http://localhost/vlxdhungminh/public/
 
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1

@@ -15,10 +15,9 @@
   Vật Liệu Xây Dựng Hùng Minh
 
 
-
 </title>    
 <!-- ================= Page description ================== -->
-<base href="http://localhost/vlxdHungMinh/public/">
+
 
 <meta name="description" content="">
 
@@ -593,6 +592,30 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: relative; z-index: 9;">
           <span aria-hidden="true">×</span>
         </button>
+<<<<<<< HEAD
+        <h4 class="modal-title">
+          <span><i class="fa fa-check" aria-hidden="true"></i></span>Thêm vào giỏ hàng thành công
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="media">
+          <div class="media-left">
+            <div class="thumb-1x1">
+              <img src="//bizweb.dktcdn.net/thumb/small/100/069/071/products/1.jpg" alt="Căn hộ 2PN tại Pearl Plaza" width="70px">
+            </div>
+          </div>
+          <div class="media-body">
+          <div class="product-title">Căn hộ 2PN tại Pearl Plaza</div>
+          <div class="product-new-price"><span>250.000.000 đ</span></div>
+        </div>
+      </div>
+      <button class="btn btn-block btn-outline-red" data-dismiss="modal">Tiếp tục mua hàng</button>
+      <a href="/checkout" class="btn btn-block btn-radius">Tiến hành thanh toán »</a>
+    </div>
+  </div>
+</div>
+</div>
+=======
           <h4 class="modal-title">
             <span><i class="fa fa-check" aria-hidden="true"></i></span>Thêm vào giỏ hàng thành công
           </h4></div>
@@ -606,6 +629,7 @@
               <div class="media-body">
                 <div class="product-title">Bán căn hộ Pent House tầng 10</div>
                   <div class="product-new-price"><span>2.700.000.000 đ</span></div></div></div><button class="btn btn-block btn-outline-red" data-dismiss="modal">Tiếp tục mua hàng</button><a href="https://mendover-theme-1.bizwebvietnam.net/checkout" class="btn btn-block btn-radius">Tiến hành thanh toán »</a></div></div> --></div></div>
+>>>>>>> 249546664894c6b84985cf6d31801c2d3339faed
 
 
 
