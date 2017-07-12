@@ -8,7 +8,7 @@ class News extends Model
 {
     protected $table='news';
     public static function Load_ALL_News(){
-    	$news=DB::table('news')->select();
+    	$news=DB::table('news')->select()->orderBy('id','DESC');
     	return $news;
     }
     public static function NewById($id){

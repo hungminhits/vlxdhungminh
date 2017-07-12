@@ -124,12 +124,8 @@ class Admin_Controller extends Controller
 
       public function ViewAllNews(){
          $news=News::Load_ALL_News()->get();
-<<<<<<< HEAD
-         return view('Admin.News_Admin',compact('news'));
-=======
          $typeNews =  TypeProduct::all()->where('type',2);
          return view('Admin.News_Admin',compact('news','typeNews'));
->>>>>>> 4ac5c98879bd8711c2e212c6b3978101533ed449
       }
       public function UpdateNews(Request $req){
          $id=$req->id;
@@ -141,6 +137,9 @@ class Admin_Controller extends Controller
          $category_id_news=$req->category_id_news;
          $news=News::UpdateNews($id,$id_user,$title,$image,$description,$content,$category_id_news);
          return $news;
+      }
+      public function ViewPageInsertNews(){
+         return view('Admin.Insert_Update_News.Insert_News');
       }
       public function InsertNews(Request $req){
          $id_user=Auth::User()->id;
@@ -265,9 +264,6 @@ class Admin_Controller extends Controller
    }
 
  
-   public function ShowAllNews(){
-      $news=News::Load_ALL_News()->get();
-      return view('Admin.News_Admin',compact('news'));
-   }
+
 
 }

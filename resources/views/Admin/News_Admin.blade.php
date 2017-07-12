@@ -83,12 +83,8 @@
         
             }
             function addRow(){
-                var formBox = $('#addRowPro');
-                $(formBox).fadeIn("slow");
-
-                // thêm phần tử id="over" vào cuối thẻ body
-                $('body').append('<div id="over"></div>');
-                $('#over').fadeIn(300);
+                var  route="{{route('InsertNews')}}";
+              window.location.replace(route);
         
             }
              $(document).on('click', "a.close, #over", function() { 

@@ -51,6 +51,9 @@ Route::post('UpdateNews',
 Route::post('InsertNews',
 	['as'=>'InsertNews',
 	'uses'=>'Admin_Controller@InsertNews']);
+Route::get('InsertNews',
+	['as'=>'InsertNews',
+	'uses'=>'Admin_Controller@ViewPageInsertNews']);
 Route::get('DeleteNews',
 	['as'=>'DeleteNews',
 	'uses'=>'Admin_Controller@DeleteNews']);
