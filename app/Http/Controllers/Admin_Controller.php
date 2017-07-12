@@ -117,6 +117,40 @@ class Admin_Controller extends Controller
          $news=News::Load_ALL_News()->get();
          return view('Admin.News_Admin',compact($news));
       }
+      public function UpdateNews(Request $req){
+         $id=$req->id;
+         $id_user=$req->id_user;
+         $title=$req->title;
+         $image=$req->image;
+         $description=$req->description;
+         $content=$req->content;
+         $category_id_news=$req->category_id_news;
+         $news=News::UpdateNews($id,$id_user,$title,$image,$description,$content,$category_id_news);
+         return $news;
+      }
+      public function InsertNews(Request $req){
+         $id_user=$req->id_user;
+         $title=$req->title;
+         $image=$req->image;
+         $description=$req->description;
+         $content=$req->content;
+         $category_id_news=$req->category_id_news;
+          $news=News::InsertNews($id_user,$title,$image,$description,$content,$category_id_news);
+         return $news;
+      }
+      public function DeleteNews(Request $req){
+         $id=$req->id;
+         $news=News::DeleteNews($id);
+         return $news;
+      }
+
+
+
+
+
+
+
+
       public function View_TypeProduct(){
             $typeproduct=TypeProduct::ALL_Type_product()->paginate(10);
             return view('Admin.TypeProduct_Admin',compact('typeproduct'));
