@@ -16,6 +16,7 @@ use App\User;
 use App\News;
 use PDF;    
 use Hash;
+use App\Bill;
 class Admin_Controller extends Controller
 {
    public function ViewContent_Admin()
@@ -115,7 +116,7 @@ class Admin_Controller extends Controller
 
       public function ViewAllNews(){
          $news=News::Load_ALL_News()->get();
-         return view('Admin.News_Admin',compact($news));
+         return view('Admin.News_Admin',compact('news'));
       }
       public function UpdateNews(Request $req){
          $id=$req->id;
@@ -143,8 +144,14 @@ class Admin_Controller extends Controller
          $news=News::DeleteNews($id);
          return $news;
       }
-
-
+      public function ShowBill(){
+         $bill=Bill::bill()->get();
+         return view('Admin.bill',compact('bill'));
+      }
+        public function ShowBill_Detail($id_bill){
+         $bill_detail=Bill_Detail::FIndBill_DetailById_Bill($id_bill)->get();
+         return $bill_detail;
+      }
 
 
 

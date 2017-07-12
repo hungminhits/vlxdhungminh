@@ -57,7 +57,12 @@ Route::get('DeleteNews/{id}',
 Route::get('viewPDF',
 	['as'=>'viewPDF',
 	'uses'=>'Admin_Controller@downloadPDF']);
-
+Route::get('ShowBill',
+	['as'=>'ShowBill',
+	'uses'=>'Admin_Controller@ShowBill']);
+Route::get('ShowBill_Detail/{id_bill}',
+	['as'=>'ShowBill_Detail',
+	'uses'=>'Admin_Controller@ShowBill_Detail']);
 Route::post('Edit_Product',
 	['as'=>'Edit_Product',
 	 'uses'=>'Admin_Controller@Edit_Product']);
