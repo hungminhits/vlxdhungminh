@@ -1,59 +1,60 @@
 
-$(document).ready(function()
-{
- 	var sids = getCookie('sids');
+// $(document).ready(function()
+// {
+//  	var sids = getCookie('sids');
 
- 	if(sids == null)
- 	{
- 		setCookie('sids','',7);
- 		sids ='';
- 	}
+//  	if(sids == null)
+//  	{
+//  		setCookie('sids','',7);
+//  		sids ='';
+//  	}
  		
-	  $('#mua_hang').click(function()
-	  {
-	  	var soluonghang = 0;
+// 	  $('#mua_hang').click(function()
+// 	  {
+// 	  	var soluonghang = 0;
 	  	
-	    var id=$(this).attr('value');
-	    var name =  $('a#name_sanpham'+id).attr('value');
-	    var image = $('img#image'+id).attr('src');
-	    var route="{{route('buy','id_sp')}}";
-  		route = route.replace('id_sp',id); 
-	    var soluonghang=$('#soluong').attr('soluong');
-      	soluonghang=parseInt(soluonghang+$('#id'+id).attr('soluong'))+1;
-      	alert(soluonghang);
-	    var aids = []; // array for id
-	    if(sids == '')
-	    {
-	    	aids.push(id);
-	    	aids.push(name);
-	    	aids.push(image);
-	    	aids.push(soluonghang);
+// 	    var id=$(this).attr('value');
+// 	    var name =  $('a#name_sanpham'+id).attr('value');
+// 	    var image = $('img#image'+id).attr('src');
+// 	    var route="{{route('buy','id_sp')}}";
+//   		route = route.replace('id_sp',id); 
+// 	    var soluonghang=$('#soluong').attr('soluong');
+//       	soluonghang=parseInt(soluonghang+$('#id'+id).attr('soluong'))+1;
+//       	alert(soluonghang);
+// 	    var aids = []; // array for id
+// 	    if(sids == '')
+// 	    {
+// 	    	aids.push(id);
+// 	    	aids.push(name);
+// 	    	aids.push(image);
+// 	    	aids.push(soluonghang);
 	    	
 	    	
 
-	    	setCookie('sids',aids,7);// a week
-	    }
-	    else
-	    {
-	    	aids = sids.split(',');
-	    	//remove dupicate
-	    	for(var i =0 ; i < aids.length;i++)
-	    	{
-	    		if(id == aids[i])
-	    		{
-	    			return;
-	    		}
-	    	}
-	    	 aids.push(id);
-	    	 aids.push(name);
-	    	 aids.push(image);
+// 	    	setCookie('sids',aids,7);// a week
+// 	    }
+// 	    else
+// 	    {
+// 	    	aids = sids.split(',');
+// 	    	//remove dupicate
+// 	    	for(var i =0 ; i < aids.length;i++)
+// 	    	{
+// 	    		if(id == aids[i])
+// 	    		{
+// 	    			return;
+// 	    		}
+// 	    	}
+// 	    	 aids.push(id);
+// 	    	 aids.push(name);
+// 	    	 aids.push(image);
 	    	
-            setCookie('sids',aids.toString(),7);
-	    }
+//             setCookie('sids',aids.toString(),7);
+// 	    }
 
 	    
-	  });
- });
+// 	  });
+//  });
+
 	
 
   

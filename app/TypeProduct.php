@@ -15,12 +15,12 @@ class TypeProduct extends Model
 		return $Type_product;
 	}	
 
-	public static function Edit_Category($id, $name, $desc, $image){
-        $pro=DB::table('category')->where('id','=',$id)->update(['name'=>$name, 'description'=>$desc,'image'=>$image]);
+	public static function Edit_Category($id, $name, $desc, $image, $type){
+        $pro=DB::table('category')->where('id','=',$id)->update(['name'=>$name, 'description'=>$desc,'image'=>$image, 'type'=>$type]);
         return $pro; 
   	}
-  	public static function Insert_Category($name, $desc, $image){
-            $id=DB::table('category')->insertGetId(['name'=>$name,'description'=>$desc,'image'=>$image]);
+  	public static function Insert_Category($name, $desc, $image, $type){
+            $id=DB::table('category')->insertGetId(['name'=>$name,'description'=>$desc,'image'=>$image, 'type'=>$type]);
             return $id;
   	}
 	public static function Delete_Category($id){

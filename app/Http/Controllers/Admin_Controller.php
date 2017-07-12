@@ -84,17 +84,19 @@ class Admin_Controller extends Controller
       $id = $req->input('id');
       $name = $req->input('edit_name');
       $desc = $req->input('edit_des');
+      $type = $req->input('edit_type');
       $filename= $req->file('edit_image')->getClientOriginalName();
       $req->file('edit_image')->move('images',$filename);
-      $pro=TypeProduct::Edit_Category($id, $name, $desc, $filename);
+      $pro=TypeProduct::Edit_Category($id, $name, $desc, $filename, $type);
    }
    public function Insert_Category(Request $req){
       $filename="";
       $name = $req->input('new_name');
       $desc = $req->input('new_des');
+      $type = $req->input('new_type');
       $filename= $req->file('new_image')->getClientOriginalName();
       $req->file('new_image')->move('images',$filename);
-      $getId=TypeProduct::Insert_Category($name, $desc, $filename);
+      $getId=TypeProduct::Insert_Category($name, $desc, $filename, $type);
       return $getId;
    }
    public function Delete_Category(Request $req){
@@ -141,7 +143,7 @@ class Admin_Controller extends Controller
       $unit = $req->input('edit_unit');
 
       $filename= $req->file('edit_image')->getClientOriginalName();
-      $req->file('edit_image')->move('images',$filename);
+      // $req->file('edit_image')->move('images',$filename);
       $pro=Product::Edit_Product($id,$name,$type, $desc, $unit_price, $pro_price,$filename, $unit);
       // $request->session()->flash('status', 'Tạo bài viết thành công!');
       return $pro; 
