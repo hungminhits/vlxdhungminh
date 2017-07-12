@@ -123,7 +123,8 @@ class Admin_Controller extends Controller
 
       public function ViewAllNews(){
          $news=News::Load_ALL_News()->get();
-         return view('Admin.News_Admin',compact($news));
+         $typeNews =  TypeProduct::all()->where('type',2);
+         return view('Admin.News_Admin',compact('news','typeNews'));
       }
       public function UpdateNews(Request $req){
          $id=$req->id;
@@ -137,7 +138,7 @@ class Admin_Controller extends Controller
          return $news;
       }
       public function InsertNews(Request $req){
-         $id_user=$req->id_user;
+         $id_user=Auth::User()->id;
          $title=$req->title;
          $image=$req->image;
          $description=$req->description;

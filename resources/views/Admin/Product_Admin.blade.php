@@ -104,10 +104,8 @@
                                                             <div class="form-line">
                                                                 <select class="selectpicker form-control" name="edit_type" id="edit_type{{ $pro->id }}" >
                                                                     @foreach($type_product as $type)
-                                                                        <option name="{{ $type->name }}" value="{{ $type->id }}" >{{ $type->name }}</option>
-                                                                        @if($pro->type_name==$type->name )
-                                                                            <option selected="selected" name="{{ $type->name }}"" value="{{ $type->id }}" >{{ $type->name }}</option>
-                                                                        @endif
+                                                                        <option name="{{ $type->name }}" value="{{ $type->id }}" id="{{ $type->name }}" >{{ $type->name }}</option>
+                                                                        
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -179,7 +177,10 @@
                                                     <button  type="button" onclick="saveEdit({{ $pro->id }});" class="button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit" style="border-radius: 10px;">  Save</button>
                                                     </div>
                                                 </div>
-                                                
+                                                <script type="text/javascript">
+                                                    $('#'+{{ $pro->type_name }}).attr('selected','selected');
+                                                    // alert(type);
+                                                </script>
                                             </form>
                                         </div>
                                         {{-- End Edit --}}
@@ -467,7 +468,7 @@
                 window.location.replace(route);
             });
             function editRow(id){
-                var typeRequest = document.getElementById("typeRequest").value;
+                var typeRequest = $("#typeRequest").val();
                 if (typeRequest!=0) {
                     $('#rowType'+id).hide();
                 }
@@ -531,8 +532,7 @@
                     {
                         if(result)
                         {
-                            var image = $($
- #                           image=image.substr(7);
+                            var image = $('#img'+id).attr("src");
                             var route="{{ route('Delete_Product') }}";
 
                             $.ajax({
