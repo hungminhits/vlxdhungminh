@@ -18,10 +18,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer(['header','page.typeproduct','page.sanpham','section.sanphamnoibat','Admin.Product_Admin'],function($view){
-            $type =  TypeProduct::all()->where('type',1);
-            $view->with('type',$type);
-        });
+          view()->composer(['header','page.typeproduct','page.sanpham','section.sanphamnoibat','Admin.Product_Admin'],function($view){
+              $type =  TypeProduct::all()->where('type',1);
+              $view->with('type',$type);
+          });
         view()->composer('section.sanphamnoibat',function($view)
         {
             $hotPro = Product::hotProduct()->get();
