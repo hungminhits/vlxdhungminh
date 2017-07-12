@@ -39,7 +39,7 @@
                                             <div id="row1{{$tp->id }}">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <td id="id{{$tp->id }}">{{$tp->id }}</td>
-                                                <td id="image{{$tp->id}}"><img id="img{{$tp->id}}" src="images/{{$tp->image}}" style="width: 100px; height: 100px"></td>
+                                                <td id="image{{$tp->id}}"><img id="img{{$tp->id}}" src="images/category/{{$tp->image}}" style="width: 100px; height: 100px"></td>
                                                 <td id="name{{ $tp->id }}">{{ $tp->name }}</td>
                                                 <td id="description{{ $tp->id }}">{{ $tp->description }}</td>
                                                 @if($tp->type==1)
@@ -280,22 +280,19 @@
                     {
                         var image = $('#img'+id).attr("src");
                         image=image.substr(7);
-                        // alert(image);
                         var route="{{ route('Delete_Category') }}";
-
                         $.ajax({
-                        url:route,
-                        type:'get',
-                        data:{
-                            id:id,
-                            imageFile:image,
-                        },
-                        success:function() {  
-                             $('#row'+id).hide();
-                            alert('Xóa thành công');
-                        }
+                            url:route,
+                            type:'get',
+                            data:{
+                                id:id,
+                                imageFile:image,
+                            },
+                            success:function() {  
+                                 $('#row'+id).hide();
+                                alert('Xóa thành công');
+                            }
                         });
-                        
                     }
                     else
                         ssi_modal.notify('error', {content: 'Result: ' + result});
@@ -304,17 +301,12 @@
             }
             function saveEdit(id)
             {
-                // var id=$(this).val();
-                var name=document.getElementById("edit_name"+id).value;
-                var description=document.getElementById("edit_description"+id).value;
+                var name=$("#edit_name"+id).val();
+                var description=$("#edit_description"+id).val();
                 var type= $("#edit_type"+id).find(":selected").attr('name');
-                var image=document.getElementById("edit_image"+id).value.toString();
-                image=image.substr(12);
+                var image = $('#edit_image'+id)[0].files[0].name;
                 var route=" {{ route('Edit_Category') }} ";
-                var form = $('form#formEdit'+id)[0];
-                // console.log(form);
-                var form_data = new FormData(form);
-                
+                var form_data = new FormData($('form#formEdit'+id)[0]);
                 $.ajax
                 ({
                     type:'post',
@@ -323,12 +315,11 @@
                     processData: false,
                     contentType: false,
                     success:function() {
-                        document.getElementById("description"+id).innerHTML=description;
-                        document.getElementById("name"+id).innerHTML=name;
-                        document.getElementById("type"+id).innerHTML=type;
-                        document.getElementById("image"+id).innerHTML="<img src='images/"+image+"' style='width: 100px; height: 100px' />";
+                        $("#description"+id).html(description);
+                        $("#name"+id).html(name);
+                        $("#type"+id).html(type);
+                        $("#image"+id).html("<img src='images/"+image+"' style='width: 100px; height: 100px' />");
                         alert('Cập nhập thành công');
-                        
                     },
                     error:function() {
                        alert('lỗi khi cập nhập');
@@ -338,21 +329,16 @@
                         $(formBox).fadeOut('400', function() {
                             $('#over').remove(); 
                         });
-            
             }
-
-
 
 
             $('#saveAdd').click(function() 
             {
-                var name=document.getElementById("new_name").value;
-                var description=document.getElementById("new_description").value;               
-                var image=document.getElementById("new_image").value.toString();
-                image=image.substr(12);
+                var name=$("#new_name").val();
+                var description=$("#new_description").val();               
+                var image = $('#new_image')[0].files[0].name;
                 var type= $("#new_type").find(":selected").attr('name');
                 var typeValue= $("#new_type").val();
-                // alert(typeValue);
                 var typeValue1="";
                 if(type=="Sản phẩm"){
                     var type1="Tin tức";
@@ -362,10 +348,8 @@
                     var type1="Sản phẩm";
                     typeValue1=1;
                 }
-                // alert(typeValue1);
                 var route="{{ route('Insert_Category') }}";
-                var form = $('form#new_form')[0];
-                var form_data = new FormData(form);
+                var form_data = new FormData($('form#new_form')[0]);
                 $.ajax
                 ({
                     type:'post',
@@ -376,16 +360,15 @@
                     success:function(data) {
                         // console.log(data);
                         var id=data;
-                        var table=document.getElementById("product_table");
+                        var table=$("#product_table");
                         var table_len=(table.rows.length);
                             var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td></td><td id='image"+id+"'><img id='img"+id+"' src='images/"+image+"' style='width: 90px; height: 90px'/></td><td id='name"+id+"'>"+name+"</td><td id='description"+id+"'>"+description+"</td><td id='type"+id+"'>"+type+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'></button> <button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'></button></td></tr>";                        
                             $('tbody').append("<div id='editRowPro"+id+"' class='form'>                                                                                                                   <p class='form_title'>Edit Type</p>                                                                                             <a href='#' class='close'><img src='close.png' class='img-close' title='Close Window' alt='Close' /></a>                        <form id='formEdit"+id+"' enctype='multipart/form-data' method='post'> <input type='hidden' name='_token' value='{{ csrf_token() }}'>                                                                                                                           <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='id'>ID</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+id+"' name='id' class='form-control' readonly ></div></div></div></div>                                                   <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='name'>Name</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' name='edit_name' id='edit_name"+id+"' value='"+name+"' required=''  class='form-control'></div></div></div></div>               <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='image'>Image</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='file' value='"+image+"' name='edit_image' id='edit_image"+id+"' class='form-control' ></div></div></div></div>  <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='description'>Description</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+description+"' name='edit_des' id='edit_description"+id+"' required='' class='form-control'></div></div></div></div>                                                                                                                            <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='type'>Type</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><select class='selectpicker form-control' name='edit_type' id='edit_type"+id+"'><option selected='selected' name='"+type+"' value='"+typeValue+"'>"+type+"</option><option name='"+type1+"' value='"+typeValue1+"'>"+type1+"</option></select></div></div></div></div>                                                                                                                            <div class='row clearfix'><div class='col-lg-offset-5 col-md-offset-2 col-sm-offset-4 col-xs-offset-5'><button  type='button' class='button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit' style='border-radius: 10px;' onclick='saveEdit("+id+");'>  Save</button></div></div> </form></div>");
-                        document.getElementById("new_name").value="";
-                        document.getElementById("new_description").value="";
-                        document.getElementById("new_image").value="";
-                        document.getElementById("new_type").value="";
+                        $("#new_name").val()="";
+                        $("#new_description").val()="";
+                        $("#new_image").val()="";
+                        $("#new_type").val()="";
                         alert('Thêm category thành công');
-                        
                     },
                     error:function() {
                         alert('Thêm category thất bại');
@@ -395,7 +378,6 @@
                         $(formBox).fadeOut('400', function() {
                             $('#over').remove(); 
                         });
-                
             });
 
     </script>

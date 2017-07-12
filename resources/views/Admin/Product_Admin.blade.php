@@ -47,7 +47,7 @@
                                             <div id="row1{{ $pro->id }}">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <td id="id{{$pro->id}}">{{$pro->id}}</td>
-                                                <td id="image{{$pro->id}}"><img id="img{{ $pro->id }}" src="images/{{ $pro->image }}" style="width: 90px; height: 90px"></td>
+                                                <td id="image{{$pro->id}}"><img id="img{{ $pro->id }}" src="images/product/{{ $pro->image }}" style="width: 90px; height: 90px"></td>
                                                 <td id="name{{$pro->id}}">{{$pro->name}}</td>
                                                 <td id="type_name{{$pro->id}}">{{$pro->type_name}}</td>
                                                 <td id="description{{$pro->id}}">{{$pro->description}}</td>
@@ -206,7 +206,7 @@
                                         <tr id="row{{$pro->id}}">
                                             <div id="row1{{ $pro->id }}">
                                                 <td id="id{{$pro->id}}">{{$pro->id}}</td>
-                                                <td id="image{{$pro->id}}"><img id="img{{ $pro->id }}" src="images/{{ $pro->image }}" style="width: 90px; height: 90px"></td>
+                                                <td id="image{{$pro->id}}"><img id="img{{ $pro->id }}" src="images/product/{{ $pro->image }}" style="width: 90px; height: 90px"></td>
                                                 <td id="name{{$pro->id}}">{{$pro->name}}</td>
                                                 <td id="description{{$pro->id}}">{{$pro->description}}</td>
                                                 <td id="unit_price{{$pro->id}}">{{number_format($pro->unit_price)}} vnd</td>
@@ -527,54 +527,48 @@
                 cancelBtn:{
                 className:'btn btn-danger'
                 }
-                },function (result) {
-                    if(result)
+                },function (result) 
                     {
-                        var image = $('#img'+id).attr("src");
-                        image=image.substr(7);
-                        var route="{{ route('Delete_Product') }}";
+                        if(result)
+                        {
+                            var image = $($
+ #                           image=image.substr(7);
+                            var route="{{ route('Delete_Product') }}";
 
-                        $.ajax({
-                        url:route,
-                        type:'get',
-                        data:{
-                            id:id,
-                            imageFile:image,
-                        },
-                        success:function() {  
-                             $('#row'+id).hide();
-                            alert('Xóa thành công');
+                            $.ajax({
+                            url:route,
+                            type:'get',
+                            data:{
+                                id:id,
+                                imageFile:image,
+                            },
+                            success:function() {  
+                                 $('#row'+id).hide();
+                                alert('Xóa thành công');
+                            }
+                            });
+                            
                         }
-                        });
-                        
+                        else
+                            ssi_modal.notify('error', {content: 'Result: ' + result});
                     }
-                    else
-                        ssi_modal.notify('error', {content: 'Result: ' + result});
-                }
-            );
+                );
             }
 
             function saveEdit(id)
             {
-                var typeRequest = document.getElementById("typeRequest").value;
+                var typeRequest = $("#typeRequest").val();
                 if (typeRequest==0) {
                     var type= $("#edit_type"+id).find(":selected").attr('name');
                 }
-                var name=document.getElementById("edit_name"+id).value;
-                var description=document.getElementById("edit_description"+id).value;
-                var unit_price=document.getElementById("edit_unit_price"+id).value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-;
-                var pro_price=document.getElementById("edit_pro_price"+id).value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-;
-                var image=document.getElementById("edit_image"+id).value.toString();
-                image=image.substr(12);
-                var unit=document.getElementById("edit_unit"+id).value;
-
+                var name = $("#edit_name"+id).val();
+                var description = $("#edit_description"+id).value;
+                var unit_price = $("#edit_unit_price"+id).val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                var pro_price = $("#edit_pro_price"+id).val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                var image = $('#edit_image'+id)[0].files[0].name;
+                var unit = $("#edit_unit"+id).val();
                 var route=" {{ route('Edit_Product') }} ";
-                var form = $('form#formEdit'+id)[0];
-                // console.log(form);
-                var form_data = new FormData(form);
-                
+                var form_data = new FormData($('form#formEdit'+id)[0]);
                 $.ajax
                 ({
                     type:'post',
@@ -584,19 +578,16 @@
                     contentType: false,
                     success:function() {
                         // var updated_at = data;
-                        document.getElementById("name"+id).innerHTML=name;
+                        $("#name"+id).html(name);
                         if (typeRequest==0) {
-                            document.getElementById("type_name"+id).innerHTML=type;
+                            $("#type_name"+id).html(type);
                         }
-                        document.getElementById("description"+id).innerHTML=description;
-                        document.getElementById("unit_price"+id).innerHTML=unit_price+" vnd";
-                        document.getElementById("pro_price"+id).innerHTML=pro_price+" vnd";
-                        document.getElementById("image"+id).innerHTML="<img src='images/"+image+"' style='width: 90px; height: 90px' />";
-                        document.getElementById("unit"+id).innerHTML=unit;
-                        // document.getElementById("updated_at"+id).innerHTML=updated_at[0]['updated_at'];
-                        document.getElementById("edit_button"+id).style.display="inline";
+                        $("#description"+id).html(description);
+                        $("#unit_price"+id).html(unit_price+"vnd");
+                        $("#pro_price"+id).html(pro_price+"vnd");
+                        $("#image"+id).html("<img src='images/"+image+"' style='width: 90px; height: 90px' />");
+                        $("#unit"+id).html(unit);
                         alert('Cập nhập thành công');
-                        
                     },
                     error:function() {
                        alert('lỗi khi cập nhập');
@@ -606,28 +597,23 @@
                         $(formBox).fadeOut('400', function() {
                             $('#over').remove(); 
                         });
-            
             }
+
             $('#saveAdd').click(function() 
             {
-                var name=document.getElementById("new_name").value;
-                var typeRequest = document.getElementById("typeRequest").value;
+                var name=$("#new_name").val();
+                var typeRequest = $("#typeRequest").val();
                 if(typeRequest==0){
                     var type=$("#new_type").find(":selected").attr('name');
                     var typeValue=$("#new_type").find(":selected").attr('value');
                 }
-                var description=document.getElementById("new_description").value;
-                var unit_price=document.getElementById("new_unit_price").value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-;
-                var pro_price=document.getElementById("new_pro_price").value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-;
-                var image=document.getElementById("new_image").value.toString();
-                image=image.substr(12);
-                var unit=document.getElementById("new_unit").value;
-
+                var description=$("#new_description").val();
+                var unit_price=$("#new_unit_price").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                var pro_price=$("#new_pro_price").val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                var image = $('#new_image')[0].files[0].name;
+                var unit=$("#new_unit").val();
                 var route="{{ route('Insert_Product') }}";
-                var form = $('form#new_form')[0];
-                var form_data = new FormData(form);
+                var form_data = new FormData($('form#new_form')[0]);
                 $.ajax
                 ({
                     type:'post',
@@ -641,34 +627,33 @@
                         var table=document.getElementById("product_table");
                         var table_len=(table.rows.length);
                         if(typeRequest!=0){ 
-                            var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td><td id='image"+id+"'><img id='img"+id+"' src='images/"+image+"' style='width: 90px; height: 90px'/></td><td id='name"+id+"'>"+name+"</td><td id='description"+id+"'>"+description+"</td><td id='unit_price"+id+"'>"+unit_price+"</td><td id='pro_price"+id+"'>"+pro_price+"</td><td id='unit"+id+"'>"+unit+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'></button> <button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'></button></td></tr>";
+                            var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td><td id='image"+id+"'><img id='img"+id+"' src='images/product/"+image+"' style='width: 90px; height: 90px'/></td><td id='name"+id+"'>"+name+"</td><td id='description"+id+"'>"+description+"</td><td id='unit_price"+id+"'>"+unit_price+"</td><td id='pro_price"+id+"'>"+pro_price+"</td><td id='unit"+id+"'>"+unit+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'></button> <button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'></button></td></tr>";
+
+                            $('tbody').append("<div id='editRowPro"+id+"' class='form'>                                                                                                                   <p class='form_title'>Edit Type</p>                                                                                                                              <a href='#' class='close'><img src='close.png' class='img-close' title='Close Window' alt='Close' /></a>                        <form id='formEdit"+id+"' enctype='multipart/form-data' method='post'> <input type='hidden' name='_token' value='{{ csrf_token() }}'><div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='id'>ID</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+id+"' name='id' class='form-control' readonly ></div></div></div></div>                                                                                                                            <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='name'>Name</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' name='edit_name' id='edit_name"+id+"' value='"+name+"' required=''  class='form-control'></div></div></div></div>               <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='description'>Description</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+description+"' name='edit_des' id='edit_description"+id+"' required='' class='form-control'></div></div></div></div>                                                                                                                             <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='unit-price'>Unit Price</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+unit_price+"' name='edit_unit_price' id='edit_unit_price"+id+"' required='' class='form-control'></div></div></div></div>                                                                                                                                <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='promotion_price'>Promotion Price</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+pro_price+"' name='edit_pro_price' id='edit_pro_price"+id+"' required='' class='form-control'></div></div></div></div>                                                                                                                               <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='image'>Image</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='file' value='"+image+"' name='edit_image' id='edit_image"+id+"' class='form-control' ></div></div></div></div>                                                                                                                                <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='unit'>Unit</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+unit+"' name='edit_unit' id='edit_unit"+id+"' required='' class='form-control'></div></div></div></div>                                                                                                                              <div class='row clearfix'><div class='col-lg-offset-5 col-md-offset-2 col-sm-offset-4 col-xs-offset-5'><button  type='button' class='button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit' style='border-radius: 10px;' onclick='saveEdit("+id+");'>  Save</button></div></div> </form></div>");
                         }else{
-                            var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td><td id='image"+id+"'><img id='img"+id+"' src='images/"+image+"' style='width: 90px; height: 90px'/></td><td id='name"+id+"'>"+name+"</td><td id='type_name"+id+"'>"+type+"</td><td id='description"+id+"'>"+description+"</td><td id='unit_price"+id+"'>"+unit_price+" vnd</td><td id='pro_price"+id+"'>"+pro_price+" vnd</td><td id='unit"+id+"'>"+unit+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'></button> <button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'></button></td></tr>";
+                            var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td><td id='image"+id+"'><img id='img"+id+"' src='images/product/"+image+"' style='width: 90px; height: 90px'/></td><td id='name"+id+"'>"+name+"</td><td id='type_name"+id+"'>"+type+"</td><td id='description"+id+"'>"+description+"</td><td id='unit_price"+id+"'>"+unit_price+" vnd</td><td id='pro_price"+id+"'>"+pro_price+" vnd</td><td id='unit"+id+"'>"+unit+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'></button> <button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'></button></td></tr>";
 
 
-                            $('tbody').append("<div id='editRowPro"+id+"' class='form'>                                                                                                                       <p class='form_title'>Edit Type</p>                                                                                                 <a href='#' class='close'><img src='close.png' class='img-close' title='Close Window' alt='Close' /></a>                            <form id='formEdit"+id+"' enctype='multipart/form-data' method='post'> <input type='hidden' name='_token' value='{{ csrf_token() }}'><div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='id'>ID</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+id+"' name='id' class='form-control' readonly ></div></div></div></div>                                                                   <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='name'>Name</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' name='edit_name' id='edit_name"+id+"' value='"+name+"' required=''  class='form-control'></div></div></div></div>                   <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='type'>Type</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><select class='selectpicker form-control' name='edit_type' id='edit_type"+id+"'><option name='"+type+"' value='"+typeValue+"'>"+type+"</option> @foreach($type_product as $type)<option name='{{ $type->name }}' value='{{ $type->id }}'>{{ $type->name }}</option> @endforeach</select></div></div></div></div>                                                                                                                                <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='description'>Description</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+description+"' name='edit_des' id='edit_description"+id+"' required='' class='form-control'></div></div></div></div>                                                                                                                               <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='unit-price'>Unit Price</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+unit_price+"' name='edit_unit_price' id='edit_unit_price"+id+"' required='' class='form-control'></div></div></div></div>                                                                                                                                <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='promotion_price'>Promotion Price</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+pro_price+"' name='edit_pro_price' id='edit_pro_price"+id+"' required='' class='form-control'></div></div></div></div>                                                                                                                               <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='image'>Image</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='file' value='"+image+"' name='edit_image' id='edit_image"+id+"' class='form-control' ></div></div></div></div>                                                                                                                                <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='unit'>Unit</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+unit+"' name='edit_unit' id='edit_unit"+id+"' required='' class='form-control'></div></div></div></div>                                                                                                                                                                               <div class='row clearfix'><div class='col-lg-offset-5 col-md-offset-2 col-sm-offset-4 col-xs-offset-5'><button  type='button' class='button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit' style='border-radius: 10px;' onclick='saveEdit("+id+");'>  Save</button></div></div> </form></div>");
+                            $('tbody').append("<div id='editRowPro"+id+"' class='form'>                                                                                                                   <p class='form_title'>Edit Type</p>                                                                                             <a href='#' class='close'><img src='close.png' class='img-close' title='Close Window' alt='Close' /></a>                        <form id='formEdit"+id+"' enctype='multipart/form-data' method='post'> <input type='hidden' name='_token' value='{{ csrf_token() }}'><div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='id'>ID</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+id+"' name='id' class='form-control' readonly ></div></div></div></div>                                                <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='name'>Name</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' name='edit_name' id='edit_name"+id+"' value='"+name+"' required=''  class='form-control'></div></div></div></div>               <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='type'>Type</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><select class='selectpicker form-control' name='edit_type' id='edit_type"+id+"'><option name='"+type+"' value='"+typeValue+"'>"+type+"</option> @foreach($type_product as $type)<option name='{{ $type->name }}' value='{{ $type->id }}'>{{ $type->name }}</option> @endforeach</select></div></div></div></div>                                                                                                                                <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='description'>Description</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+description+"' name='edit_des' id='edit_description"+id+"' required='' class='form-control'></div></div></div></div>                                                                                                                               <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='unit-price'>Unit Price</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+unit_price+"' name='edit_unit_price' id='edit_unit_price"+id+"' required='' class='form-control'></div></div></div></div>                                                                                                                                <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='promotion_price'>Promotion Price</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+pro_price+"' name='edit_pro_price' id='edit_pro_price"+id+"' required='' class='form-control'></div></div></div></div>                                                                                                                               <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='image'>Image</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='file' value='"+image+"' name='edit_image' id='edit_image"+id+"' class='form-control' ></div></div></div></div>                                                                                                                                <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='unit'>Unit</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+unit+"' name='edit_unit' id='edit_unit"+id+"' required='' class='form-control'></div></div></div></div>                                                                                                                                                                               <div class='row clearfix'><div class='col-lg-offset-5 col-md-offset-2 col-sm-offset-4 col-xs-offset-5'><button  type='button' class='button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit' style='border-radius: 10px;' onclick='saveEdit("+id+");'>  Save</button></div></div> </form></div>");
                         }
                         
-
-                        document.getElementById("new_name").value="";
-                        document.getElementById("new_type").value="";
-                        document.getElementById("new_description").value="";
-                        document.getElementById("new_unit_price").value="";
-                        document.getElementById("new_pro_price").value="";
-                        document.getElementById("new_image").value="";
-                        document.getElementById("new_unit").value="";
+                        $("#new_name").val()="";
+                        $("#new_type").val()="";
+                        $("#new_description").val()="";
+                        $("#new_unit_price").val()="";
+                        $("#new_pro_price").val()="";
+                        $("#new_image").val()="";
+                        $("#new_unit").val()="";
                         alert('Thêm sản phẩm thành công');
-                        var formBox = $('#addRowPro');
-                        $(formBox).fadeOut('400', function() {
-                            $('#over').remove(); 
-                        });
                     },
                     error:function() {
                         alert('thất bại');
                     },
-
                 });
-                
+                var formBox = $('#addRowPro');
+                        $(formBox).fadeOut('400', function() {
+                            $('#over').remove(); 
+                        });
             });
 
     </script>
