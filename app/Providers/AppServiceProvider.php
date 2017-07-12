@@ -61,7 +61,7 @@ class AppServiceProvider extends ServiceProvider
             //dd($bestproduct);
         });
 
-            view()->composer(['header','section.sanphambanchay'],function($view)
+            view()->composer(['header','section.sanphambanchay','page.giohang'],function($view)
         {
           if(Session::has('cart'))
           {

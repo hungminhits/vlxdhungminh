@@ -167,15 +167,17 @@
 
                               $('.123').append("<div class='list-item-cart"+id+"' >   <div class='cart-img-details'>        <div class='cart-img-photo' id ='cart-img-photo"+id+"'> <a id='route_cart'                href='"+route_cart+"'> <img alt='' src='"+image+"' > </a> </div>                            <div class='cart-img-contaent'><a href='/can-ho-3pn-o-pearl-plaza'><h4 id='cart-name"+id+"'>"+name+"</h4></a><span class='cart-item-amount' id='id"+id+"' soluonghang='"+soluonghang+"' giamgia='"+promotion_price+"' dongia='"+unit_price+"'> "+soluonghang+" *"+price+"</span></div> <div class='pro-del'><a class='cart-item-delete' value='"+id+"'><i class='fa fa-times'></i></a></div></div> <div class='clear'></div> </div>  ");
 
-                                if($('.top-subtotal').length)
+                                if(($('.top-subtotal').length) && ($('.actions').length))
                               {
                                 $('.top-subtotal').html("Tổng tiền:  <span class='price' tong_tam='0' value='"+tongtien+"'>"+tongtien+" </span>")
+                                $('.actions').html("<a href='/checkout' class='btn-view-cart' ><span>Thanh toán</span></a>");
                                 
                               }
                               else
                               {
 
                                 $('.123').append("<div class='top-subtotal'> Tổng tiền:  <span class='price' tong_tam='0' value='"+tongtien+"'>  </div ");
+                                $('.123').append("<div class='action'> <a href='/checkout' class='btn-view-cart' ><span>Thanh toán</span></a></div>");
                               }
 
 

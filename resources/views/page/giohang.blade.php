@@ -43,23 +43,26 @@
 
 								<div class="cart-tbody">
 									<!--  San pham -->
-									<div class="item-cart productid-2783190">
+									@if(Session::has('cart'))
+										@foreach($product_cart as $product)
+									<div class="item-cart productid{{$product['item']['id']}}" >
+									
 										<div style="width: 17%" class="image">
 											<a class="product-image" title="Bán căn hộ SSG Tower 2 PN" href="/ban-can-ho-ssg-tower-1">
-												<img width="75" height="auto" alt="Bán căn hộ SSG Tower 2 PN" src="//bizweb.dktcdn.net/thumb/compact/100/069/071/products/8.jpg">
+												<img width="75" height="auto" alt="Bán căn hộ SSG Tower 2 PN" src="{{$product['item']['image']}}">
 											</a>
 										</div>
 
 										<div style="width: 33%" class="a-center">
 											<h2 class="product-name"> 
-												<a href="/ban-can-ho-ssg-tower-1">Bán căn hộ SSG Tower 2 PN</a> 
+												<a href="/ban-can-ho-ssg-tower-1">{{$product['item']['name']}}</a> 
 											</h2>
 											<span class="variant-title" style="display: none;">Default Title</span>
 										</div>
 
 										<div style="width: 15%" class="a-center">
 											<span class="item-price">
-												 <span class="price">3.000.000.000₫</span>
+												 <span class="price">{{$product['item']['unit_price']}}</span>
 											</span>
 										</div>
 
@@ -83,7 +86,7 @@
 
 										<div style="width: 15%" class="a-center">
 											<span class="cart-price">
-												 <span class="price">3.000.000.000₫</span> 
+												 <span class="price">{{$product['item']['image']}}</span> 
 											</span>
 										</div>
 
@@ -93,60 +96,14 @@
 												<span><span>Xóa</span></span>
 											</a>
 										</div>
+
+										
 									</div>
+									@endforeach
+									@endif
 									
-									<!--  San pham -->
-									<div class="item-cart productid-2783202">
-										<div style="width: 17%" class="image">
-											<a class="product-image" title="Bán căn hộ Times City Park Hill" href="/ban-can-ho-times-city">
-												<img width="75" height="auto" alt="Bán căn hộ Times City Park Hill" src="//bizweb.dktcdn.net/thumb/compact/100/069/071/products/10.jpg">
-											</a>
-										</div>
-
-										<div style="width: 33%" class="a-center">
-											<h2 class="product-name"> 
-												<a href="/ban-can-ho-times-city">Bán căn hộ Times City Park Hill</a> 
-											</h2>
-
-											<span class="variant-title" style="display: none;">Default Title</span>
-										</div>
-
-										<div style="width: 15%" class="a-center">
-											<span class="item-price"> 
-												<span class="price">4.300.000.000₫</span>
-											</span>
-										</div>
-
-										<div style="width: 14%" class="a-center">
-											<div class="input_qty_pr">
-												<input class="variantID" type="hidden" name="variantId" value="2783202">
-													<button onclick="var result = document.getElementById('qtyItem2783202'); var qtyItem2783202 = result.value; if( !isNaN( qtyItem2783202 ) &amp;&amp; qtyItem2783202 > 1 ) result.value--;return false;" disabled="" class="reduced_pop items-count btn-minus" type="button">
-													<i class="fa fa-caret-left"></i>
-													</button>
-
-												<input type="text" maxlength="12" min="0" class="input-text number-sidebar input_pop input_pop qtyItem2783202" id="qtyItem2783202" name="Lines" size="4" value="1">
-													<button onclick="var result = document.getElementById('qtyItem2783202'); var qtyItem2783202 = result.value; if( !isNaN( qtyItem2783202 )) result.value++;return false;" class="increase_pop items-count btn-plus" type="button">
-													<i class="fa fa-caret-right"></i>
-													</button>
-											</div>
-										</div>
-
-										<div style="width: 15%" class="a-center">
-											<span class="cart-price"> 
-												<span class="price">4.300.000.000₫</span> 
-											</span>
-										</div>
-
-										<div style="width: 6%">
-											<a class="button remove-item remove-item-cart" title="Xóa" href="javascript:;" data-id="2783202">
-												<i class="fa fa-trash"></i>
-												<span>
-													<span>Xóa</span>
-												</span>
-											</a>
-										</div>
-									</div>
-
+									
+								
 								</div>
 							</div>
 						</form>
