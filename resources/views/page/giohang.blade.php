@@ -42,6 +42,7 @@
 								</div>
 
 								<div class="cart-tbody">
+									<!--  San pham -->
 									<div class="item-cart productid-2783190">
 										<div style="width: 17%" class="image">
 											<a class="product-image" title="Bán căn hộ SSG Tower 2 PN" href="/ban-can-ho-ssg-tower-1">
@@ -93,7 +94,8 @@
 											</a>
 										</div>
 									</div>
-
+									
+									<!--  San pham -->
 									<div class="item-cart productid-2783202">
 										<div style="width: 17%" class="image">
 											<a class="product-image" title="Bán căn hộ Times City Park Hill" href="/ban-can-ho-times-city">
@@ -208,6 +210,7 @@
 
 							<div class="header-cart-content" style="background:#fff;">
 								<div class="cart_page_mobile content-product-list">
+									<!--  San pham -->
 									<div class="item-product item productid-2783190 ">
 										<div class="item-product-cart-mobile">
 											<a href="/ban-can-ho-ssg-tower-1">	</a>
@@ -237,6 +240,7 @@
 										</div>
 									</div>
 
+									<!--  San pham -->
 									<div class="item-product item productid-2783202 ">
 										<div class="item-product-cart-mobile">
 											<a href="/ban-can-ho-times-city">	</a>

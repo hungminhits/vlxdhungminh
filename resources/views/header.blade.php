@@ -160,7 +160,7 @@
                                             <span class="price" tong_tam="0" value="{{$totalPrice}}">{{number_format($totalPrice)}} </span>
                                                                         
                                       </div>                         
-                                   
+                                    
                                       <div class="actions">
                                             <a href="/checkout" class="btn-view-cart">
                                             <span>Thanh toán</span></a>
@@ -332,7 +332,7 @@
            
             $('p.no-item').show();
             $('#soluong').html((tongsoluong)+" "+"sản phẩm");
-            $('.123').html("Không có sản phẩm nào trong giỏ hàng");
+            $('.123').html(" <div class='no-item'>Không có sản phẩm nào trong giỏ hàng</div> ");
             $('.top-subtotal').hide();
             $('.actions').hide();
                        

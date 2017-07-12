@@ -14,11 +14,9 @@ class Type_Product_Controller extends Controller
 {
    public function showType($id)
    {
-<<<<<<< HEAD
-   		$typro = DB::table('type_products')
-=======
+
+   		// $typro = DB::table('type_products')
    		$typro = DB::table('category')
->>>>>>> 249546664894c6b84985cf6d31801c2d3339faed
    				->where('id',$id)
    				->select()
    				->get();

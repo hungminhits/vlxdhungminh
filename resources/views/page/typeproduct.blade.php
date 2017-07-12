@@ -40,7 +40,7 @@
 							@for ($i=0;$i<count($type);$i++)
 								@if ($type[$i]['name'] == $name)
 								<li class="li_lv1 active"> <a href="{{route('type',[$type[$i]['id'],'sortBy'=>'default'])}}">{{$name}}</a> <span class="sub_minus"></span>
-{{-- 									<ul class="level0_415">
+									<ul class="level0_415">
 
 
 										<li class="li_lv2"> <a href="/"> sub1 </a></li>
@@ -60,7 +60,7 @@
 									</ul>
 									<!--level0--> 	
 								</li>
-			 --}}
+			 
 								@else
 
 								<li class="li_lv1 "> <a href="{{route('type',[$type[$i]['id'],'sortBy'=>'default'])}}">{{$type[$i]['name']}}</a> <span class="sub_minus"></span>
