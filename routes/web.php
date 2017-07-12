@@ -51,7 +51,7 @@ Route::post('UpdateNews',
 Route::post('InsertNews',
 	['as'=>'InsertNews',
 	'uses'=>'Admin_Controller@InsertNews']);
-Route::get('DeleteNews/{id}',
+Route::get('DeleteNews',
 	['as'=>'DeleteNews',
 	'uses'=>'Admin_Controller@DeleteNews']);
 Route::get('viewPDF',

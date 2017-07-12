@@ -86,8 +86,12 @@ class Admin_Controller extends Controller
       $name = $req->input('edit_name');
       $desc = $req->input('edit_des');
       $type = $req->input('edit_type');
-      $filename= $req->file('edit_image')->getClientOriginalName();
-      $req->file('edit_image')->move('images',$filename);
+       if ($req->hasFile('edit_image')) {
+         $filename= $req->file('edit_image')->getClientOriginalName();
+      $req->file('edit_image')->move('images/category',$filename);
+      }else{
+         $filename=null;
+      }
       $pro=TypeProduct::Edit_Category($id, $name, $desc, $filename, $type);
    }
    public function Insert_Category(Request $req){
@@ -95,14 +99,18 @@ class Admin_Controller extends Controller
       $name = $req->input('new_name');
       $desc = $req->input('new_des');
       $type = $req->input('new_type');
-      $filename= $req->file('new_image')->getClientOriginalName();
-      $req->file('new_image')->move('images',$filename);
+       if ($req->hasFile('edit_image')) {
+         $filename= $req->file('new_image')->getClientOriginalName();
+      $req->file('new_image')->move('images/category',$filename);
+      }else{
+         $filename=null;
+      }
       $getId=TypeProduct::Insert_Category($name, $desc, $filename, $type);
       return $getId;
    }
    public function Delete_Category(Request $req){
       $image = $req->imageFile;
-      File::delete('images/'.$image);
+      File::delete('images/category/'.$image);
       $type=TypeProduct::Delete_Category($req->id);
    }
 
@@ -116,7 +124,12 @@ class Admin_Controller extends Controller
 
       public function ViewAllNews(){
          $news=News::Load_ALL_News()->get();
+<<<<<<< HEAD
          return view('Admin.News_Admin',compact('news'));
+=======
+         $typeNews =  TypeProduct::all()->where('type',2);
+         return view('Admin.News_Admin',compact('news','typeNews'));
+>>>>>>> 4ac5c98879bd8711c2e212c6b3978101533ed449
       }
       public function UpdateNews(Request $req){
          $id=$req->id;
@@ -130,7 +143,7 @@ class Admin_Controller extends Controller
          return $news;
       }
       public function InsertNews(Request $req){
-         $id_user=$req->id_user;
+         $id_user=Auth::User()->id;
          $title=$req->title;
          $image=$req->image;
          $description=$req->description;
@@ -182,11 +195,13 @@ class Admin_Controller extends Controller
       $unit_price = $req->input('edit_unit_price');
       $pro_price = $req->input('edit_pro_price');
       $unit = $req->input('edit_unit');
-
-      $filename= $req->file('edit_image')->getClientOriginalName();
-      // $req->file('edit_image')->move('images',$filename);
+      if ($req->hasFile('edit_image')) {
+         $filename= $req->file('edit_image')->getClientOriginalName();
+      $req->file('edit_image')->move('images/product',$filename);
+      }else{
+         $filename=null;
+      }
       $pro=Product::Edit_Product($id,$name,$type, $desc, $unit_price, $pro_price,$filename, $unit);
-      // $request->session()->flash('status', 'Tạo bài viết thành công!');
       return $pro; 
    }
    public function Insert_Product(Request $req){
@@ -197,15 +212,19 @@ class Admin_Controller extends Controller
       $unit_price = $req->input('new_unit_price');
       $pro_price = $req->input('new_pro_price');
       $unit = $req->input('new_unit');
-      $filename= $req->file('new_image')->getClientOriginalName();
-      $req->file('new_image')->move('images',$filename);
+       if ($req->hasFile('new_image')) {
+         $filename= $req->file('new_image')->getClientOriginalName();
+      $req->file('new_image')->move('images/product',$filename);
+      }else{
+         $filename=null;
+      }
       $getId=Product::Insert_Product($name, $type, $desc, $unit_price, $pro_price,$filename, $unit);
       return $getId;
    } 
    public function Delete_Product(Request $req){
       $id = $req->id;
       $image = $req->imageFile;
-      File::delete('images/'.$image);
+      File::delete('images/product/'.$image);
       $pro=Product::Delete_Product($id);
    }
       public function ViewProductbyDay(){
