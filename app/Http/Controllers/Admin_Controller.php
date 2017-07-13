@@ -129,27 +129,58 @@ class Admin_Controller extends Controller
       }
       public function UpdateNews(Request $req){
          $id=$req->id;
-         $id_user=$req->id_user;
-         $title=$req->title;
-         $image=$req->image;
-         $description=$req->description;
-         $content=$req->content;
-         $category_id_news=$req->category_id_news;
-         $news=News::UpdateNews($id,$id_user,$title,$image,$description,$content,$category_id_news);
-         return $news;
-      }
-      public function ViewPageInsertNews(){
-         return view('Admin.Insert_Update_News.Insert_News');
-      }
-      public function InsertNews(Request $req){
          $id_user=Auth::User()->id;
          $title=$req->title;
-         $image=$req->image;
+         $description=$req->description;
+         $description=htmlspecialchars($description, ENT_COMPAT);
+         $content=$req->content;
+         $category_id_news=$req->category_id_news;
+         if ($req->hasFile('image')) 
+         {
+            $image= $req->file('image')->getClientOriginalName();
+            $req->file('image')->move('images/news',$image);
+            $suaanh=1;
+            $news=News::UpdateNews($suaanh,$id,$id_user,$title,$image,$description,$content,$category_id_news);
+         }
+         else
+         {
+            $image=null;
+            $suaanh=0;
+            $news=News::UpdateNews($suaanh,$id,$id_user,$title,$image,$description,$content,$category_id_news);
+         }
+         
+          return redirect()->route('ViewNews');
+      }
+      public function ViewPageInsertNews(Request $req){
+         $id=$req->id;
+         if($id!=null){
+            $news=News::UpdateNewById($req->id)->get();
+            return view('Admin.Insert_Update_News.Insert_News',compact('id','news'));
+         }
+         else{
+            $id=0;
+            return view('Admin.Insert_Update_News.Insert_News',compact('id'));
+         }
+         
+      }
+      public function InsertNews(Request $req){
+         //Chưa kiểm tra đươc image và description
+         $id_user=Auth::User()->id;
+         $title=$req->title;
+         if ($req->hasFile('image')) 
+         {
+            $image= $req->file('image')->getClientOriginalName();
+            $req->file('image')->move('images/news',$image);
+         }
+         else
+         {
+            $image=null;
+         }
          $description=$req->description;
          $content=$req->content;
          $category_id_news=$req->category_id_news;
           $news=News::InsertNews($id_user,$title,$image,$description,$content,$category_id_news);
-         return $news;
+         return redirect()->route('ViewNews');
       }
       public function DeleteNews(Request $req){
          $id=$req->id;

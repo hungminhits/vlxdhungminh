@@ -22,7 +22,7 @@ class LoginLogoutRegister_Controller extends Controller
 
     public function postRegister(Request $req){
         $this->validate($req,['email'=>'required|email', 'full_name'=>'required', 'password'=>'required|min:6|max:10', 'phone'=>'numeric', 're_password'=>'required|same:password'
-            ],['email.reuired'=>'Vui lòng nhập Email',
+            ],['email.required'=>'Vui lòng nhập Email',
                 'email.email'=>'Email không đúng định dạng',
                 'Phone.numeric'=>'Điện thoại phải thuộc kiểu số',
                 'password.redirect'=>'Vui lòng nhập mật khẩu',

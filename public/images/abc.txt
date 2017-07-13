@@ -1,0 +1,46 @@
+
+        private void frmBackup_Restore_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'tRACNGHIEMDataSet.SP_STT_BACKUP' table. You can move, or remove it, as needed.
+            this.sP_STT_BACKUPTableAdapter.Fill(this.tRACNGHIEMDataSet.SP_STT_BACKUP);
+
+        }
+
+        private void sP_STT_BACKUPDataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            index = sP_STT_BACKUPDataGridView.CurrentRow.Index;
+            for (int i = 0; i < sP_STT_BACKUPDataGridView.RowCount; i++)
+            {
+                if (i != index)
+                {
+                    sP_STT_BACKUPDataGridView.Rows[i].Cells[0].Value = false;
+                }
+            }
+            sP_STT_BACKUPDataGridView.Rows[index].Cells[0].Value = true;
+        }
+
+        private void btnSaoLuu_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            int reinit = chkReset.Checked ? 1 : 0;
+            string[] name = { "@reinit" };
+            object[] param = { reinit };
+            DBAccess.ExecuteNonQuery("SP_Backup", name, param, 1);
+        }
+
+        private void btnPhucHoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (index == -1)
+            {
+                MessageBox.Show("Ch?n b?n sao luu tru?c");
+            }
+            else
+            {
+                DBAccess.ChangeToTempDB();
+                DBAccess.ExecuteNonQuery("ALTER DATABASE TRACNGHIEM SET SINGLE_USER WITH ROLLBACK IMMEDIATE;", cmdType: CommandType.Text);
+                DBAccess.ExecuteNonQuery(string.Format(@"RESTORE DATABASE TRACNGHIEM FROM TRACNGHIEM_BAK WITH FILE = {0}, RECOVERY, REPLACE;",index + 1), cmdType:CommandType.Text);
+                DBAccess.ExecuteNonQuery("ALTER DATABASE TRACNGHIEM SET MULTI_USER;", cmdType: CommandType.Text);
+                DBAccess.ChangeToTRACNGHIEM();
+            }
+
+        }
+    }

@@ -55,7 +55,7 @@
 								<div class="as_bestsellers_thumb">
 									<a href="{{route('news-detail',$tintuc->id)}}" title="{{$tintuc->title}}">
 										
-										<img alt="{{$tintuc->title}}" src="images/{{$tintuc->image}}">
+										<img alt="{{$tintuc->title}}" src="images/news/{{$tintuc->image}}">
 										
 									</a>
 								</div>
@@ -77,7 +77,7 @@
 							<article class="blog-gird-item blog-item blog-gird-item3">
 								<div class="pageblog-thumb">
 									
-									<a href="{{route('news-detail',$new->id)}}" title="{{$new->title}}"><img alt="{{$new->title}}" src="images/{{$new->image}}"></a>
+									<a href="{{route('news-detail',$new->id)}}" title="{{$new->title}}"><img alt="{{$new->title}}" src="images/news/{{$new->image}}"></a>
 									
 									<a title="{{$new->title}}" href="{{route('news-detail',$new->id)}}" class="tzblog-view"><i class="fa fa-search"></i></a>
 								</div>

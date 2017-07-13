@@ -42,7 +42,7 @@
                                                 <td id="id_user{{$new->id }}">{{$new->id_user }}</td>
                                                 <td id="image{{$new->id}}"><img id="img{{$new->id}}" src="images/news/{{$new->image}}" style="width: 100px; height: 100px"></td>
                                                 <td id="title{{ $new->id }}">{{ $new->title }}</td>
-                                                <td id="description{{ $new->id }}">{{ $new->description }}</td>
+                                                <td id="description{{ $new->id }}"><p>{{html_entity_decode($new->description ,ENT_QUOTES, 'UTF-8')}}</p></td>
                                                 <td id="content{{ $new->id }}">{{ $new->content }}</td>
                                                 <td id="category_id{{ $new->id }}">{{ $new->Category_ID }}</td>
                                                 <td>
@@ -50,9 +50,7 @@
                                                     <button class="btn btn-warning btn-lg glyphicon glyphicon-trash" style="border-radius: 10px" id="delete_button{{ $new->id  }}" onclick="delete_row('{{ $new->id  }}');"></button>
                                                 </td>
                                             </div>
-                                        </tr>
-
-                                      
+                                        </tr>     
                                     @endforeach
                                 </tbody>
                             </table>    
@@ -73,14 +71,10 @@
                 }
             });
             
-            function editRow(id){
-                var formBox = $('#editRowPro'+id);
-                $(formBox).fadeIn("slow");
-
-                // thêm phần tử id="over" vào cuối thẻ body
-                $('body').append('<div id="over"></div>');
-                $('#over').fadeIn(300);
-        
+            function editRow($id){
+                var  route="{{route('InsertNews','id=idnews')}}";
+                route=route.replace('idnews',$id)
+              window.location.replace(route);
             }
             function addRow(){
                 var  route="{{route('InsertNews')}}";
