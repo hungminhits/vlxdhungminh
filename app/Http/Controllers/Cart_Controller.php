@@ -26,6 +26,20 @@ class Cart_Controller extends Controller
         
     }
 
+     public function muahang(Request $req) // add gio hang
+    {
+            $product = Product::find($req->idmuahang);
+            $oldCart = Session('cart') ? Session('cart') : null;
+            $cart = new Cart($oldCart);
+            $cart->add($product, $product->id);
+            $req->Session()->put('cart', $cart);
+            return redirect()->back();
+
+
+            
+        
+    }
+
     public function delete_cart(Request $req)
     {
             $oldCart=Session('cart')?Session::get('cart'):null;

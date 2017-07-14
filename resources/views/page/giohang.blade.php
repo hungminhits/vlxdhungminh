@@ -275,6 +275,7 @@
 
 			function minus(id)
 			{			
+						
 						var route="{{route('delete1product','id_sp')}}";
 		        			route_delete_product=route.replace("id_sp",id);
 		        			
@@ -318,7 +319,7 @@
 						tongtien = tongtien - price;
 				
 					$.ajax({
-					ulr:route_delete_product,
+					url:route_delete_product,
 					type:'get',
         			data: {id:id},
         			success:function()
@@ -387,7 +388,7 @@
 				tongtien = parseInt(tongtien) + parseInt(price);
 				
 					$.ajax({
-					ulr:route_buy_product,
+					url:route_buy_product,
 					type:'get',
         			data: {id:id},
         			success:function()
@@ -484,6 +485,8 @@
 
 				          $('.price').attr('value',tongtien);
 				          $('.price').html((tongtien));
+				          $('.totals_price').html(tongtien);
+        				$('.totals_price').attr('value',tongtien);
 				        }
 	      
 	      		});

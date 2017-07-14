@@ -25,7 +25,7 @@
 	</div>
 			<section class="main-cart-page main-container col1-layout" style="padding-bottom: 300px">
 				<div class="main container hidden-xs">
-					<div class="col-main cart_desktop_page cart-page" style="min-height: auto;"><p class="hidden-xs-down">Không có sản phẩm nào trong giỏ hàng. Quay lại <a href="{!! url('/')!!}" style="color:;">cửa hàng</a> để tiếp tục mua sắm.</p></div>
+					<div class="col-main cart_desktop_page cart-page" style="min-height: auto;"><p class="hidden-xs-down">Không có sản phẩm nào trong giỏ hàng. Quay lại <a href="{{route('allPro',['sortBy'=>'default'])}}" style="color:;">cửa hàng</a> để tiếp tục mua sắm.</p></div>
 
 				</div>
 				<div class="cart-mobile hidden-md hidden-lg hidden-sm">

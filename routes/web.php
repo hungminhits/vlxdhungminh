@@ -213,3 +213,8 @@ Route::get('buy/{id}',
 Route::get('cart_delete_all',
 	['as'=>'delete_all_cart',
 	'uses'=>'Cart_Controller@delete_all_cart']);
+
+Route::get('muahang',
+	['as'=>'muahang',
+	 'uses'=>'Cart_Controller@muahang']); 
+
