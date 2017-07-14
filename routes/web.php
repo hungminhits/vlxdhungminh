@@ -45,10 +45,27 @@ Route::get('ChartById_Admin/{id}/{created_at_from}/{created_at_to}',
 Route::get('ViewNews',
 	['as'=>'ViewNews',
 	'uses'=>'Admin_Controller@ViewAllNews']);
+Route::post('UpdateNews',
+	['as'=>'UpdateNews',
+	'uses'=>'Admin_Controller@UpdateNews']);
+Route::post('InsertNews',
+	['as'=>'InsertNews',
+	'uses'=>'Admin_Controller@InsertNews']);
+Route::get('InsertNews',
+	['as'=>'InsertNews',
+	'uses'=>'Admin_Controller@ViewPageInsertNews']);
+Route::get('DeleteNews',
+	['as'=>'DeleteNews',
+	'uses'=>'Admin_Controller@DeleteNews']);
 Route::get('viewPDF',
 	['as'=>'viewPDF',
 	'uses'=>'Admin_Controller@downloadPDF']);
-
+Route::get('ShowBill',
+	['as'=>'ShowBill',
+	'uses'=>'Admin_Controller@ShowBill']);
+Route::get('ShowBill_Detail/{id_bill}',
+	['as'=>'ShowBill_Detail',
+	'uses'=>'Admin_Controller@ShowBill_Detail']);
 Route::post('Edit_Product',
 	['as'=>'Edit_Product',
 	 'uses'=>'Admin_Controller@Edit_Product']);

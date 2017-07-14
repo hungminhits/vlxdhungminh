@@ -16,6 +16,7 @@ use App\User;
 use App\News;
 use PDF;    
 use Hash;
+use App\Bill;
 class Admin_Controller extends Controller
 {
    public function ViewContent_Admin()
@@ -85,8 +86,12 @@ class Admin_Controller extends Controller
       $name = $req->input('edit_name');
       $desc = $req->input('edit_des');
       $type = $req->input('edit_type');
-      $filename= $req->file('edit_image')->getClientOriginalName();
-      $req->file('edit_image')->move('images',$filename);
+       if ($req->hasFile('edit_image')) {
+         $filename= $req->file('edit_image')->getClientOriginalName();
+      $req->file('edit_image')->move('images/category',$filename);
+      }else{
+         $filename=null;
+      }
       $pro=TypeProduct::Edit_Category($id, $name, $desc, $filename, $type);
    }
    public function Insert_Category(Request $req){
@@ -94,14 +99,18 @@ class Admin_Controller extends Controller
       $name = $req->input('new_name');
       $desc = $req->input('new_des');
       $type = $req->input('new_type');
-      $filename= $req->file('new_image')->getClientOriginalName();
-      $req->file('new_image')->move('images',$filename);
+       if ($req->hasFile('edit_image')) {
+         $filename= $req->file('new_image')->getClientOriginalName();
+      $req->file('new_image')->move('images/category',$filename);
+      }else{
+         $filename=null;
+      }
       $getId=TypeProduct::Insert_Category($name, $desc, $filename, $type);
       return $getId;
    }
    public function Delete_Category(Request $req){
       $image = $req->imageFile;
-      File::delete('images/'.$image);
+      File::delete('images/category/'.$image);
       $type=TypeProduct::Delete_Category($req->id);
    }
 
@@ -115,8 +124,83 @@ class Admin_Controller extends Controller
 
       public function ViewAllNews(){
          $news=News::Load_ALL_News()->get();
-         return view('Admin.News_Admin',compact($news));
+         $typeNews =  TypeProduct::all()->where('type',2);
+         return view('Admin.News_Admin',compact('news','typeNews'));
       }
+      public function UpdateNews(Request $req){
+         $id=$req->id;
+         $id_user=Auth::User()->id;
+         $title=$req->title;
+         $description=$req->description;
+         $description=htmlspecialchars($description, ENT_COMPAT);
+         $content=$req->content;
+         $category_id_news=$req->category_id_news;
+         if ($req->hasFile('image')) 
+         {
+            $image= $req->file('image')->getClientOriginalName();
+            $req->file('image')->move('images/news',$image);
+            $suaanh=1;
+            $news=News::UpdateNews($suaanh,$id,$id_user,$title,$image,$description,$content,$category_id_news);
+         }
+         else
+         {
+            $image=null;
+            $suaanh=0;
+            $news=News::UpdateNews($suaanh,$id,$id_user,$title,$image,$description,$content,$category_id_news);
+         }
+         
+          return redirect()->route('ViewNews');
+      }
+      public function ViewPageInsertNews(Request $req){
+         $id=$req->id;
+         if($id!=null){
+            $news=News::UpdateNewById($req->id)->get();
+            return view('Admin.Insert_Update_News.Insert_News',compact('id','news'));
+         }
+         else{
+            $id=0;
+            return view('Admin.Insert_Update_News.Insert_News',compact('id'));
+         }
+         
+      }
+      public function InsertNews(Request $req){
+         //Chưa kiểm tra đươc image và description
+         $id_user=Auth::User()->id;
+         $title=$req->title;
+         if ($req->hasFile('image')) 
+         {
+            $image= $req->file('image')->getClientOriginalName();
+            $req->file('image')->move('images/news',$image);
+         }
+         else
+         {
+            $image=null;
+         }
+         $description=$req->description;
+         $content=$req->content;
+         $category_id_news=$req->category_id_news;
+          $news=News::InsertNews($id_user,$title,$image,$description,$content,$category_id_news);
+         return redirect()->route('ViewNews');
+      }
+      public function DeleteNews(Request $req){
+         $id=$req->id;
+         $news=News::DeleteNews($id);
+         return $news;
+      }
+      public function ShowBill(){
+         $bill=Bill::bill()->get();
+         return view('Admin.bill',compact('bill'));
+      }
+        public function ShowBill_Detail($id_bill){
+         $bill_detail=Bill_Detail::FIndBill_DetailById_Bill($id_bill)->get();
+         return $bill_detail;
+      }
+
+
+
+
+
+
       public function View_TypeProduct(){
             $typeproduct=TypeProduct::ALL_Type_product()->paginate(10);
             return view('Admin.TypeProduct_Admin',compact('typeproduct'));
@@ -141,11 +225,13 @@ class Admin_Controller extends Controller
       $unit_price = $req->input('edit_unit_price');
       $pro_price = $req->input('edit_pro_price');
       $unit = $req->input('edit_unit');
-
-      $filename= $req->file('edit_image')->getClientOriginalName();
-      // $req->file('edit_image')->move('images',$filename);
+      if ($req->hasFile('edit_image')) {
+         $filename= $req->file('edit_image')->getClientOriginalName();
+      $req->file('edit_image')->move('images/product',$filename);
+      }else{
+         $filename=null;
+      }
       $pro=Product::Edit_Product($id,$name,$type, $desc, $unit_price, $pro_price,$filename, $unit);
-      // $request->session()->flash('status', 'Tạo bài viết thành công!');
       return $pro; 
    }
    public function Insert_Product(Request $req){
@@ -156,15 +242,19 @@ class Admin_Controller extends Controller
       $unit_price = $req->input('new_unit_price');
       $pro_price = $req->input('new_pro_price');
       $unit = $req->input('new_unit');
-      $filename= $req->file('new_image')->getClientOriginalName();
-      $req->file('new_image')->move('images',$filename);
+       if ($req->hasFile('new_image')) {
+         $filename= $req->file('new_image')->getClientOriginalName();
+      $req->file('new_image')->move('images/product',$filename);
+      }else{
+         $filename=null;
+      }
       $getId=Product::Insert_Product($name, $type, $desc, $unit_price, $pro_price,$filename, $unit);
       return $getId;
    } 
    public function Delete_Product(Request $req){
       $id = $req->id;
       $image = $req->imageFile;
-      File::delete('images/'.$image);
+      File::delete('images/product/'.$image);
       $pro=Product::Delete_Product($id);
    }
       public function ViewProductbyDay(){
@@ -205,9 +295,6 @@ class Admin_Controller extends Controller
    }
 
  
-   public function ShowAllNews(){
-      $news=News::Load_ALL_News()->get();
-      return view('Admin.News_Admin',compact('news'));
-   }
+
 
 }

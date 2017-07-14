@@ -136,7 +136,7 @@
                                                 </div>
                                                 <div class="row clearfix">
                                                     <div class="col-lg-offset-5 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
-                                                    <button  type="button" id="saveEdit" value="{{ $users->id }}" class="button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit" style="border-radius: 10px;">  Save</button>
+                                                    <button  type="button" onclick="saveEdit({{ $users->id }});" class="button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit" style="border-radius: 10px;">  Save</button>
                                                     </div>
                                                 </div>
                                                 
@@ -186,7 +186,7 @@
                                         <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" id="new_password" name="new_password" class="form-control" placeholder="Enter your password">
+                                                    <input type="password" id="new_password" name="new_password" class="form-control" placeholder="Enter your password">
                                                 </div>
                                             </div>
                                         </div>
@@ -325,7 +325,6 @@
                             alert('Xóa thành công');
                         }
                         });
-                        
                     }
                     else
                         ssi_modal.notify('error', {content: 'Result: ' + result});
@@ -333,19 +332,14 @@
             );
             }
 
-            $('.saveEdit').click(function() {
-                var id=$(this).val();
-                var name=document.getElementById("edit_name"+id).value;
-                var email=document.getElementById("edit_email"+id).value;
-                // var password=document.getElementById("edit_password"+id).value;
-                var phone=document.getElementById("edit_phone"+id).value;
-                var address=document.getElementById("edit_address"+id).value;
-                var group=document.getElementById("edit_group"+id).value;
-
+            
+            function saveEdit(id) {
+                var name=$('#edit_name'+id).val();
+                var phone=$('#edit_phone'+id).val();
+                var address=$('#edit_address'+id).val();
+                var group=$('#edit_group'+id).val();
                 var route=" {{ route('Edit_User') }} ";
-                var form = $('form#formEdit'+id)[0];
-                var form_data = new FormData(form);
-                
+                var form_data = new FormData($('form#formEdit'+id)[0]);
                 $.ajax
                 ({
                     type:'post',
@@ -354,16 +348,11 @@
                     processData: false,
                     contentType: false,
                     success:function() {
-                        // var updated_at = data;
-                        document.getElementById("name"+id).innerHTML=name;
-                        document.getElementById("email"+id).innerHTML=email;
-                        // document.getElementById("password"+id).innerHTML=password;
-                        document.getElementById("phone"+id).innerHTML=phone;
-                        document.getElementById("address"+id).innerHTML=address;
-                        document.getElementById("group"+id).innerHTML=group;
-                        // document.getElementById("edit_button"+id).style.display="inline";
+                        $("#name"+id).html(name);
+                        $("#phone"+id).html(phone);
+                        $("#address"+id).html(address);
+                        $("#group"+id).html(group);
                         alert('Cập nhập thành công');
-                        
                     },
                     error:function() {
                        alert('lỗi khi cập nhập');
@@ -373,29 +362,17 @@
                         $(formBox).fadeOut('400', function() {
                             $('#over').remove(); 
                         });
-            
-            });
+            }
+
             $('#saveAdd').click(function() 
             {
-                var name=document.getElementById("new_name").value;
-                var email=document.getElementById("new_email").value;
-                // var password=document.getElementById("new_password").value;
-                var phone=document.getElementById("new_phone").value;
-                var address=document.getElementById("new_address").value;
-                var group=document.getElementById("new_group").value;
-
-                var flag = true;
-                // if (name=='') {
-                //     $('#name_err').text('Tên sản phẩm không được để trống');
-                //     flag= false;
-                // }
-                // if (unit_price=='' || unit_price) {
-                //     $('#name_err').text('Tên sản phẩm không được để trống');
-                //     flag= false;
-                // }
+                var name=$('#new_name'+id).val();
+                var email=$('#new_email'+id).val();
+                var phone=$('#new_phone'+id).val();
+                var address=$('#new_address'+id).val();
+                var group=$('#new_group'+id).val();
                 var route="{{ route('Insert_User') }}";
-                var form = $('form#new_form')[0];
-                var form_data = new FormData(form);
+                var form_data = new FormData($('form#new_form')[0]);
                 $.ajax
                 ({
                     type:'post',
@@ -404,20 +381,18 @@
                     contentType: false,
                     data:form_data,
                     success:function(data) {
-                        // console.log(data);
                         var id=data;
                         var table=document.getElementById("product_table");
                         var table_len=(table.rows.length);
-                            var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td><td id='name"+id+"'>"+name+"</td><td id='email"+id+"'>"+email+"</td><td id='phone"+id+"'>"+phone+"</td><td id='address"+id+"'>"+address+"</td><td id='group"+id+"'>"+group+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'></button> <button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'></button></td></tr>                                                                                                                             <div id='editRowPro"+id+"' class='form'>                                                                                        <p class='form_title'>Edit User</p>                                                                                             <a href='#' class='close'><img src='close.png' class='img-close' title='Close Window' alt='Close' /></a>                        <form id='formEdit"+id+"' enctype='multipart/form-data' method='post'>                                                          <input type='hidden' name='_token' value='{{ csrf_token() }}'>                                                                  <div class='row'><label>ID</label><input type='text' name='id' value='"+id+"' readonly></div>                                   <div class='row'><label>Name</label><input type='text' name='edit_name' id='edit_name"+id+"' value='"+name+"' required=''></div>                                                                                                                            <div class='row'><label> Email</label><input type='email' value='"+email+"' name='edit_des' id='edit_email"+id+"' disabled=''></div>                                                                                                                            <div class='row'><label>Phone</label><input type='number' value='"+phone+"' name='edit_phone' id='edit_phone"+id+"' required=''></div>                                                                                                              <div class='row'><label>Address</label><input type='text' value='"+address+"' name='edit_address' id='edit_address"+id+"'></div>                                                                                                                            <div class='row'><label>Group</label><input type='text' value='"+group+"' name='edit_group' id='edit_group"+id+"' required=''></div><br>                                                                                                                        <button  type='button' id='saveEdit' value='"+id+"' class='button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit' style='border-radius: 10px;''>  Save</button></form></div>";                        
-
-                        document.getElementById("new_name").value="";
-                        document.getElementById("new_email").value="";
-                        document.getElementById("new_password").value="";
-                        document.getElementById("new_phone").value="";
-                        document.getElementById("new_address").value="";
-                        document.getElementById("new_group").value="";
+                        var row = table.insertRow(table_len).outerHTML="<tr id='row"+id+"'><td id='id"+id+"'>"+id+"</td><td id='name"+id+"'>"+name+"</td><td id='email"+id+"'>"+email+"</td><td id='phone"+id+"'>"+phone+"</td><td id='address"+id+"'>"+address+"</td><td id='group"+id+"'>"+group+"</td><td><button class='btn btn-info btn-lg glyphicon glyphicon-hand-right' style='border-radius: 10px;' id='edit_button"+id+"' onclick='editRow("+id+")'></button> <button class='btn btn-warning btn-lg glyphicon glyphicon-trash' style='border-radius: 10px' id='delete_button"+id+"' onclick='delete_row("+id+");'></button></td></tr>";                                                                                                                                                           
+                        $('tbody').append("<div id='editRowPro"+id+"' class='form'>                                                                                                                   <p class='form_title'>Edit Type</p>                                                                                             <a href='#' class='close'><img src='close.png' class='img-close' title='Close Window' alt='Close' /></a>                        <form id='formEdit"+id+"' enctype='multipart/form-data' method='post'> <input type='hidden' name='_token' value='{{ csrf_token() }}'>                                                                                                                           <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='id'>ID</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+id+"' name='id' class='form-control' readonly ></div></div></div></div>                                                           <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='name'>Name</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' name='edit_name' id='edit_name"+id+"' value='"+name+"' required=''  class='form-control'></div></div></div></div>               <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='email'>Email</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='email' value='"+email+"' name='edit_email' id='edit_email"+id+"' disabled='' class='form-control' ></div></div></div></div>                                                                                                                            <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='phone'>Phone</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='number' value='"+phone+"' name='edit_phone' id='edit_phone"+id+"' required='' class='form-control'></div></div></div></div>                                                                                                                            <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='address'>Address</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='text' value='"+address+"' name='edit_address' id='edit_address"+id+"' required='' class='form-control'></div></div></div></div>                                                                                                                           <div class='row clearfix'><div class='col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label'><label class='group'>Group</label></div><div class='col-lg-10 col-md-10 col-sm-8 col-xs-7'><div class='form-group'><div class='form-line'><input type='texy' value='"+group+"' name='edit_group' id='edit_group"+id+"' required='' class='form-control'></div></div></div></div>                                                                                                                            <div class='row clearfix'><div class='col-lg-offset-5 col-md-offset-2 col-sm-offset-4 col-xs-offset-5'><button  type='button' class='button submit-button btn btn-info btn-lg glyphicon glyphicon-floppy-save saveEdit' style='border-radius: 10px;' onclick='saveEdit("+id+");'>  Save</button></div></div> </form></div>");                                                                                                                                                        
+                        $("#new_name").val()="";
+                        $("#new_email").val()="";
+                        $("#new_password").val()="";
+                        $("#new_phone").val()="";
+                        $("#new_address").val()="";
+                        $("#new_group").val()="";
                         alert('Thêm user thành công');
-                        
                     },
                     error:function() {
                         alert('Thêm user thất bại');

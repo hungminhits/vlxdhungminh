@@ -23,16 +23,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer(['header','page.typeproduct','page.sanpham','section.sanphamnoibat','Admin.Product_Admin'],function($view){
-            $type =  TypeProduct::all()->where('type',1);
-            $view->with('type',$type);
-        });
+          view()->composer(['header','page.typeproduct','page.sanpham','section.sanphamnoibat','Admin.Product_Admin'],function($view){
+              $type =  TypeProduct::all()->where('type',1);
+              $view->with('type',$type);
+          });
         view()->composer('section.sanphamnoibat',function($view)
         {
             $hotPro = Product::hotProduct()->get();
             $view->with('hotPro',$hotPro);
         });
-        view()->composer(['page.tintuc','page.ChitietTintuc'],function($view){
+        view()->composer(['page.tintuc','page.ChitietTintuc','Admin.Insert_Update_News.Insert_News'],function($view){
             $typenews=TypeProduct::all()->where('type',2);
              $newNoiBat=News::Load_ALL_News()->orderBy('created_at','DESC')->limit(5)->get();
             $view->with(['typenews'=>$typenews,'newNoiBat'=>$newNoiBat]);

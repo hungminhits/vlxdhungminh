@@ -18,7 +18,7 @@
                         window.onload = function() {
                             var chart = new CanvasJS.Chart("chartContainer", {
                                 title: {
-                                    text: " Tổng lượng các san phẩm"
+                                    text: " Top Tổng Số lượng Bán của các san phẩm"
                                 },
                                 data: [{
                                     type: "column",

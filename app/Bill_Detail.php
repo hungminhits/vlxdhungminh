@@ -28,8 +28,15 @@ class Bill_Detail extends Model
        			->where('bill_detail.id_product','=',$id)
             ->whereRaw("DATE(bill_detail.created_at)>='$created_at_from' AND DATE(bill_detail.created_at)<='$created_at_to'")
        			->groupBy('products_name','bill_detail.id_product','Ngay')
+            ->limit(5)
        			->get();
         return $product;   
         }
+    public function FIndBill_DetailById_Bill($id_bill){
+      $bill_detail=DB::table('bill_detail')
+                      ->where('id_bill',$id_bill)
+                      ->Select();
+      return $bill;
+    }
 
 }
