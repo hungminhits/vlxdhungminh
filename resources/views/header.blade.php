@@ -100,7 +100,7 @@
                             <div class="cart-total">
                               <ul>
                                 <li>
-                                  <a class="cart-toggler" href="{{route('giohang')}}">
+                                  <a class="cart-toggler" href="{{route('cart')}}">
                                    <span class="hidden-xs" style="color:#848484;"> Giỏ hàng:</span> 
                                       <spam class="count_item_pr" id="cart-total">@if(Session::has('cart'))
                                           <span id="soluong" soluong="{{$totalQty}}" value="{{$totalQty}}">(&nbsp{{$totalQty}}&nbsp)san pham</span>
@@ -131,7 +131,7 @@
                                                      
                                                       soluonghang="{{$product['qty']}}"
 
-                                                  giamgia="{{$product['item']['promotion_price']}}" dongia="{{$product['item']['unit_price']}}">
+                                                  giamgia="{{$product['item']['promotion_price']}}" dongia="{{$product['item']['unit_price']}}" thanhtien="0">
 
                                                         {{$product['qty']}} *
                                                         

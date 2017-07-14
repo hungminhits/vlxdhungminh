@@ -159,17 +159,6 @@ Route::get('detail/{id}',
 	['as'=>'detail',
 	 'uses'=>'Detail_Controller@getDetail']);
 
-Route::get('cart_product',
-	['as'=>'cart',
-	'uses'=>'Cart_Controller@showCart']);
-
-route::get('delete_cart/{id}',
-	['as'=>'delete1cart',
-	 'uses'=>'Cart_Controller@delete_cart']);
-
-Route::get('giohang',[
-	'as'=>'giohang',
-	'uses'=>'Home_Controller@getGiohang']);
 Route::get('myPage',[
 	'as'=>'myPage',
 	'uses'=>'LoginLogoutRegister_Controller@getMyPage']);
@@ -187,8 +176,23 @@ Route::get('active-user',[
 	'uses'=>'LoginLogoutRegister_Controller@activeUser']
 );
 
+Route::get('cart_product',
+	['as'=>'cart',
+	'uses'=>'Cart_Controller@showCart']);
+
+route::get('delete_cart/{id}',
+	['as'=>'delete1cart',
+	 'uses'=>'Cart_Controller@delete_cart']);
+
+route::get('delete_product/{id}', 
+	['as'=>'delete1product',
+	  'uses'=>'Cart_Controller@delete_one_product']);
+
+
 Route::get('buy/{id}',
 	['as'=>'buy',
 	 'uses'=>'Cart_Controller@buy']); 
 
-
+Route::get('cart_delete_all',
+	['as'=>'delete_all_cart',
+	'uses'=>'Cart_Controller@delete_all_cart']);

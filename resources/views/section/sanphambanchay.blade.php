@@ -115,9 +115,7 @@
           
         }
       
-        alert(price);
-        
-        
+
           // soluong hang
           var soluonghang = $('#id'+id).attr('soluonghang');
 
@@ -134,6 +132,10 @@
          var tongsoluong = $('#soluong').attr('soluong');
          tongsoluong= parseInt(tongsoluong)+parseInt(1);
 
+         var thanhtien = $('#id'+id).attr('thanhtien');
+        thanhtien = parseInt(thanhtien) + parseInt(soluonghang)*parseInt(price);
+
+
         var tongtien=parseInt($('.price').attr('value'));
 
         if(isNaN(tongtien))
@@ -147,8 +149,6 @@
         }
 
 
-
-        
         $.ajax({
         url: route,
         type:'get',
@@ -165,7 +165,7 @@
 
                               $('.no-item').hide();
 
-                              $('.123').append("<div class='list-item-cart"+id+"' >   <div class='cart-img-details'>        <div class='cart-img-photo' id ='cart-img-photo"+id+"'> <a id='route_cart'                href='"+route_cart+"'> <img alt='' src='"+image+"' > </a> </div>                            <div class='cart-img-contaent'><a href='/can-ho-3pn-o-pearl-plaza'><h4 id='cart-name"+id+"'>"+name+"</h4></a><span class='cart-item-amount' id='id"+id+"' soluonghang='"+soluonghang+"' giamgia='"+promotion_price+"' dongia='"+unit_price+"'> "+soluonghang+" *"+price+"</span></div> <div class='pro-del'><a class='cart-item-delete' value='"+id+"'><i class='fa fa-times'></i></a></div></div> <div class='clear'></div> </div>  ");
+                              $('.123').prepend("<div class='list-item-cart"+id+"' >   <div class='cart-img-details'>        <div class='cart-img-photo' id ='cart-img-photo"+id+"'> <a id='route_cart'                href='"+route_cart+"'> <img alt='' src='"+image+"' > </a> </div>                            <div class='cart-img-contaent'><a href='/can-ho-3pn-o-pearl-plaza'><h4 id='cart-name"+id+"'>"+name+"</h4></a><span class='cart-item-amount' id='id"+id+"' soluonghang='"+soluonghang+"' giamgia='"+promotion_price+"' dongia='"+unit_price+"'> "+soluonghang+" *"+price+"</span></div> <div class='pro-del'><a class='cart-item-delete' value='"+id+"'><i class='fa fa-times'></i></a></div></div> <div class='clear'></div> </div>  ");
 
                                 if(($('.top-subtotal').length) && ($('.actions').length))
                               {
@@ -179,9 +179,7 @@
                                 $('.123').append("<div class='top-subtotal'> Tổng tiền:  <span class='price' tong_tam='0' value='"+tongtien+"'>  </div ");
                                 $('.123').append("<div class='action'> <a href='/checkout' class='btn-view-cart' ><span>Thanh toán</span></a></div>");
                               }
-
-
-                        
+                       
                           }
                           $('.list-item-cart'+id).show();
 
@@ -194,14 +192,17 @@
                         $('#soluong').attr('value',tongsoluong);
                         $('#soluong').html((tongsoluong)+" "+"sản phẩm");
                         $('span.price').attr('value',tongtien);
+                        $('#id'+id).attr('thanhtien',thanhtien);
                         $('#id'+id).html((soluonghang) + "*" +(price));
 
                         $('.top-subtotal').html("Tổng tiền:  <span class='price' tong_tam='0' value='"+tongtien+"'>"+tongtien+" </span>")
                         $('.actions').html("<a href='/checkout' class='btn-view-cart' ><span>Thanh toán</span></a>");
 
+                        $('.totalprice_product').html(soluonghang);
 
                      
                     }
+                    alert("Bạn đã mua sản phẩm:" + name);
 
           }
 
@@ -215,6 +216,10 @@
 
     });
 </script>
+
+
+
+
 <script type="text/javascript">
   function formatNumber(nStr, decSeperate, groupSeperate) {
         nStr += '';
