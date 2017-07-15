@@ -25,12 +25,12 @@ class Cart
 		}
 		$giohang['qty']++;
 		if($item->promotion_price==0){
-			$giohang['price'] = $item->unit_price * $giohang['qty'];
+			$giohang['price'] = $item->unit_price * 1;
 			$this->items[$id] = $giohang;
 			$this->totalQty++;
 			$this->totalPrice += $giohang['price'];
 		}else{
-			$giohang['price'] = $item->promotion_price * $giohang['qty'];
+			$giohang['price'] = $item->promotion_price * 1;
 			$this->items[$id] = $giohang;
 			$this->totalQty++;
 			$this->totalPrice += $giohang['price'];

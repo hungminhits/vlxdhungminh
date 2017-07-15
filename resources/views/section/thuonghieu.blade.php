@@ -1,6 +1,6 @@
 
 <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,700&subset=latin-ext" rel="stylesheet">
-<section class="awe-section-8"> 
+<section class="awe-section-8" style="padding-top: 10px"> 
   <div class="tz-partner" >
         <div class="container-fluid">
                <ul>

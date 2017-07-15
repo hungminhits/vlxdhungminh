@@ -100,7 +100,7 @@
                             <div class="cart-total">
                               <ul>
                                 <li>
-                                  <a class="cart-toggler" href="{{route('giohang')}}">
+                                  <a class="cart-toggler" href="{{route('cart')}}">
                                    <span class="hidden-xs" style="color:#848484;"> Giỏ hàng:</span> 
                                       <spam class="count_item_pr" id="cart-total">@if(Session::has('cart'))
                                           <span id="soluong" soluong="{{$totalQty}}" value="{{$totalQty}}">(&nbsp{{$totalQty}}&nbsp)san pham</span>
@@ -131,7 +131,7 @@
                                                      
                                                       soluonghang="{{$product['qty']}}"
 
-                                                  giamgia="{{$product['item']['promotion_price']}}" dongia="{{$product['item']['unit_price']}}">
+                                                  giamgia="{{$product['item']['promotion_price']}}" dongia="{{$product['item']['unit_price']}}" thanhtien="0">
 
                                                         {{$product['qty']}} *
                                                         
@@ -160,7 +160,7 @@
                                             <span class="price" tong_tam="0" value="{{$totalPrice}}">{{number_format($totalPrice)}} </span>
                                                                         
                                       </div>                         
-                                   
+                                    
                                       <div class="actions">
                                             <a href="/checkout" class="btn-view-cart">
                                             <span>Thanh toán</span></a>
@@ -262,7 +262,9 @@
                                         <a href="https://mendover-theme-1.bizwebvietnam.net/nha-du-an">Nhà ở dự án</a>
                                       </li> -->
                                       @for($i=0;$i<count($type);$i++)
-                                      <li><a href="{{route('type',[$type[$i]['id'],'sortBy'=>'default'])}}">{{$type[$i]['name']}}</a></li>
+                                      <li><a href="{{route('type',[$type[$i]['id'],'sortBy'=>'default'])}}">
+                          
+                                      {{$type[$i]['name']}}</a></li>
                                       @endfor
                                       
                                       
@@ -332,7 +334,7 @@
            
             $('p.no-item').show();
             $('#soluong').html((tongsoluong)+" "+"sản phẩm");
-            $('.123').html("Không có sản phẩm nào trong giỏ hàng");
+            $('.123').html(" <div class='no-item'>Không có sản phẩm nào trong giỏ hàng</div> ");
             $('.top-subtotal').hide();
             $('.actions').hide();
                        

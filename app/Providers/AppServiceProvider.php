@@ -61,13 +61,14 @@ class AppServiceProvider extends ServiceProvider
             //dd($bestproduct);
         });
 
-            view()->composer(['header','section.sanphambanchay'],function($view)
+            view()->composer(['header','section.sanphambanchay','page.giohang'],function($view)
         {
           if(Session::has('cart'))
           {
             $oldCart = Session::get('cart');
             $cart = new Cart($oldCart);
             $view->with(['cart'=>Session::get('cart'),'product_cart'=>$cart->items,'totalPrice'=> $cart->totalPrice,'totalQty'=>$cart->totalQty]);
+            
 
             
 
