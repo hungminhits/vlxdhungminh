@@ -42,7 +42,8 @@
             <link rel="stylesheet" type="text/css" href="css/dialog.css">
 
             <script src="ckeditor/ckeditor.js"></script>
-           <script src="ckfinder/ckfinder.js"></script>
+            <script src="ckeditor/ckfinder/ckfinder.js"></script>
+
               <!-- Jquery Core Js -->
             <script src="plugins/jquery/jquery.min.js"></script>
 
