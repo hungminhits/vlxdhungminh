@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 /** This file is part of KCFinder project
   *
   *      @desc Base configuration file
@@ -15,7 +15,8 @@
 /* IMPORTANT!!! Do not comment or remove uncommented settings in this file
    even if you are using session configuration.
    See http://kcfinder.sunhater.com/install for setting descriptions */
-
+   if(isset($_SESSION['group']))
+    $auth=true;
 $_CONFIG = array(
 
 

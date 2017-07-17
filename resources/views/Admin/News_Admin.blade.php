@@ -42,8 +42,11 @@
                                                 <td id="id_user{{$new->id }}">{{$new->id_user }}</td>
                                                 <td id="image{{$new->id}}"><img id="img{{$new->id}}" src="images/news/{{$new->image}}" style="width: 100px; height: 100px"></td>
                                                 <td id="title{{ $new->id }}">{{ $new->title }}</td>
-                                                <td id="description{{ $new->id }}"><p>{{html_entity_decode($new->description ,ENT_QUOTES, 'UTF-8')}}</p></td>
-                                                <td id="content{{ $new->id }}">{{ $new->content }}</td>
+                                                <td id="description{{ $new->id }}"><div>{{$new->description}}</div></td>
+                                                <?php 
+                                                    //echo htmlspecialchars($new->content);
+                                                ?>
+                                                <td id="content{{ $new->id }}">{!!html_entity_decode($new->content)!!}</td>
                                                 <td id="category_id{{ $new->id }}">{{ $new->Category_ID }}</td>
                                                 <td>
                                                     <button class="btn btn-info btn-lg glyphicon glyphicon-hand-right" style="border-radius: 10px;" id="edit_button{{ $new->id  }}" onclick="editRow({{ $new->id }})"></button>

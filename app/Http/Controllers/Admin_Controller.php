@@ -17,6 +17,7 @@ use App\News;
 use PDF;    
 use Hash;
 use App\Bill;
+use Session;
 class Admin_Controller extends Controller
 {
    public function ViewContent_Admin()
@@ -34,8 +35,10 @@ class Admin_Controller extends Controller
 //Loại sản phẫm 
    public function PostLogin_Admin(Request $req){
         if(Auth::attempt(['email'=>$req->email,'password'=>$req->password,'active'=>1])){
-            if(Auth::User()->group>=1)
-               return redirect()->route('ViewContentAdmin');
+            if(Auth::User()->group>=1){
+               Session::put('group',Auth::User()->group);
+               // $_SESSION['group']=;
+               return redirect()->route('ViewContentAdmin');}
              else
                return redirect()->back()->with('thatbai','Bạn không có quyền truy cập vào trang này');
         }
@@ -132,7 +135,7 @@ class Admin_Controller extends Controller
          $id_user=Auth::User()->id;
          $title=$req->title;
          $description=$req->description;
-         $description=htmlspecialchars($description, ENT_COMPAT);
+         $description=$description;
          $content=$req->content;
          $category_id_news=$req->category_id_news;
          if ($req->hasFile('image')) 
@@ -176,8 +179,8 @@ class Admin_Controller extends Controller
          {
             $image=null;
          }
-         $description=$req->description;
-         $content=$req->content;
+         $description=mysql_real_escape_string($req->description);
+         $content=mysql_real_escape_string($req->content);
          $category_id_news=$req->category_id_news;
           $news=News::InsertNews($id_user,$title,$image,$description,$content,$category_id_news);
          return redirect()->route('ViewNews');
