@@ -60,7 +60,7 @@
 									</a>
 								</div>
 								<div class="as_bestsellers_content">
-									<h3><a title="{{$tintuc->title}}" href="{{route('news-detail',$tintuc->id)}}">{{$tintuc->title}}</a></h3>
+									<h3><a title="{{$tintuc->title}}" href="{{route('news-detail',$tintuc->id)}}">{!!$tintuc->title!!}</a></h3>
 									<div class="post-date">{{date("d/m/Y",strtotime($tintuc->created_at))}}</div>
 								</div>
 							</li>
@@ -81,14 +81,14 @@
 									
 									<a title="{{$new->title}}" href="{{route('news-detail',$new->id)}}" class="tzblog-view"><i class="fa fa-search"></i></a>
 								</div>
-								<h2><a href="{{route('news-detail',$new->id)}}">{{$new->title}}</a></h2>
+								<h2><a href="{{route('news-detail',$new->id)}}">{!!$new->title!!}</a></h2>
 								<span class="tzblog-meta">
 									<em><i class="fa fa-user"></i>{{$new->id_user}}</em>
 									<em><i class="fa fa-clock-o"></i>{{date("d/m/Y",strtotime($new->created_at))}}</em>
 								</span>
 								<div class="action-button-hiden" style="    text-align: left;">
 									
-									<p style="text-align: justify;">{{($new->description)}}</p>
+									<p style="text-align: justify;">{!!html_entity_decode($new->description)!!}</p>
 									
 									<div class="quickviewbtn">
 										<a style="margin:0px;padding: 13px 40px;" class="color-tooltip" data-toggle="tooltip" href="{{route('news-detail',$new->id)}}" title="Đọc tiếp">Đọc tiếp</a>
@@ -111,14 +111,14 @@
 									
 									<a title="{{$new->title}}" href="{{route('news-detail',$new->id)}}" class="tzblog-view"><i class="fa fa-search"></i></a>
 								</div>
-								<h2><a href="{{route('news-detail',$new->id)}}">{{$new->title}}</a></h2>
+								<h2><a href="{{route('news-detail',$new->id)}}">{!!$new->title!!}</a></h2>
 								<span class="tzblog-meta">
 									<em><i class="fa fa-user"></i>{{$new->id_user}}</em>
 									<em><i class="fa fa-clock-o"></i>{{date("d/m/Y",strtotime($new->created_at))}}</em>
 								</span>
 								<div class="action-button-hiden" style="    text-align: left;">
 									
-									<p style="text-align: justify;">{{($new->description)}}</p>
+									<p style="text-align: justify;">{!!html_entity_decode($new->description)!!}</p>
 									
 									<div class="quickviewbtn">
 										<a style="margin:0px;padding: 13px 40px;" class="color-tooltip" data-toggle="tooltip" href="{{route('news-detail',$new->id)}}" title="Đọc tiếp">Đọc tiếp</a>

@@ -55,7 +55,7 @@
 								<div class="as_bestsellers_thumb">
 									<a href="{{route('news-detail',$tintuc->id)}}" title="{{$tintuc->title}}">
 										
-										<img alt="{{$tintuc->title}}" src="images/{{$tintuc->image}}">
+										<img alt="{{$tintuc->title}}" src="/images/{{$tintuc->image}}">
 										
 									</a>
 								</div>
@@ -76,7 +76,7 @@
 					</div>
 					<p style="text-align: center;"><img src="images/{{$newDetail[0]->image}}" /></p>
 
-					<p style="text-align: justify;">{{$newDetail[0]->content}}</p>
+					<p style="text-align: justify;">{!!html_entity_decode($newDetail[0]->content)!!}</p>
 				</div>
 						
 						<div class="row">

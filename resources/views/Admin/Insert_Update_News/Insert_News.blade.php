@@ -58,7 +58,6 @@
                                                     </div>
                                                     <script>
                                                       CKEDITOR.replace( 'ckeditor');
-                                                      CKEDITOR.replace('ckeditor1');
                                                     </script>
                                                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                                         <label class="id">Loại Tin tức</label>

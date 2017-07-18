@@ -134,9 +134,8 @@ class Admin_Controller extends Controller
          $id=$req->id;
          $id_user=Auth::User()->id;
          $title=$req->title;
-         $description=$req->description;
-         $description=$description;
-         $content=$req->content;
+         $description=mysql_real_escape_string($req->description);
+         $content=mysql_real_escape_string($req->content);
          $category_id_news=$req->category_id_news;
          if ($req->hasFile('image')) 
          {

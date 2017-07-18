@@ -17,7 +17,7 @@
 
 </title>    
 <!-- ================= Page description ================== -->
-
+<base href="{{asset('')}}">
 
 <meta name="description" content="">
 
