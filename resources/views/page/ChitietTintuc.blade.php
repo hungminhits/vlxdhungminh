@@ -55,7 +55,7 @@
 								<div class="as_bestsellers_thumb">
 									<a href="{{route('news-detail',$tintuc->id)}}" title="{{$tintuc->title}}">
 										
-										<img alt="{{$tintuc->title}}" src="/images/{{$tintuc->image}}">
+										<img alt="{{$tintuc->title}}" src="/	images/{{$tintuc->image}}">
 										
 									</a>
 								</div>

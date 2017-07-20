@@ -36,8 +36,7 @@ class Admin_Controller extends Controller
    public function PostLogin_Admin(Request $req){
         if(Auth::attempt(['email'=>$req->email,'password'=>$req->password,'active'=>1])){
             if(Auth::User()->group>=1){
-               Session::put('group',Auth::User()->group);
-               // $_SESSION['group']=;
+               Session::put('group',false); 
                return redirect()->route('ViewContentAdmin');}
              else
                return redirect()->back()->with('thatbai','Bạn không có quyền truy cập vào trang này');

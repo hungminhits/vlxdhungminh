@@ -9,7 +9,6 @@
                 <h2>DASHBOARD</h2>
             </div>
             <div class="row clearfix">
-              
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 
                     <div class="card" style="width: 1000px">
@@ -34,7 +33,9 @@
                         </script>
                     <div id="chartContainer" style="height: 400px; width: 900px;"></div>
                         <div class="header">
-                            <h2>5 sản phẩm có lượt View nhiều nhất</h2>
+                            <h2>5 sản phẩm có lượt View nhiều nhất </h2>
+                                      
+                        ?>
                         </div>
                         <script type="text/javascript">
                         var array = new Array();

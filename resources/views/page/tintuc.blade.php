@@ -17,7 +17,6 @@
 			</ul>
 		</div>
 	</div>
-
 	<section class="tzblog-wrap">
 		<div class="container">
 			<div class="row flx">
